@@ -1,0 +1,12 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '10.0'
+
+def shared_pods
+	use_frameworks!
+	pod 'Hue'
+end
+
+# Pods for Kasha
+target 'Kasha' do
+	shared_pods
+end
