@@ -32,8 +32,22 @@ class ArtistsViewController: ASViewController<ASDisplayNode>, ASTableDataSource,
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Helpers
+    func artist(forRowAt indexPath: IndexPath) -> MPMediaItemCollection {
+        guard let artist = self.allArtistsQuery.collections?[indexPath.row] else {
+            preconditionFailure("No artist for row at indexPath \(indexPath)")
+        }
+        return artist
+    }
 
     // MARK: - ASTableDataSource
+    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
+        let artist = self.artist(forRowAt: indexPath)
+        let artistNode = ASTextCellNode()
+        artistNode.text = artist.representativeItem?.artist ?? "Unknown Arist"
+        return artistNode
+    }
     
     // MARK: - ASTableDelegate
     func numberOfSections(in tableNode: ASTableNode) -> Int {

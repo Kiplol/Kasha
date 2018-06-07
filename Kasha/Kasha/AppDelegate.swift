@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import AsyncDisplayKit
 import MediaPlayer
 import UIKit
 
@@ -51,11 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Session Control
     func enterApp() {
         let artistsVC = ArtistsViewController()
-        let artistsNav = UINavigationController(rootViewController: artistsVC)
-        let tabVC = UITabBarController()
+        let artistsNav = ASNavigationController(rootViewController: artistsVC)
+        let tabVC = ASTabBarController()
         tabVC.viewControllers = [artistsNav]
         self.window?.rootViewController = tabVC
     }
 
 }
-
