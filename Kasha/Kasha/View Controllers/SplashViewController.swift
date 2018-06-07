@@ -18,6 +18,8 @@ class SplashViewController: KashaViewController {
             print(authorizationStatus)
             switch authorizationStatus {
             case .authorized:
+                let artistQuery = MPMediaQuery.artists()
+                print("Penis")
                 break
             default:
                 break
