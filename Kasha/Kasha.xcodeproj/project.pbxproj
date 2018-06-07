@@ -13,6 +13,8 @@
 		37066A5C20C6270C0021D0A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5A20C6270C0021D0A5 /* Main.storyboard */; };
 		37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5D20C6270D0021D0A5 /* Assets.xcassets */; };
 		37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */; };
+		373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DB120C8B91E0090D6FA /* Constants.swift */; };
+		373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +28,8 @@
 		37066A5D20C6270D0021D0A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37066A6020C6270D0021D0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37066A6220C6270D0021D0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		373B1DB120C8B91E0090D6FA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_AVTL547TZF.p8; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,12 +70,22 @@
 				37066A5420C6270C0021D0A5 /* AppDelegate.swift */,
 				37066A5620C6270C0021D0A5 /* FirstViewController.swift */,
 				37066A5820C6270C0021D0A5 /* SecondViewController.swift */,
+				373B1DB120C8B91E0090D6FA /* Constants.swift */,
 				37066A5A20C6270C0021D0A5 /* Main.storyboard */,
 				37066A5D20C6270D0021D0A5 /* Assets.xcassets */,
 				37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */,
 				37066A6220C6270D0021D0A5 /* Info.plist */,
+				373B1DB420C8BA080090D6FA /* Supporting Files */,
 			);
 			path = Kasha;
+			sourceTree = "<group>";
+		};
+		373B1DB420C8BA080090D6FA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		BA8D288BE383E275E5AEA1DA /* Pods */ = {
@@ -151,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */,
 				37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */,
 				37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */,
 				37066A5C20C6270C0021D0A5 /* Main.storyboard in Resources */,
@@ -185,11 +200,15 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kasha/Pods-Kasha-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Cider/Cider.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
+				"${BUILT_PRODUCTS_DIR}/JSONWebToken/JWT.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWT.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -206,6 +225,7 @@
 				37066A5920C6270C0021D0A5 /* SecondViewController.swift in Sources */,
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,
 				37066A5720C6270C0021D0A5 /* FirstViewController.swift in Sources */,
+				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
