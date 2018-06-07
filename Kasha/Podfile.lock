@@ -2,23 +2,27 @@ PODS:
   - Cider (0.10.0)
   - Hue (3.0.1)
   - JSONWebToken (2.2.0)
+  - SwiftLint (0.24.2)
 
 DEPENDENCIES:
   - Cider (~> 0.10)
   - Hue
   - JSONWebToken
+  - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Cider
     - Hue
     - JSONWebToken
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Cider: 7d9518cfa70692d41f8f860bd04da33510479362
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   JSONWebToken: 6fae32489632658d563dd6952a5c34020ea813e4
+  SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
 
-PODFILE CHECKSUM: bcc4b3e7a374c3aaae38c3cbe534377dd6d4110b
+PODFILE CHECKSUM: f3d56fa382a2eff554fbac964a7d2622334ce7f6
 
 COCOAPODS: 1.5.3

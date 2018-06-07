@@ -15,6 +15,9 @@
 		37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */; };
 		373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DB120C8B91E0090D6FA /* Constants.swift */; };
 		373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */; };
+		373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */; };
+		373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DBA20C8D7110090D6FA /* SplashViewController.swift */; };
+		373B1DBE20C8D8FE0090D6FA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DBD20C8D8FE0090D6FA /* .swiftlint.yml */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +33,9 @@
 		37066A6220C6270D0021D0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		373B1DB120C8B91E0090D6FA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_AVTL547TZF.p8; sourceTree = "<group>"; };
+		373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashaViewController.swift; sourceTree = "<group>"; };
+		373B1DBA20C8D7110090D6FA /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		373B1DBD20C8D8FE0090D6FA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,6 +55,7 @@
 		37066A4820C6270C0021D0A5 = {
 			isa = PBXGroup;
 			children = (
+				373B1DBD20C8D8FE0090D6FA /* .swiftlint.yml */,
 				37066A5320C6270C0021D0A5 /* Kasha */,
 				37066A5220C6270C0021D0A5 /* Products */,
 				BA8D288BE383E275E5AEA1DA /* Pods */,
@@ -68,8 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				37066A5420C6270C0021D0A5 /* AppDelegate.swift */,
-				37066A5620C6270C0021D0A5 /* FirstViewController.swift */,
-				37066A5820C6270C0021D0A5 /* SecondViewController.swift */,
+				373B1DB720C8D6E10090D6FA /* View Controllers */,
 				373B1DB120C8B91E0090D6FA /* Constants.swift */,
 				37066A5A20C6270C0021D0A5 /* Main.storyboard */,
 				37066A5D20C6270D0021D0A5 /* Assets.xcassets */,
@@ -86,6 +92,17 @@
 				373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		373B1DB720C8D6E10090D6FA /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */,
+				373B1DBA20C8D7110090D6FA /* SplashViewController.swift */,
+				37066A5620C6270C0021D0A5 /* FirstViewController.swift */,
+				37066A5820C6270C0021D0A5 /* SecondViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		BA8D288BE383E275E5AEA1DA /* Pods */ = {
@@ -117,6 +134,7 @@
 				37066A4E20C6270C0021D0A5 /* Frameworks */,
 				37066A4F20C6270C0021D0A5 /* Resources */,
 				6A8A8488AD85BBC4EDBA712C /* [CP] Embed Pods Frameworks */,
+				373B1DBC20C8D8970090D6FA /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -165,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				373B1DBE20C8D8FE0090D6FA /* .swiftlint.yml in Resources */,
 				373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */,
 				37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */,
 				37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */,
@@ -192,6 +211,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		373B1DBC20C8D8970090D6FA /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		6A8A8488AD85BBC4EDBA712C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -225,6 +258,8 @@
 				37066A5920C6270C0021D0A5 /* SecondViewController.swift in Sources */,
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,
 				37066A5720C6270C0021D0A5 /* FirstViewController.swift in Sources */,
+				373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */,
+				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
 				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
