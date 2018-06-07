@@ -12,9 +12,16 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // MARK: - ivars
+    class var instance: AppDelegate {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            preconditionFailure("What on Earth?")
+        }
+        return appDelegate
+    }
     var window: UIWindow?
 
-
+    // MARK: - UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         return true
     }
@@ -41,6 +48,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    // MARK: - Session Control
+    func enterApp() {
+        let artistsVC = ArtistsViewController()
+        let artistsNav = UINavigationController(rootViewController: artistsVC)
+        let tabVC = UITabBarController()
+        tabVC.viewControllers = [artistsNav]
+        self.window?.rootViewController = tabVC
+    }
 
 }
 

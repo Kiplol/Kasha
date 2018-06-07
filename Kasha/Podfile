@@ -3,9 +3,9 @@ platform :ios, '11.0'
 
 def shared_pods
 	use_frameworks!
-	pod 'Cider', '~> 0.10'
 	pod 'Hue'
 	pod 'SwiftLint'
+	pod 'Texture'
 end
 
 # Pods for Kasha

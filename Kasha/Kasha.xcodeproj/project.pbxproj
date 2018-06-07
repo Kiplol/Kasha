@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37066A5420C6270C0021D0A5 /* AppDelegate.swift */; };
-		37066A5720C6270C0021D0A5 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37066A5620C6270C0021D0A5 /* FirstViewController.swift */; };
-		37066A5920C6270C0021D0A5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37066A5820C6270C0021D0A5 /* SecondViewController.swift */; };
+		37066A5720C6270C0021D0A5 /* ArtistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37066A5620C6270C0021D0A5 /* ArtistsViewController.swift */; };
 		37066A5C20C6270C0021D0A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5A20C6270C0021D0A5 /* Main.storyboard */; };
 		37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5D20C6270D0021D0A5 /* Assets.xcassets */; };
 		37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */; };
@@ -26,8 +25,7 @@
 		27826D8084061ABB51DC9C11 /* Pods-Kasha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.release.xcconfig"; sourceTree = "<group>"; };
 		37066A5120C6270C0021D0A5 /* Kasha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kasha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37066A5420C6270C0021D0A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		37066A5620C6270C0021D0A5 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		37066A5820C6270C0021D0A5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		37066A5620C6270C0021D0A5 /* ArtistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsViewController.swift; sourceTree = "<group>"; };
 		37066A5B20C6270C0021D0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37066A5D20C6270D0021D0A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37066A6020C6270D0021D0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -102,8 +100,7 @@
 			children = (
 				373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */,
 				373B1DBA20C8D7110090D6FA /* SplashViewController.swift */,
-				37066A5620C6270C0021D0A5 /* FirstViewController.swift */,
-				37066A5820C6270C0021D0A5 /* SecondViewController.swift */,
+				37066A5620C6270C0021D0A5 /* ArtistsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -242,13 +239,19 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kasha/Pods-Kasha-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Cider/Cider.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
+				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
+				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
+				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -262,9 +265,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37066A5920C6270C0021D0A5 /* SecondViewController.swift in Sources */,
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,
-				37066A5720C6270C0021D0A5 /* FirstViewController.swift in Sources */,
+				37066A5720C6270C0021D0A5 /* ArtistsViewController.swift in Sources */,
 				373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */,
 				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
 				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,
