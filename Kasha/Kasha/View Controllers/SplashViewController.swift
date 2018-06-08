@@ -18,7 +18,9 @@ class SplashViewController: KashaViewController {
             print(authorizationStatus)
             switch authorizationStatus {
             case .authorized:
-                AppDelegate.instance.enterApp()
+                DispatchQueue.main.async {
+                    AppDelegate.instance.enterApp()
+                }
             default:
                 break
             }

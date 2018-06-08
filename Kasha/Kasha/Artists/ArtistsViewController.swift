@@ -19,7 +19,7 @@ class ArtistsViewController: ASViewController<ASDisplayNode>, ASTableDataSource,
     // MARK: - Initializers
     init() {
         super.init(node: self.tableNode)
-
+        self.title = "Artists"
         tableNode.delegate = self
         tableNode.dataSource = self
     }
@@ -42,11 +42,16 @@ class ArtistsViewController: ASViewController<ASDisplayNode>, ASTableDataSource,
     }
 
     // MARK: - ASTableDataSource
-    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
+    
+    func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
         let artist = self.artist(forRowAt: indexPath)
-        let artistNode = ASTextCellNode()
-        artistNode.text = artist.representativeItem?.artist ?? "Unknown Arist"
-        return artistNode
+        
+        let cellNodeBlock = { () -> ASCellNode in
+            let artistNode = ArtistTableNode(artist: artist)
+            return artistNode
+        }
+        
+        return cellNodeBlock
     }
     
     // MARK: - ASTableDelegate

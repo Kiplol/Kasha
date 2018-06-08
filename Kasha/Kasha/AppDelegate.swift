@@ -51,11 +51,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Session Control
     func enterApp() {
-        let artistsVC = ArtistsViewController()
-        let artistsNav = ASNavigationController(rootViewController: artistsVC)
-        let tabVC = ASTabBarController()
-        tabVC.viewControllers = [artistsNav]
-        self.window?.rootViewController = tabVC
+        DispatchQueue.main.async {
+            let artistsVC = ArtistsViewController()
+            let artistsNav = ASNavigationController(rootViewController: artistsVC)
+            artistsNav.navigationBar.prefersLargeTitles = true
+            let tabVC = ASTabBarController()
+            tabVC.viewControllers = [artistsNav]
+            self.window?.rootViewController = tabVC
+        }
+    }
+    
+    // MARK: - Private
+    func setupAppearance() {
+//        if #available(iOS 11.0, *) {
+//            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+//        }
     }
 
 }
