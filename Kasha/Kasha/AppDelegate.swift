@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        self.setupAppearance()
         return true
     }
 
@@ -54,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.async {
             let artistsVC = ArtistsViewController()
             let artistsNav = ASNavigationController(rootViewController: artistsVC)
-            artistsNav.navigationBar.prefersLargeTitles = true
             let tabVC = ASTabBarController()
             tabVC.viewControllers = [artistsNav]
             self.window?.rootViewController = tabVC
@@ -63,9 +63,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Private
     func setupAppearance() {
-//        if #available(iOS 11.0, *) {
-//            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-//        }
+        //Window
+        self.window?.tintColor = UIColor.red
+
+        //Navigation Bar
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor.white
+        UINavigationBar.appearance().prefersLargeTitles = true
+        UINavigationBar.appearance().largeTitleTextAttributes =
+            [NSAttributedStringKey.foregroundColor: self.window!.tintColor]
+        
+        //Tab Bar
+        UITabBar.appearance().isTranslucent = false
     }
 
 }

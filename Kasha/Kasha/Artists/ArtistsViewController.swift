@@ -14,7 +14,6 @@ class ArtistsViewController: KashaViewController, ASTableDataSource, ASTableDele
 
     // MARK: - ivars
     fileprivate let tableNode = ASTableNode()
-    fileprivate let allArtistsQuery = MPMediaQuery.artists()
     
     // MARK: - Initializers
     init() {
@@ -39,14 +38,14 @@ class ArtistsViewController: KashaViewController, ASTableDataSource, ASTableDele
             preconditionFailure("No artist section for row at indexPath \(indexPath)")
         }
         let currentLocation = section.range.location + indexPath.row
-        guard let artist = self.allArtistsQuery.collections?[currentLocation] else {
+        guard let artist = MediaLibraryHelper.shared.allArists()?[currentLocation] else {
             preconditionFailure("No artist for row at indexPath \(indexPath)")
         }
         return artist
     }
     
     func artists(forSection section: Int) -> MPMediaQuerySection? {
-        return self.allArtistsQuery.collectionSections?[section]
+        return MediaLibraryHelper.shared.allArtistSections()?[section]
     }
     
     // MARK: - UITableViewDelegate
@@ -55,9 +54,7 @@ class ArtistsViewController: KashaViewController, ASTableDataSource, ASTableDele
     }
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-//        return ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U",
-//                "V", "W", "X", "Y", "Z", "#"]
-        return self.allArtistsQuery.collectionSections?.compactMap { $0.title }
+        return MediaLibraryHelper.shared.allArtistSections()?.compactMap { $0.title }
     }
     
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
@@ -67,22 +64,22 @@ class ArtistsViewController: KashaViewController, ASTableDataSource, ASTableDele
     // MARK: - ASTableDataSource
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
         let artist = self.artist(forRowAt: indexPath)
-        
+
         let cellNodeBlock = { () -> ASCellNode in
             let artistNode = ArtistTableNode(artist: artist)
             return artistNode
         }
-        
+
         return cellNodeBlock
     }
     
     // MARK: - ASTableDelegate
     func numberOfSections(in tableNode: ASTableNode) -> Int {
-        return self.allArtistsQuery.collectionSections?.count ?? 0
+        return MediaLibraryHelper.shared.allArtistSections()?.count ?? 0
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return self.artists(forSection: section)?.range.length ?? 0
+        return MediaLibraryHelper.shared.allArtistSections()?[section].range.length ?? 0
     }
 
 }

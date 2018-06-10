@@ -22,7 +22,13 @@ class ArtistTableNode: ASCellNode {
         self.artist = artist
         super.init()
         
-        self.labelArtistName.attributedText = NSAttributedString(string: artist.representativeItem?.artist ?? "Unknown Artist", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)])
+        let attributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        self.labelArtistName.attributedText = NSAttributedString(string: artist.representativeItem?.artist ??
+            "Unknown Artist", attributes: attributes)
+        self.labelArtistName.maximumNumberOfLines = 1
+        self.labelArtistName.truncationMode = .byTruncatingTail
+        self.labelArtistName.style.flexShrink = 1.0
+        self.labelArtistName.truncationAttributedText = NSAttributedString(string: "...")
         self.image.image = (artist.representativeItem?.artwork)?.image(at: CGSize(width: 100.0, height: 100.0))
         DispatchQueue.main.async {
             self.image.layer.cornerRadius = 4.0
@@ -32,15 +38,25 @@ class ArtistTableNode: ASCellNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        let padding: CGFloat = 12.0
+        
+        //Image
+        self.image.style.preferredSize = CGSize(width: ArtistTableNode.imageWidth, height: ArtistTableNode.imageWidth)
+        
+        //Stack
         let stack = ASStackLayoutSpec.horizontal()
         stack.alignItems = .center
-        stack.spacing = 12.0
-        
-        self.image.style.preferredSize = CGSize(width: ArtistTableNode.imageWidth, height: ArtistTableNode.imageWidth)
+        stack.spacing = padding
         stack.children = [self.image, self.labelArtistName]
-        
-        let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: 4.0, left: 4.0, bottom: 4.0, right: 4.0), child: stack)
+
+        //Inset
+        let inset = ASInsetLayoutSpec(insets: UIEdgeInsets(top: padding,
+                                                           left: padding,
+                                                           bottom: padding,
+                                                           right: padding),
+                                      child: stack)
+
         return inset
     }
-
+    
 }
