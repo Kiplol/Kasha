@@ -37,11 +37,7 @@ class ArtistsViewController: KashaViewController, ASTableDataSource, ASTableDele
         guard let section = self.artists(forSection: indexPath.section) else {
             preconditionFailure("No artist section for row at indexPath \(indexPath)")
         }
-        let currentLocation = section.range.location + indexPath.row
-        guard let artist = MediaLibraryHelper.shared.allArists()?[currentLocation] else {
-            preconditionFailure("No artist for row at indexPath \(indexPath)")
-        }
-        return artist
+        return MediaLibraryHelper.shared.artist(forSection: section, atIndex: indexPath.row)
     }
     
     func artists(forSection section: Int) -> MPMediaQuerySection? {
@@ -80,6 +76,12 @@ class ArtistsViewController: KashaViewController, ASTableDataSource, ASTableDele
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
         return MediaLibraryHelper.shared.allArtistSections()?[section].range.length ?? 0
+    }
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        let artist = self.artist(forRowAt: indexPath)
+        let artistVC = ArtistViewController(artist: artist)
+        self.navigationController?.pushViewController(artistVC, animated: true)
     }
 
 }

@@ -29,7 +29,8 @@ class ArtistTableNode: ASCellNode {
         self.labelArtistName.truncationMode = .byTruncatingTail
         self.labelArtistName.style.flexShrink = 1.0
         self.labelArtistName.truncationAttributedText = NSAttributedString(string: "...")
-        self.image.image = (artist.representativeItem?.artwork)?.image(at: CGSize(width: 100.0, height: 100.0))
+        self.image.image = (artist.representativeItem?.artwork)?.image(at:
+            CGSize(width: ArtistTableNode.imageWidth, height: ArtistTableNode.imageWidth))
         DispatchQueue.main.async {
             self.image.layer.cornerRadius = 4.0
         }
