@@ -6,12 +6,24 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import MediaPlayer
 import UIKit
 
 class KashaViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    // MARK:- Initializers
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.commonInit()
+    }
+    
+    func commonInit() {
+        //Override
     }
 
 }

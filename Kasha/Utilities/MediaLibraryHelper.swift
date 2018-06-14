@@ -35,6 +35,11 @@ class MediaLibraryHelper: NSObject {
         return MPMediaQuery.albums().collectionSections ?? []
     }
     
+    func album(forSection section: MPMediaQuerySection, atIndex index: Int) -> MPMediaItemCollection {
+        let currentLocation = section.range.location + index
+        return MediaLibraryHelper.shared.allAlbums()[currentLocation]
+    }
+    
     func albums(forArtist artist: MPMediaItemCollection) -> [MPMediaItemCollection] {
         let artistID = artist.persistentID
         let albumsQuery = MPMediaQuery.albums()

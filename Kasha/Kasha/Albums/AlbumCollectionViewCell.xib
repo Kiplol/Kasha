@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AlbumCollectionViewCell" customModule="Kasha" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vhz-ep-vBU">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aL3-gZ-L0g">
+                                <rect key="frame" x="6" y="6" width="148" height="148"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gSd-dI-DOg">
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="gSd-dI-DOg" secondAttribute="height" id="X4Y-am-GGr"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="gSd-dI-DOg" firstAttribute="top" secondItem="aL3-gZ-L0g" secondAttribute="top" id="IcF-Ek-fqf"/>
+                                    <constraint firstItem="gSd-dI-DOg" firstAttribute="leading" secondItem="aL3-gZ-L0g" secondAttribute="leading" id="b1W-c2-qGk"/>
+                                    <constraint firstAttribute="trailing" secondItem="gSd-dI-DOg" secondAttribute="trailing" id="itN-yD-gmp"/>
+                                    <constraint firstAttribute="bottom" secondItem="gSd-dI-DOg" secondAttribute="bottom" id="rTD-aO-s8L"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aL3-gZ-L0g" firstAttribute="leading" secondItem="Vhz-ep-vBU" secondAttribute="leading" constant="6" id="UcA-BJ-Llp"/>
+                            <constraint firstItem="aL3-gZ-L0g" firstAttribute="top" secondItem="Vhz-ep-vBU" secondAttribute="top" constant="6" id="Y8C-eT-lFK"/>
+                            <constraint firstAttribute="trailing" secondItem="aL3-gZ-L0g" secondAttribute="trailing" constant="6" id="hP4-UD-AUA"/>
+                            <constraint firstAttribute="bottom" secondItem="aL3-gZ-L0g" secondAttribute="bottom" constant="6" id="jAE-5e-sAS"/>
+                            <constraint firstAttribute="width" constant="160" id="pS0-oa-Yzb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Vhz-ep-vBU" secondAttribute="bottom" id="0XY-jM-Teg"/>
+                <constraint firstItem="Vhz-ep-vBU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="HSO-Nr-uEE"/>
+                <constraint firstAttribute="trailing" secondItem="Vhz-ep-vBU" secondAttribute="trailing" id="Vol-ud-1D2"/>
+                <constraint firstItem="Vhz-ep-vBU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nTf-Uq-u7h"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="constraintWidth" destination="pS0-oa-Yzb" id="UD9-PC-aD5"/>
+                <outlet property="imageAlbum" destination="gSd-dI-DOg" id="LmO-wS-Cl9"/>
+                <outlet property="imageContainer" destination="aL3-gZ-L0g" id="bql-nq-Wa4"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

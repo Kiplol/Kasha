@@ -19,14 +19,25 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     // MARK: - ivars
     private let artistSections = MediaLibraryHelper.shared.allArtistSections()
     
+    // MARK: - KashaViewController
+    override func commonInit() {
+        super.commonInit()
+        self.title = "Artists"
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Artists"
 
         let artistCellNib = UINib(nibName: "ArtistTableViewCell", bundle: Bundle.main)
         self.tableView.register(artistCellNib, forCellReuseIdentifier: ArtistsViewController.cellID)
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let selectedRow = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: selectedRow, animated: animated)
+        }
     }
     
     // MARK: - Helpers
@@ -70,5 +81,8 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     }
     
     // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 
 }
