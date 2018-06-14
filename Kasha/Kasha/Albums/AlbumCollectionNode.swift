@@ -30,7 +30,14 @@ class AlbumCollectionNode: ASCellNode {
         self.labelAlbumName.style.flexShrink = 1.0
         
         let imageSize = CGSize(width: AlbumCollectionNode.imageWidth, height: AlbumCollectionNode.imageWidth)
-        self.image.image = (album.representativeItem?.artwork)?.image(at: imageSize)
+        DispatchQueue.global(qos: .default).async { [unowned self] in
+            self.image.image = (album.representativeItem?.artwork)?.image(at: imageSize)
+        }
+    }
+    
+    override func didLoad() {
+        super.didLoad()
+        self.image.layer.cornerRadius = 10.0
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

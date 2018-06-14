@@ -55,8 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.async {
             let artistsVC = ArtistsViewController()
             let artistsNav = ASNavigationController(rootViewController: artistsVC)
+            let albumsNav = ASNavigationController(rootViewController: AlbumsViewController())
             let tabVC = ASTabBarController()
-            tabVC.viewControllers = [artistsNav]
+            tabVC.viewControllers = [artistsNav, albumsNav]
             self.window?.rootViewController = tabVC
         }
     }

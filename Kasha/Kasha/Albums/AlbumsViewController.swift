@@ -26,6 +26,7 @@ class AlbumsViewController: KashaViewController, ASCollectionDataSource {
         } else {
             self.albums = MediaLibraryHelper.shared.allAlbums()
         }
+        
         super.init(node: self.collectionNode)
         if let artist = artist {
             self.title = artist.representativeItem?.artist

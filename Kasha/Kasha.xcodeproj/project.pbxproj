@@ -20,7 +20,7 @@
 		373B1DC020C8D9F60090D6FA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373B1DBF20C8D9F60090D6FA /* MediaPlayer.framework */; };
 		373B1DC320CA38CA0090D6FA /* ArtistTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DC220CA38CA0090D6FA /* ArtistTableNode.swift */; };
 		373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DC420CD8F970090D6FA /* MediaLibraryHelper.swift */; };
-		373B1DCA20CDDF4B0090D6FA /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DC920CDDF4B0090D6FA /* ArtistViewController.swift */; };
+		373B1DCA20CDDF4B0090D6FA /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DC920CDDF4B0090D6FA /* AlbumsViewController.swift */; };
 		373B1DCD20CDE1FF0090D6FA /* AlbumCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DCC20CDE1FF0090D6FA /* AlbumCollectionNode.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
@@ -42,7 +42,7 @@
 		373B1DBF20C8D9F60090D6FA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		373B1DC220CA38CA0090D6FA /* ArtistTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableNode.swift; sourceTree = "<group>"; };
 		373B1DC420CD8F970090D6FA /* MediaLibraryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLibraryHelper.swift; sourceTree = "<group>"; };
-		373B1DC920CDDF4B0090D6FA /* ArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
+		373B1DC920CDDF4B0090D6FA /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		373B1DCC20CDE1FF0090D6FA /* AlbumCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionNode.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
@@ -120,7 +120,6 @@
 			children = (
 				37066A5620C6270C0021D0A5 /* ArtistsViewController.swift */,
 				373B1DC220CA38CA0090D6FA /* ArtistTableNode.swift */,
-				373B1DC920CDDF4B0090D6FA /* ArtistViewController.swift */,
 			);
 			path = Artists;
 			sourceTree = "<group>";
@@ -138,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				373B1DCC20CDE1FF0090D6FA /* AlbumCollectionNode.swift */,
+				373B1DC920CDDF4B0090D6FA /* AlbumsViewController.swift */,
 			);
 			path = Albums;
 			sourceTree = "<group>";
@@ -305,7 +305,7 @@
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,
 				37066A5720C6270C0021D0A5 /* ArtistsViewController.swift in Sources */,
 				373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */,
-				373B1DCA20CDDF4B0090D6FA /* ArtistViewController.swift in Sources */,
+				373B1DCA20CDDF4B0090D6FA /* AlbumsViewController.swift in Sources */,
 				373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */,
 				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
 				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,

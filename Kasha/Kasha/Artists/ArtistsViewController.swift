@@ -80,7 +80,7 @@ class ArtistsViewController: KashaViewController, ASTableDataSource, ASTableDele
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         let artist = self.artist(forRowAt: indexPath)
-        let artistVC = ArtistViewController(artist: artist)
+        let artistVC = AlbumsViewController(artist: artist)
         self.navigationController?.pushViewController(artistVC, animated: true)
     }
 
