@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37066A5420C6270C0021D0A5 /* AppDelegate.swift */; };
-		37066A5720C6270C0021D0A5 /* ArtistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37066A5620C6270C0021D0A5 /* ArtistsViewController.swift */; };
 		37066A5C20C6270C0021D0A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5A20C6270C0021D0A5 /* Main.storyboard */; };
 		37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5D20C6270D0021D0A5 /* Assets.xcassets */; };
 		37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */; };
@@ -18,10 +17,8 @@
 		373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DBA20C8D7110090D6FA /* SplashViewController.swift */; };
 		373B1DBE20C8D8FE0090D6FA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DBD20C8D8FE0090D6FA /* .swiftlint.yml */; };
 		373B1DC020C8D9F60090D6FA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373B1DBF20C8D9F60090D6FA /* MediaPlayer.framework */; };
-		373B1DC320CA38CA0090D6FA /* ArtistTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DC220CA38CA0090D6FA /* ArtistTableNode.swift */; };
 		373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DC420CD8F970090D6FA /* MediaLibraryHelper.swift */; };
-		373B1DCA20CDDF4B0090D6FA /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DC920CDDF4B0090D6FA /* AlbumsViewController.swift */; };
-		373B1DCD20CDE1FF0090D6FA /* AlbumCollectionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DCC20CDE1FF0090D6FA /* AlbumCollectionNode.swift */; };
+		373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +26,6 @@
 		27826D8084061ABB51DC9C11 /* Pods-Kasha.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.release.xcconfig"; sourceTree = "<group>"; };
 		37066A5120C6270C0021D0A5 /* Kasha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kasha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37066A5420C6270C0021D0A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		37066A5620C6270C0021D0A5 /* ArtistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsViewController.swift; sourceTree = "<group>"; };
 		37066A5B20C6270C0021D0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		37066A5D20C6270D0021D0A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37066A6020C6270D0021D0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -40,10 +36,8 @@
 		373B1DBA20C8D7110090D6FA /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		373B1DBD20C8D8FE0090D6FA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		373B1DBF20C8D9F60090D6FA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		373B1DC220CA38CA0090D6FA /* ArtistTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableNode.swift; sourceTree = "<group>"; };
 		373B1DC420CD8F970090D6FA /* MediaLibraryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLibraryHelper.swift; sourceTree = "<group>"; };
-		373B1DC920CDDF4B0090D6FA /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
-		373B1DCC20CDE1FF0090D6FA /* AlbumCollectionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionNode.swift; sourceTree = "<group>"; };
+		373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsViewController.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,8 +80,9 @@
 				37066A5420C6270C0021D0A5 /* AppDelegate.swift */,
 				373B1DCB20CDE1E70090D6FA /* Albums */,
 				373B1DC120CA38AA0090D6FA /* Artists */,
-				373B1DB720C8D6E10090D6FA /* View Controllers */,
+				373B1DB720C8D6E10090D6FA /* Onboarding */,
 				373B1DB120C8B91E0090D6FA /* Constants.swift */,
+				373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */,
 				37066A5A20C6270C0021D0A5 /* Main.storyboard */,
 				37066A5D20C6270D0021D0A5 /* Assets.xcassets */,
 				37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */,
@@ -106,20 +101,18 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		373B1DB720C8D6E10090D6FA /* View Controllers */ = {
+		373B1DB720C8D6E10090D6FA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */,
 				373B1DBA20C8D7110090D6FA /* SplashViewController.swift */,
 			);
-			path = "View Controllers";
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		373B1DC120CA38AA0090D6FA /* Artists */ = {
 			isa = PBXGroup;
 			children = (
-				37066A5620C6270C0021D0A5 /* ArtistsViewController.swift */,
-				373B1DC220CA38CA0090D6FA /* ArtistTableNode.swift */,
+				373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */,
 			);
 			path = Artists;
 			sourceTree = "<group>";
@@ -136,8 +129,6 @@
 		373B1DCB20CDE1E70090D6FA /* Albums */ = {
 			isa = PBXGroup;
 			children = (
-				373B1DCC20CDE1FF0090D6FA /* AlbumCollectionNode.swift */,
-				373B1DC920CDDF4B0090D6FA /* AlbumsViewController.swift */,
 			);
 			path = Albums;
 			sourceTree = "<group>";
@@ -277,18 +268,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kasha/Pods-Kasha-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
-				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
-				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
-				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -303,14 +286,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,
-				37066A5720C6270C0021D0A5 /* ArtistsViewController.swift in Sources */,
 				373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */,
-				373B1DCA20CDDF4B0090D6FA /* AlbumsViewController.swift in Sources */,
 				373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */,
+				373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */,
 				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
 				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,
-				373B1DCD20CDE1FF0090D6FA /* AlbumCollectionNode.swift in Sources */,
-				373B1DC320CA38CA0090D6FA /* ArtistTableNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

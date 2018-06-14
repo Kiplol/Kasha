@@ -6,10 +6,9 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
-import AsyncDisplayKit
 import UIKit
 
-class KashaViewController: ASViewController<ASDisplayNode> {
+class KashaViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

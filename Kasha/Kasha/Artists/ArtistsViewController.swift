@@ -1,87 +1,42 @@
 //
-//  FirstViewController.swift
+//  ArtistsViewController.swift
 //  Kasha
 //
-//  Created by Elliott Kipper on 6/4/18.
+//  Created by Elliott Kipper on 6/14/18.
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
-import AsyncDisplayKit
-import MediaPlayer
 import UIKit
 
-class ArtistsViewController: KashaViewController, ASTableDataSource, ASTableDelegate, UITableViewDelegate {
+class ArtistsViewController: KashaViewController {
 
+    // MARK: - IBOutlets
+    @IBOutlet weak var tableView: UITableView!
+    
     // MARK: - ivars
-    fileprivate let tableNode = ASTableNode()
     
-    // MARK: - Initializers
-    init() {
-        super.init(node: self.tableNode)
+    // MARK: - View Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
         self.title = "Artists"
-        tableNode.delegate = self
-        tableNode.dataSource = self
+
+        // Do any additional setup after loading the view.
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("storyboards are incompatible with truth and beauty")
-    }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Helpers
-    func artist(forRowAt indexPath: IndexPath) -> MPMediaItemCollection {
-        guard let section = self.artists(forSection: indexPath.section) else {
-            preconditionFailure("No artist section for row at indexPath \(indexPath)")
-        }
-        return MediaLibraryHelper.shared.artist(forSection: section, atIndex: indexPath.row)
-    }
-    
-    func artists(forSection section: Int) -> MPMediaQuerySection? {
-        return MediaLibraryHelper.shared.allArtistSections()?[section]
-    }
-    
-    // MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sectionIndexTitles(for: tableView)?[section]
-    }
-    
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return MediaLibraryHelper.shared.allArtistSections()?.compactMap { $0.title }
-    }
-    
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return index
-    }
 
-    // MARK: - ASTableDataSource
-    func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
-        let artist = self.artist(forRowAt: indexPath)
+    /*
+    // MARK: - Navigation
 
-        let cellNodeBlock = { () -> ASCellNode in
-            let artistNode = ArtistTableNode(artist: artist)
-            return artistNode
-        }
-
-        return cellNodeBlock
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-    
-    // MARK: - ASTableDelegate
-    func numberOfSections(in tableNode: ASTableNode) -> Int {
-        return MediaLibraryHelper.shared.allArtistSections()?.count ?? 0
-    }
-    
-    func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return MediaLibraryHelper.shared.allArtistSections()?[section].range.length ?? 0
-    }
-    
-    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
-        let artist = self.artist(forRowAt: indexPath)
-        let artistVC = AlbumsViewController(artist: artist)
-        self.navigationController?.pushViewController(artistVC, animated: true)
-    }
+    */
 
 }

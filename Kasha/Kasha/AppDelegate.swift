@@ -6,7 +6,6 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
-import AsyncDisplayKit
 import MediaPlayer
 import UIKit
 
@@ -53,12 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Session Control
     func enterApp() {
         DispatchQueue.main.async {
-            let artistsVC = ArtistsViewController()
-            let artistsNav = ASNavigationController(rootViewController: artistsVC)
-            let albumsNav = ASNavigationController(rootViewController: AlbumsViewController())
-            let tabVC = ASTabBarController()
-            tabVC.viewControllers = [artistsNav, albumsNav]
-            self.window?.rootViewController = tabVC
+            guard let rootTabBarController = UIStoryboard(name: "Main", bundle: Bundle.main)
+                .instantiateViewController(withIdentifier: "rootTabBarController") as? UITabBarController else {
+                    return
+            }
+            self.window?.rootViewController = rootTabBarController
         }
     }
     

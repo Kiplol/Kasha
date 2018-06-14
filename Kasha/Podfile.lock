@@ -1,51 +1,20 @@
 PODS:
   - Hue (3.0.1)
-  - PINCache (3.0.1-beta.6):
-    - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
-    - PINCache/Core (= 3.0.1-beta.6)
-  - PINCache/Arc-exception-safe (3.0.1-beta.6):
-    - PINCache/Core
-  - PINCache/Core (3.0.1-beta.6):
-    - PINOperation (~> 1.1.0)
-  - PINOperation (1.1)
-  - PINRemoteImage/Core (3.0.0-beta.13):
-    - PINOperation
-  - PINRemoteImage/iOS (3.0.0-beta.13):
-    - PINRemoteImage/Core
-  - PINRemoteImage/PINCache (3.0.0-beta.13):
-    - PINCache (= 3.0.1-beta.6)
-    - PINRemoteImage/Core
   - SwiftLint (0.24.2)
-  - Texture (2.6):
-    - Texture/PINRemoteImage (= 2.6)
-  - Texture/Core (2.6)
-  - Texture/PINRemoteImage (2.6):
-    - PINRemoteImage/iOS (= 3.0.0-beta.13)
-    - PINRemoteImage/PINCache
-    - Texture/Core
 
 DEPENDENCIES:
   - Hue
   - SwiftLint
-  - Texture
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Hue
-    - PINCache
-    - PINOperation
-    - PINRemoteImage
     - SwiftLint
-    - Texture
 
 SPEC CHECKSUMS:
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
-  PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
-  PINOperation: 7f042fa6df5b606deb4bd5997654cf7033d5be1d
-  PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
-  Texture: 7249074582daf75e524e59df5428b66b8e8db0e4
 
-PODFILE CHECKSUM: 009f87fc015d89fc552da93ed741cb4ecd2d3181
+PODFILE CHECKSUM: 7d9a94dac36c924fbe793e370fa3240918a17590
 
 COCOAPODS: 1.5.3
