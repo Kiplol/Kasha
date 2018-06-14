@@ -19,6 +19,8 @@
 		373B1DC020C8D9F60090D6FA /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 373B1DBF20C8D9F60090D6FA /* MediaPlayer.framework */; };
 		373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DC420CD8F970090D6FA /* MediaLibraryHelper.swift */; };
 		373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */; };
+		373B1DD220D318570090D6FA /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DD020D318570090D6FA /* ArtistTableViewCell.swift */; };
+		373B1DD320D318570090D6FA /* ArtistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DD120D318570090D6FA /* ArtistTableViewCell.xib */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +40,8 @@
 		373B1DBF20C8D9F60090D6FA /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		373B1DC420CD8F970090D6FA /* MediaLibraryHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaLibraryHelper.swift; sourceTree = "<group>"; };
 		373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsViewController.swift; sourceTree = "<group>"; };
+		373B1DD020D318570090D6FA /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
+		373B1DD120D318570090D6FA /* ArtistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistTableViewCell.xib; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */,
+				373B1DD020D318570090D6FA /* ArtistTableViewCell.swift */,
+				373B1DD120D318570090D6FA /* ArtistTableViewCell.xib */,
 			);
 			path = Artists;
 			sourceTree = "<group>";
@@ -217,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				373B1DD320D318570090D6FA /* ArtistTableViewCell.xib in Resources */,
 				373B1DBE20C8D8FE0090D6FA /* .swiftlint.yml in Resources */,
 				373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */,
 				37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */,
@@ -291,6 +298,7 @@
 				373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */,
 				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
 				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,
+				373B1DD220D318570090D6FA /* ArtistTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

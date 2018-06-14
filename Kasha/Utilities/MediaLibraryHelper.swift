@@ -13,20 +13,17 @@ class MediaLibraryHelper: NSObject {
     static let shared = MediaLibraryHelper()
     
     // MARK: - Artists
-    func allArists() -> [MPMediaItemCollection]? {
-        return MPMediaQuery.artists().collections
+    func allArists() -> [MPMediaItemCollection] {
+        return MPMediaQuery.artists().collections ?? []
     }
     
-    func allArtistSections() -> [MPMediaQuerySection]? {
-        return MPMediaQuery.artists().collectionSections
+    func allArtistSections() -> [MPMediaQuerySection] {
+        return MPMediaQuery.artists().collectionSections ?? []
     }
     
     func artist(forSection section: MPMediaQuerySection, atIndex index: Int) -> MPMediaItemCollection {
         let currentLocation = section.range.location + index
-        guard let artist = MediaLibraryHelper.shared.allArists()?[currentLocation] else {
-            preconditionFailure("No artist for row at index \(index)")
-        }
-        return artist
+        return MediaLibraryHelper.shared.allArists()[currentLocation]
     }
     
     // MARK: - Albums
