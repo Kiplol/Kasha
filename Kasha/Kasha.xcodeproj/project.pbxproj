@@ -21,6 +21,7 @@
 		373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */; };
 		373B1DD220D318570090D6FA /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DD020D318570090D6FA /* ArtistTableViewCell.swift */; };
 		373B1DD320D318570090D6FA /* ArtistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DD120D318570090D6FA /* ArtistTableViewCell.xib */; };
+		373B1DD520D31E6B0090D6FA /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DD420D31E6B0090D6FA /* AlbumsViewController.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistsViewController.swift; sourceTree = "<group>"; };
 		373B1DD020D318570090D6FA /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
 		373B1DD120D318570090D6FA /* ArtistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistTableViewCell.xib; sourceTree = "<group>"; };
+		373B1DD420D31E6B0090D6FA /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlbumsViewController.swift; path = Kasha/Albums/AlbumsViewController.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +64,7 @@
 		37066A4820C6270C0021D0A5 = {
 			isa = PBXGroup;
 			children = (
+				373B1DD420D31E6B0090D6FA /* AlbumsViewController.swift */,
 				373B1DBD20C8D8FE0090D6FA /* .swiftlint.yml */,
 				37066A5320C6270C0021D0A5 /* Kasha */,
 				37066A5220C6270C0021D0A5 /* Products */,
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				373B1DD520D31E6B0090D6FA /* AlbumsViewController.swift in Sources */,
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,
 				373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */,
 				373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */,
