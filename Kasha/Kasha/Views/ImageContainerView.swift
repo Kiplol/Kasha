@@ -20,6 +20,11 @@ class ImageContainerView: UIView {
             self.imageView.image = newValue
         }
     }
+    @IBInspectable override var contentMode: UIViewContentMode {
+        didSet {
+            self.imageView.contentMode = self.contentMode
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,7 +40,8 @@ class ImageContainerView: UIView {
         self.imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.imageView.frame = self.bounds
         self.imageView.clipsToBounds = true
-        self.addSubview(self.imageView)
+        self.imageView.contentMode = .scaleAspectFill
+        self.insertSubview(self.imageView, at: 0)
         self.addObserver(self, forKeyPath: #keyPath(layer.cornerRadius), options: [.new], context: nil)
     }
     
