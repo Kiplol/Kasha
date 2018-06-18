@@ -28,10 +28,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6WV-An-hci">
                                         <rect key="frame" x="0.0" y="134" width="160" height="26"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nxq-kZ-RSh">
-                                                <rect key="frame" x="0.0" y="0.0" width="160" height="26"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzZ-FA-tyO">
                                                 <rect key="frame" x="4" y="4" width="152" height="18"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
@@ -41,14 +37,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Nxq-kZ-RSh" secondAttribute="bottom" id="Dd5-2I-53U"/>
                                             <constraint firstAttribute="trailing" secondItem="uzZ-FA-tyO" secondAttribute="trailing" constant="4" id="Icx-AL-gUw"/>
                                             <constraint firstItem="uzZ-FA-tyO" firstAttribute="leading" secondItem="6WV-An-hci" secondAttribute="leading" constant="4" id="edm-rA-br8"/>
-                                            <constraint firstItem="Nxq-kZ-RSh" firstAttribute="top" secondItem="6WV-An-hci" secondAttribute="top" id="g9g-Fp-BtF"/>
                                             <constraint firstItem="uzZ-FA-tyO" firstAttribute="top" secondItem="6WV-An-hci" secondAttribute="top" constant="4" id="hR5-8u-gqt"/>
                                             <constraint firstAttribute="bottom" secondItem="uzZ-FA-tyO" secondAttribute="bottom" constant="4" id="iw1-E2-95I"/>
-                                            <constraint firstAttribute="trailing" secondItem="Nxq-kZ-RSh" secondAttribute="trailing" id="kx8-bu-P5Y"/>
-                                            <constraint firstItem="Nxq-kZ-RSh" firstAttribute="leading" secondItem="6WV-An-hci" secondAttribute="leading" id="z3M-d4-BYW"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -84,7 +76,6 @@
                 <outlet property="imageAlbum" destination="aL3-gZ-L0g" id="Ok0-Mi-kG5"/>
                 <outlet property="infoContainer" destination="6WV-An-hci" id="3a5-oQ-swy"/>
                 <outlet property="labelAlbumName" destination="uzZ-FA-tyO" id="ThI-xL-noZ"/>
-                <outlet property="textBackground" destination="Nxq-kZ-RSh" id="ASw-Pk-hd4"/>
             </connections>
         </collectionViewCell>
     </objects>

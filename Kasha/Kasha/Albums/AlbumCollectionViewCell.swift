@@ -18,7 +18,6 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageAlbum: ImageContainerView!
     @IBOutlet weak var constraintWidth: NSLayoutConstraint!
     @IBOutlet weak var infoContainer: UIView!
-    @IBOutlet weak var textBackground: UIView!
     @IBOutlet weak var labelAlbumName: UILabel!
     
     // MARK: - ivars
@@ -41,8 +40,16 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     
     func update(withAlbum album: MPMediaItemCollection) {
         self.labelAlbumName.text = album.representativeItem?.albumTitle ?? "Unknown Album"
+        self.labelAlbumName.textColor = UIColor.white
+        self.infoContainer.backgroundColor = UIColor.black
         DispatchQueue.global(qos: .default).async {
+            //Image
             let image = album.representativeItem?.artwork?.image(at: CGSize(width: 200.0, height: 200.0))
+            DispatchQueue.main.async {
+                self.imageAlbum.image = image
+            }
+            
+            //Image Colors
             let (bgColor, textColor): (UIColor, UIColor) = {
                 if let (bg, primary, _, _) = image?.colors() {
                     return (bg, primary)
@@ -50,13 +57,10 @@ class AlbumCollectionViewCell: UICollectionViewCell {
                     return (UIColor.black, UIColor.white)
                 }
             }()
-            
             DispatchQueue.main.async {
                 self.labelAlbumName.textColor = textColor
-                self.textBackground.backgroundColor = bgColor
-                self.imageAlbum.image = image
+                self.infoContainer.backgroundColor = bgColor
             }
         }
     }
-
 }
