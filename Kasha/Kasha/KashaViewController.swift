@@ -11,7 +11,7 @@ import UIKit
 
 class KashaViewController: UIViewController {
 
-    // MARK:- Initializers
+    // MARK: - Initializers
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.commonInit()
