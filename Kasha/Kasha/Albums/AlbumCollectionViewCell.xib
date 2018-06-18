@@ -23,10 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aL3-gZ-L0g">
-                                <rect key="frame" x="6" y="6" width="148" height="148"/>
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gSd-dI-DOg">
-                                        <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="gSd-dI-DOg" secondAttribute="height" id="X4Y-am-GGr"/>
                                         </constraints>
@@ -43,10 +43,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aL3-gZ-L0g" firstAttribute="leading" secondItem="Vhz-ep-vBU" secondAttribute="leading" constant="6" id="UcA-BJ-Llp"/>
-                            <constraint firstItem="aL3-gZ-L0g" firstAttribute="top" secondItem="Vhz-ep-vBU" secondAttribute="top" constant="6" id="Y8C-eT-lFK"/>
-                            <constraint firstAttribute="trailing" secondItem="aL3-gZ-L0g" secondAttribute="trailing" constant="6" id="hP4-UD-AUA"/>
-                            <constraint firstAttribute="bottom" secondItem="aL3-gZ-L0g" secondAttribute="bottom" constant="6" id="jAE-5e-sAS"/>
+                            <constraint firstItem="aL3-gZ-L0g" firstAttribute="leading" secondItem="Vhz-ep-vBU" secondAttribute="leading" id="UcA-BJ-Llp"/>
+                            <constraint firstItem="aL3-gZ-L0g" firstAttribute="top" secondItem="Vhz-ep-vBU" secondAttribute="top" id="Y8C-eT-lFK"/>
+                            <constraint firstAttribute="trailing" secondItem="aL3-gZ-L0g" secondAttribute="trailing" id="hP4-UD-AUA"/>
+                            <constraint firstAttribute="bottom" secondItem="aL3-gZ-L0g" secondAttribute="bottom" id="jAE-5e-sAS"/>
                             <constraint firstAttribute="width" constant="160" id="pS0-oa-Yzb"/>
                         </constraints>
                     </view>

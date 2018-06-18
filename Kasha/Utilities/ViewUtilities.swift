@@ -8,6 +8,27 @@
 
 import UIKit
 
+extension UIView {
+    
+    func applyAlbumStyleShadow() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowOffset = CGSize.zero
+        self.layer.shadowRadius = 3.0
+        self.clipsToBounds = false
+    }
+    
+    func applyAlbumStyleRoundedCorners() {
+        self.layer.cornerRadius = 10.0
+    }
+    
+    func applyAlbumsStyle() {
+        self.applyAlbumStyleRoundedCorners()
+        self.applyAlbumStyleShadow()
+    }
+    
+}
+
 extension UICollectionView {
     
     var flowLayout: UICollectionViewFlowLayout? {

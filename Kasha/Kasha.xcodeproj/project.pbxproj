@@ -25,6 +25,7 @@
 		373B1DD820D3220C0090D6FA /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DD620D3220C0090D6FA /* AlbumCollectionViewCell.swift */; };
 		373B1DD920D3220C0090D6FA /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DD720D3220C0090D6FA /* AlbumCollectionViewCell.xib */; };
 		373B1DDB20D326A90090D6FA /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DDA20D326A90090D6FA /* ViewUtilities.swift */; };
+		37414D3720D74CCC0076596E /* ImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3620D74CCC0076596E /* ImageContainerView.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		373B1DD620D3220C0090D6FA /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		373B1DD720D3220C0090D6FA /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		373B1DDA20D326A90090D6FA /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
+		37414D3620D74CCC0076596E /* ImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContainerView.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 				373B1DB720C8D6E10090D6FA /* Onboarding */,
 				373B1DB120C8B91E0090D6FA /* Constants.swift */,
 				373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */,
+				37414D3520D74CB30076596E /* Views */,
 				37066A5A20C6270C0021D0A5 /* Main.storyboard */,
 				37066A5D20C6270D0021D0A5 /* Assets.xcassets */,
 				37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */,
@@ -149,6 +152,14 @@
 				373B1DD720D3220C0090D6FA /* AlbumCollectionViewCell.xib */,
 			);
 			path = Albums;
+			sourceTree = "<group>";
+		};
+		37414D3520D74CB30076596E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				37414D3620D74CCC0076596E /* ImageContainerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		BA8D288BE383E275E5AEA1DA /* Pods */ = {
@@ -305,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37414D3720D74CCC0076596E /* ImageContainerView.swift in Sources */,
 				373B1DD820D3220C0090D6FA /* AlbumCollectionViewCell.swift in Sources */,
 				373B1DDB20D326A90090D6FA /* ViewUtilities.swift in Sources */,
 				373B1DD520D31E6B0090D6FA /* AlbumsViewController.swift in Sources */,

@@ -51,15 +51,16 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         return self.albumSections[section].range.length
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumsViewController.albumCellID,
                                                       for: indexPath)
         if let albumCell = cell as? AlbumCollectionViewCell {
+            let numberOfColumns = max(floor((collectionView.usableWidth() / AlbumCollectionViewCell.idealWidth)), 2.0)
             albumCell.update(withAlbum: self.album(forIndexPath: indexPath))
             let interItemSpace = collectionView.flowLayout?.minimumInteritemSpacing ?? 0.0
-            albumCell.width = floor(collectionView.usableWidth() * 0.5) - (interItemSpace / 2.0) //2 for 2 columns
+            albumCell.width = floor(collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
         }
         return cell
     }
-
 }

@@ -11,6 +11,8 @@ import UIKit
 
 class AlbumCollectionViewCell: UICollectionViewCell {
     
+    static let idealWidth: CGFloat = 170.0
+    
     // MARK: - IBOutlets
     @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var imageAlbum: UIImageView!
@@ -26,13 +28,11 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.clipsToBounds = false
+        self.contentView.clipsToBounds = false
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        self.imageAlbum.layer.cornerRadius = 10.0
-        self.imageContainer.layer.cornerRadius = self.imageAlbum.layer.cornerRadius
-        self.imageContainer.layer.shadowColor = UIColor.black.cgColor
-        self.imageContainer.layer.shadowOpacity = 0.2
-        self.imageContainer.layer.shadowOffset = CGSize.zero
-        self.imageContainer.layer.shadowRadius = 2.0
+        self.imageAlbum.applyAlbumStyleRoundedCorners()
+        self.imageContainer.applyAlbumsStyle()
     }
     
     func update(withAlbum album: MPMediaItemCollection) {

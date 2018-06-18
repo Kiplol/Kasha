@@ -14,12 +14,12 @@ class ArtistTableViewCell: UITableViewCell {
     static let cellHeight: CGFloat = 70.0
 
     // MARK: - IBOutlets
-    @IBOutlet weak var imageArtist: UIImageView!
+    @IBOutlet weak var imageArtist: ImageContainerView!
     @IBOutlet weak var labelArtistName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.imageArtist.layer.cornerRadius = 10.0
+        self.imageArtist.applyAlbumsStyle()
     }
     
     func update(withArtist artist: MPMediaItemCollection) {
