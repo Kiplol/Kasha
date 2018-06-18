@@ -112,7 +112,7 @@
         <!--Albums View Controller-->
         <scene sceneID="c7J-Yk-jjn">
             <objects>
-                <viewController id="Ivp-jZ-hKI" customClass="AlbumsViewController" customModule="albums" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="albums" id="Ivp-jZ-hKI" customClass="AlbumsViewController" customModule="Kasha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="87Y-r5-FYc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

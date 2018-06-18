@@ -29,6 +29,7 @@
 		37414D3A20D75EEF0076596E /* STBTableViewIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3920D75EEF0076596E /* STBTableViewIndex.swift */; };
 		37414D3C20D820580076596E /* SelfSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3B20D820580076596E /* SelfSizing.swift */; };
 		37414D3E20D83C960076596E /* SongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3D20D83C960076596E /* SongsViewController.swift */; };
+		37414D4020D840720076596E /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3F20D840720076596E /* ArtistViewController.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		37414D3920D75EEF0076596E /* STBTableViewIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STBTableViewIndex.swift; sourceTree = "<group>"; };
 		37414D3B20D820580076596E /* SelfSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizing.swift; sourceTree = "<group>"; };
 		37414D3D20D83C960076596E /* SongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsViewController.swift; sourceTree = "<group>"; };
+		37414D3F20D840720076596E /* ArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 		373B1DC120CA38AA0090D6FA /* Artists */ = {
 			isa = PBXGroup;
 			children = (
+				37414D3F20D840720076596E /* ArtistViewController.swift */,
 				373B1DCE20D315FC0090D6FA /* ArtistsViewController.swift */,
 				373B1DD020D318570090D6FA /* ArtistTableViewCell.swift */,
 				373B1DD120D318570090D6FA /* ArtistTableViewCell.xib */,
@@ -347,6 +350,7 @@
 				37414D3A20D75EEF0076596E /* STBTableViewIndex.swift in Sources */,
 				373B1DD220D318570090D6FA /* ArtistTableViewCell.swift in Sources */,
 				37414D3E20D83C960076596E /* SongsViewController.swift in Sources */,
+				37414D4020D840720076596E /* ArtistViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
