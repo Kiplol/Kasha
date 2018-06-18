@@ -35,45 +35,41 @@
                                                     <constraint firstAttribute="width" secondItem="3ll-EG-1yd" secondAttribute="height" id="6AZ-JG-cgm"/>
                                                 </constraints>
                                             </imageView>
-                                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMj-lu-3Pk">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UpY-XB-x1R">
                                                 <rect key="frame" x="0.0" y="111.5" width="160" height="48.5"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9xB-e5-rgy">
-                                                        <rect key="frame" x="8" y="8" width="144" height="32.5"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKZ-E3-m9s">
-                                                                <rect key="frame" x="0.0" y="0.0" width="144" height="18"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQO-ce-em0">
-                                                                <rect key="frame" x="0.0" y="18" width="144" height="14.5"/>
-                                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="9xB-e5-rgy" secondAttribute="trailing" constant="8" id="6hn-G0-qpx"/>
-                                                    <constraint firstItem="9xB-e5-rgy" firstAttribute="top" secondItem="XMj-lu-3Pk" secondAttribute="top" constant="8" id="IF3-3T-9xS"/>
-                                                    <constraint firstAttribute="bottom" secondItem="9xB-e5-rgy" secondAttribute="bottom" constant="8" id="KjP-4M-77h"/>
-                                                    <constraint firstItem="9xB-e5-rgy" firstAttribute="leading" secondItem="XMj-lu-3Pk" secondAttribute="leading" constant="8" id="SP0-h1-47N"/>
-                                                </constraints>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9xB-e5-rgy">
+                                                <rect key="frame" x="8" y="119.5" width="39.5" height="32.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKZ-E3-m9s">
+                                                        <rect key="frame" x="0.0" y="0.0" width="39.5" height="18"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQO-ce-em0">
+                                                        <rect key="frame" x="0.0" y="18" width="39.5" height="14.5"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="9xB-e5-rgy" secondAttribute="bottom" constant="8" id="1xy-j6-k7z"/>
                                             <constraint firstAttribute="trailing" secondItem="3ll-EG-1yd" secondAttribute="trailing" id="3Xe-Xv-9QV"/>
                                             <constraint firstItem="3ll-EG-1yd" firstAttribute="top" secondItem="E3Q-rd-MJc" secondAttribute="top" id="BQ2-Qv-WNG"/>
-                                            <constraint firstAttribute="trailing" secondItem="XMj-lu-3Pk" secondAttribute="trailing" id="Exe-Ee-xs5"/>
+                                            <constraint firstItem="UpY-XB-x1R" firstAttribute="top" secondItem="9xB-e5-rgy" secondAttribute="top" constant="-8" id="JMb-ib-2Lk"/>
                                             <constraint firstItem="3ll-EG-1yd" firstAttribute="leading" secondItem="E3Q-rd-MJc" secondAttribute="leading" id="L8C-nS-hWm"/>
-                                            <constraint firstAttribute="bottom" secondItem="XMj-lu-3Pk" secondAttribute="bottom" id="PIj-2T-NsS"/>
+                                            <constraint firstItem="UpY-XB-x1R" firstAttribute="leading" secondItem="E3Q-rd-MJc" secondAttribute="leading" id="RnW-aC-UwG"/>
+                                            <constraint firstAttribute="trailing" secondItem="UpY-XB-x1R" secondAttribute="trailing" id="XaC-gM-9B9"/>
+                                            <constraint firstItem="9xB-e5-rgy" firstAttribute="leading" secondItem="E3Q-rd-MJc" secondAttribute="leading" constant="8" id="aSl-ce-czI"/>
+                                            <constraint firstAttribute="bottom" secondItem="UpY-XB-x1R" secondAttribute="bottom" id="iuA-cr-OTb"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9xB-e5-rgy" secondAttribute="trailing" constant="8" id="p7J-KE-ufD"/>
                                             <constraint firstAttribute="bottom" secondItem="3ll-EG-1yd" secondAttribute="bottom" id="qAJ-RY-UJw"/>
-                                            <constraint firstItem="XMj-lu-3Pk" firstAttribute="leading" secondItem="E3Q-rd-MJc" secondAttribute="leading" id="uoz-J3-f9j"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -106,6 +102,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
                 <outlet property="everythingContainer" destination="aL3-gZ-L0g" id="kHJ-7J-BhZ"/>
+                <outlet property="gradientView" destination="UpY-XB-x1R" id="lLi-Xq-tNl"/>
                 <outlet property="imageAlbum" destination="3ll-EG-1yd" id="KAu-yI-LBL"/>
                 <outlet property="imageContainer" destination="E3Q-rd-MJc" id="Li3-rc-5E3"/>
                 <outlet property="labelAlbumName" destination="vKZ-E3-m9s" id="ra9-Fi-BBX"/>

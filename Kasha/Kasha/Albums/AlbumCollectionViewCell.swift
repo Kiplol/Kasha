@@ -20,6 +20,8 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
     @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var labelAlbumName: UILabel!
     @IBOutlet weak var labelArtistName: UILabel!
+    @IBOutlet weak var gradientView: UIView!
+    private let gradient = CAGradientLayer()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +31,11 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
         self.imageAlbum.applyAlbumStyleRoundedCorners()
         self.imageContainer.applyAlbumStyleRoundedCorners()
         self.everythingContainer.applyAlbumsStyle()
+        
+        self.gradient.colors = [UIColor.black.alpha(0.0).cgColor, UIColor.black.alpha(0.7).cgColor,
+                                UIColor.black.alpha(0.8).cgColor]
+        self.gradient.locations = [0.0, 0.40, 1.0]
+        self.gradientView.layer.addSublayer(self.gradient)
     }
     
     func update(withAlbum album: MPMediaItemCollection) {
@@ -40,6 +47,11 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
                 self.imageAlbum.image = image
             }
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.gradient.frame = self.gradientView.bounds
     }
     
     // MARK: - SelfSizing
