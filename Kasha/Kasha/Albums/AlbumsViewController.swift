@@ -9,8 +9,7 @@
 import MediaPlayer
 import UIKit
 
-class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate,
-UICollectionViewDelegateFlowLayout {
+class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private static let albumCellID = "albumCellID"
     
@@ -38,6 +37,16 @@ UICollectionViewDelegateFlowLayout {
         self.indexView.titles = self.albumSections.map { $0.title }
         self.indexView.delegate = self
         self.view.addSubview(self.indexView)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        if let flowLayout = self.collectionView.flowLayout {
+            let numberOfColumns = max(floor((self.collectionView.usableWidth() / AlbumCollectionViewCell.idealWidth)), 2.0)
+            let interItemSpace = self.collectionView.flowLayout?.minimumInteritemSpacing ?? 0.0
+            let width = floor(self.collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
+            flowLayout.itemSize = AlbumCollectionViewCell.sizeConstrained(toWidth: width, withData: nil)
+        }
     }
     
     // MARK: - Helpers

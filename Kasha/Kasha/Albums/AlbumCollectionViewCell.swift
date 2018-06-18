@@ -27,7 +27,7 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
         super.awakeFromNib()
         self.clipsToBounds = false
         self.contentView.clipsToBounds = false
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+//        self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.imageAlbum.applyAlbumStyleRoundedCorners()
         self.imageContainer.applyAlbumStyleRoundedCorners()
         self.everythingContainer.applyAlbumsStyle()
