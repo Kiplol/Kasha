@@ -73,6 +73,15 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         }
         return cell
     }
+    
+    // MARK: - UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let songsVC = SongsViewController.fromStoryboard()
+        let album = self.album(forIndexPath: indexPath)
+        songsVC.songs = MediaLibraryHelper.shared.allSongs(fromAlbum: album)
+        songsVC.title = album.representativeItem?.albumTitle
+        self.show(songsVC, sender: album)
+    }
 }
 
 extension AlbumsViewController: STBTableViewIndexDelegate {

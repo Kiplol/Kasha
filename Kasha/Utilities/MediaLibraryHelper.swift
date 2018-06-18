@@ -47,5 +47,22 @@ class MediaLibraryHelper: NSObject {
                                                                 forProperty: MPMediaItemPropertyArtistPersistentID))
         return albumsQuery.collections ?? []
     }
+    
+    // MARK: - Songs
+    func allSongs(forArtist artist: MPMediaItemCollection) -> [MPMediaItem] {
+        let artistID = artist.persistentID
+        let songQuery = MPMediaQuery.songs()
+        songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: artistID,
+                                                              forProperty: MPMediaItemPropertyArtistPersistentID))
+        return songQuery.items ?? []
+    }
+    
+    func allSongs(fromAlbum album: MPMediaItemCollection) -> [MPMediaItem] {
+        let albumID = album.persistentID
+        let songQuery = MPMediaQuery.songs()
+        songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: albumID,
+                                                              forProperty: MPMediaItemPropertyAlbumPersistentID))
+        return songQuery.items ?? []
+    }
 
 }
