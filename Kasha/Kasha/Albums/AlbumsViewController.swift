@@ -18,7 +18,6 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     
     // MARK: - ivars
     private let albumSections = MediaLibraryHelper.shared.allAlbumSections()
-    private let indexView = STBTableViewIndex()
 
     // MARK: - KashaViewController
     override func commonInit() {
@@ -32,11 +31,6 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: AlbumsViewController.albumCellID)
-        
-        self.indexView.autoHides = false
-        self.indexView.titles = self.albumSections.map { $0.title }
-        self.indexView.delegate = self
-        self.view.addSubview(self.indexView)
     }
     
     override func viewWillLayoutSubviews() {
@@ -81,25 +75,5 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         songsVC.songs = MediaLibraryHelper.shared.allSongs(fromAlbum: album)
         songsVC.title = album.representativeItem?.albumTitle
         self.show(songsVC, sender: album)
-    }
-}
-
-extension AlbumsViewController: STBTableViewIndexDelegate {
-    func tableViewIndexChanged(_ index: Int, title: String) {
-        let indexPath = IndexPath(row: 0, section: index)
-        self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-    }
-    
-    func tableViewIndexTopLayoutGuideLength() -> CGFloat {
-        return self.view.safeAreaInsets.top + 20
-    }
-    
-    func tableViewIndexBottomLayoutGuideLength() -> CGFloat {
-        var bottomHeight: CGFloat = 0.0
-        if let tabBarController = self.tabBarController {
-            let tabBarHeight = tabBarController.tabBar.frame.size.height
-            bottomHeight += tabBarHeight
-        }
-        return AppDelegate.instance.safeAreaInsets.bottom + bottomHeight + 120
     }
 }

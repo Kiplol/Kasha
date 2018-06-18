@@ -26,7 +26,6 @@
 		373B1DD920D3220C0090D6FA /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DD720D3220C0090D6FA /* AlbumCollectionViewCell.xib */; };
 		373B1DDB20D326A90090D6FA /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DDA20D326A90090D6FA /* ViewUtilities.swift */; };
 		37414D3720D74CCC0076596E /* ImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3620D74CCC0076596E /* ImageContainerView.swift */; };
-		37414D3A20D75EEF0076596E /* STBTableViewIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3920D75EEF0076596E /* STBTableViewIndex.swift */; };
 		37414D3C20D820580076596E /* SelfSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3B20D820580076596E /* SelfSizing.swift */; };
 		37414D3E20D83C960076596E /* SongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3D20D83C960076596E /* SongsViewController.swift */; };
 		37414D4020D840720076596E /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3F20D840720076596E /* ArtistViewController.swift */; };
@@ -56,7 +55,6 @@
 		373B1DD720D3220C0090D6FA /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		373B1DDA20D326A90090D6FA /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
 		37414D3620D74CCC0076596E /* ImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContainerView.swift; sourceTree = "<group>"; };
-		37414D3920D75EEF0076596E /* STBTableViewIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STBTableViewIndex.swift; sourceTree = "<group>"; };
 		37414D3B20D820580076596E /* SelfSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizing.swift; sourceTree = "<group>"; };
 		37414D3D20D83C960076596E /* SongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsViewController.swift; sourceTree = "<group>"; };
 		37414D3F20D840720076596E /* ArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 		37414D3820D75EB10076596E /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
-				37414D3920D75EEF0076596E /* STBTableViewIndex.swift */,
 			);
 			path = "3rd Party";
 			sourceTree = "<group>";
@@ -318,10 +315,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kasha/Pods-Kasha-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BDKCollectionIndexView/BDKCollectionIndexView.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BDKCollectionIndexView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +346,6 @@
 				373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */,
 				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
 				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,
-				37414D3A20D75EEF0076596E /* STBTableViewIndex.swift in Sources */,
 				373B1DD220D318570090D6FA /* ArtistTableViewCell.swift in Sources */,
 				37414D3E20D83C960076596E /* SongsViewController.swift in Sources */,
 				37414D4020D840720076596E /* ArtistViewController.swift in Sources */,
