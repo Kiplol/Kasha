@@ -26,6 +26,8 @@
 		373B1DD920D3220C0090D6FA /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DD720D3220C0090D6FA /* AlbumCollectionViewCell.xib */; };
 		373B1DDB20D326A90090D6FA /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DDA20D326A90090D6FA /* ViewUtilities.swift */; };
 		37414D3720D74CCC0076596E /* ImageContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3620D74CCC0076596E /* ImageContainerView.swift */; };
+		37414D3A20D75EEF0076596E /* STBTableViewIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3920D75EEF0076596E /* STBTableViewIndex.swift */; };
+		37414D3C20D820580076596E /* SelfSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3B20D820580076596E /* SelfSizing.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,8 @@
 		373B1DD720D3220C0090D6FA /* AlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumCollectionViewCell.xib; sourceTree = "<group>"; };
 		373B1DDA20D326A90090D6FA /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
 		37414D3620D74CCC0076596E /* ImageContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContainerView.swift; sourceTree = "<group>"; };
+		37414D3920D75EEF0076596E /* STBTableViewIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STBTableViewIndex.swift; sourceTree = "<group>"; };
+		37414D3B20D820580076596E /* SelfSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizing.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,6 +95,7 @@
 		37066A5320C6270C0021D0A5 /* Kasha */ = {
 			isa = PBXGroup;
 			children = (
+				37414D3820D75EB10076596E /* 3rd Party */,
 				37066A5420C6270C0021D0A5 /* AppDelegate.swift */,
 				373B1DCB20CDE1E70090D6FA /* Albums */,
 				373B1DC120CA38AA0090D6FA /* Artists */,
@@ -157,9 +162,18 @@
 		37414D3520D74CB30076596E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37414D3B20D820580076596E /* SelfSizing.swift */,
 				37414D3620D74CCC0076596E /* ImageContainerView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		37414D3820D75EB10076596E /* 3rd Party */ = {
+			isa = PBXGroup;
+			children = (
+				37414D3920D75EEF0076596E /* STBTableViewIndex.swift */,
+			);
+			path = "3rd Party";
 			sourceTree = "<group>";
 		};
 		BA8D288BE383E275E5AEA1DA /* Pods */ = {
@@ -321,11 +335,13 @@
 				373B1DDB20D326A90090D6FA /* ViewUtilities.swift in Sources */,
 				373B1DD520D31E6B0090D6FA /* AlbumsViewController.swift in Sources */,
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,
+				37414D3C20D820580076596E /* SelfSizing.swift in Sources */,
 				373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */,
 				373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */,
 				373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */,
 				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
 				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,
+				37414D3A20D75EEF0076596E /* STBTableViewIndex.swift in Sources */,
 				373B1DD220D318570090D6FA /* ArtistTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

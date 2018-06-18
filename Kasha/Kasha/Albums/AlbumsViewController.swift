@@ -9,7 +9,8 @@
 import MediaPlayer
 import UIKit
 
-class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate,
+UICollectionViewDelegateFlowLayout {
     
     private static let albumCellID = "albumCellID"
     
@@ -18,6 +19,7 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     
     // MARK: - ivars
     private let albumSections = MediaLibraryHelper.shared.allAlbumSections()
+    private let indexView = STBTableViewIndex()
 
     // MARK: - KashaViewController
     override func commonInit() {
@@ -31,9 +33,11 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: AlbumsViewController.albumCellID)
-        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = CGSize(width: 180.0, height: 180.0)
-        }
+        
+        self.indexView.autoHides = false
+        self.indexView.titles = self.albumSections.map { $0.title }
+        self.indexView.delegate = self
+        self.view.addSubview(self.indexView)
     }
     
     // MARK: - Helpers
@@ -56,11 +60,37 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumsViewController.albumCellID,
                                                       for: indexPath)
         if let albumCell = cell as? AlbumCollectionViewCell {
-            let numberOfColumns = max(floor((collectionView.usableWidth() / AlbumCollectionViewCell.idealWidth)), 2.0)
             albumCell.update(withAlbum: self.album(forIndexPath: indexPath))
-            let interItemSpace = collectionView.flowLayout?.minimumInteritemSpacing ?? 0.0
-            albumCell.width = floor(collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
         }
         return cell
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let numberOfColumns = max(floor((collectionView.usableWidth() / AlbumCollectionViewCell.idealWidth)), 2.0)
+        let interItemSpace = collectionView.flowLayout?.minimumInteritemSpacing ?? 0.0
+        let width = floor(collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
+        return AlbumCollectionViewCell.sizeConstrained(toWidth: width, withData: nil)
+    }
+}
+
+extension AlbumsViewController: STBTableViewIndexDelegate {
+    func tableViewIndexChanged(_ index: Int, title: String) {
+        let indexPath = IndexPath(row: 0, section: index)
+        self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+    }
+    
+    func tableViewIndexTopLayoutGuideLength() -> CGFloat {
+        return self.view.safeAreaInsets.top + 20
+    }
+    
+    func tableViewIndexBottomLayoutGuideLength() -> CGFloat {
+        var bottomHeight: CGFloat = 0.0
+        if let tabBarController = self.tabBarController {
+            let tabBarHeight = tabBarController.tabBar.frame.size.height
+            bottomHeight += tabBarHeight
+        }
+        return AppDelegate.instance.safeAreaInsets.bottom + bottomHeight + 120
     }
 }

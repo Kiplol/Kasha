@@ -88,7 +88,6 @@
                             <constraint firstItem="aL3-gZ-L0g" firstAttribute="top" secondItem="Vhz-ep-vBU" secondAttribute="top" id="Y8C-eT-lFK"/>
                             <constraint firstAttribute="trailing" secondItem="aL3-gZ-L0g" secondAttribute="trailing" id="hP4-UD-AUA"/>
                             <constraint firstAttribute="bottom" secondItem="aL3-gZ-L0g" secondAttribute="bottom" id="jAE-5e-sAS"/>
-                            <constraint firstAttribute="width" constant="160" id="pS0-oa-Yzb"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -101,7 +100,6 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
-                <outlet property="constraintWidth" destination="pS0-oa-Yzb" id="UD9-PC-aD5"/>
                 <outlet property="everythingContainer" destination="aL3-gZ-L0g" id="kHJ-7J-BhZ"/>
                 <outlet property="gradientView" destination="UpY-XB-x1R" id="lLi-Xq-tNl"/>
                 <outlet property="imageAlbum" destination="3ll-EG-1yd" id="KAu-yI-LBL"/>

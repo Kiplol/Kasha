@@ -10,7 +10,7 @@ import Hue
 import MediaPlayer
 import UIKit
 
-class AlbumCollectionViewCell: UICollectionViewCell {
+class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
     
     static let idealWidth: CGFloat = 170.0
     
@@ -18,21 +18,10 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageAlbum: UIImageView!
     @IBOutlet weak var everythingContainer: UIView!
     @IBOutlet weak var imageContainer: UIView!
-    @IBOutlet weak var constraintWidth: NSLayoutConstraint!
     @IBOutlet weak var labelAlbumName: UILabel!
     @IBOutlet weak var labelArtistName: UILabel!
     @IBOutlet weak var gradientView: UIView!
     private let gradient = CAGradientLayer()
-    
-    // MARK: - ivars
-    var width: CGFloat? = nil {
-        didSet {
-            if let newValue = self.width {
-                self.constraintWidth.constant = newValue
-                self.setNeedsLayout()
-            }
-        }
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,6 +52,10 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.gradient.frame = self.gradientView.bounds
+    }
     
+    // MARK: - SelfSizing
+    static func sizeConstrained(toWidth width: CGFloat, withData: Any?) -> CGSize {
+        return CGSize(width: width, height: width)
     }
 }

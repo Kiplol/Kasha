@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return appDelegate
     }
+    var safeAreaInsets: UIEdgeInsets {
+        return self.window?.safeAreaInsets ?? UIEdgeInsets.zero
+    }
+    
     var window: UIWindow?
 
     // MARK: - UIApplicationDelegate
