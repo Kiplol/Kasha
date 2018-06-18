@@ -73,15 +73,6 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         }
         return cell
     }
-    
-    // MARK: - UICollectionViewDelegateFlowLayout
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let numberOfColumns = max(floor((collectionView.usableWidth() / AlbumCollectionViewCell.idealWidth)), 2.0)
-        let interItemSpace = collectionView.flowLayout?.minimumInteritemSpacing ?? 0.0
-        let width = floor(collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
-        return AlbumCollectionViewCell.sizeConstrained(toWidth: width, withData: nil)
-    }
 }
 
 extension AlbumsViewController: STBTableViewIndexDelegate {
