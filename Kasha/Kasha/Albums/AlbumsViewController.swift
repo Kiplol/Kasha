@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import BDKCollectionIndexView
 import MediaPlayer
 import UIKit
 
@@ -15,6 +16,7 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var indexView: BDKCollectionIndexView!
     
     // MARK: - ivars
     private let albumSections = MediaLibraryHelper.shared.allAlbumSections()
@@ -29,8 +31,14 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Collection View
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: AlbumsViewController.albumCellID)
+        
+        //Section Index
+        self.indexView.addTarget(self, action: #selector(AlbumsViewController.indexViewValueChanged(sender:)),
+                                 for: .valueChanged)
+        self.indexView.indexTitles = self.albumSections.map { $0.title }
     }
     
     override func viewWillLayoutSubviews() {
@@ -75,5 +83,13 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         songsVC.songs = MediaLibraryHelper.shared.allSongs(fromAlbum: album)
         songsVC.title = album.representativeItem?.albumTitle
         self.show(songsVC, sender: album)
+    }
+}
+
+extension AlbumsViewController {
+    // MARK: - Index View
+    @objc func indexViewValueChanged(sender: BDKCollectionIndexView) {
+        let path = IndexPath(item: 0, section: Int(sender.currentIndex))
+        self.collectionView.scrollToItem(at: path, at: .top, animated: false)
     }
 }

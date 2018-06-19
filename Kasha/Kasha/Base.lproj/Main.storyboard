@@ -132,19 +132,29 @@
                                     <outlet property="delegate" destination="Ivp-jZ-hKI" id="9E6-kA-Xfy"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8J-Cz-f50" customClass="BDKCollectionIndexView">
+                                <rect key="frame" x="347" y="0.0" width="28" height="618"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="gpl-4t-5mP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZzT-90-CTs" firstAttribute="leading" secondItem="Uq0-Ua-x2D" secondAttribute="leading" id="W8z-ML-6RI"/>
+                            <constraint firstItem="N8J-Cz-f50" firstAttribute="top" secondItem="87Y-r5-FYc" secondAttribute="top" id="Ykc-sU-uBE"/>
+                            <constraint firstItem="N8J-Cz-f50" firstAttribute="trailing" secondItem="Uq0-Ua-x2D" secondAttribute="trailing" id="czA-T5-xLs"/>
                             <constraint firstItem="ZzT-90-CTs" firstAttribute="top" secondItem="Uq0-Ua-x2D" secondAttribute="top" id="kvK-LD-DZP"/>
                             <constraint firstItem="Uq0-Ua-x2D" firstAttribute="trailing" secondItem="ZzT-90-CTs" secondAttribute="trailing" id="nRe-g3-A8t"/>
                             <constraint firstItem="Uq0-Ua-x2D" firstAttribute="bottom" secondItem="ZzT-90-CTs" secondAttribute="bottom" id="odA-NQ-a2A"/>
+                            <constraint firstItem="Uq0-Ua-x2D" firstAttribute="bottom" secondItem="N8J-Cz-f50" secondAttribute="bottom" id="sdS-0E-Igk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Uq0-Ua-x2D"/>
                     </view>
                     <navigationItem key="navigationItem" id="dpW-vW-IOH"/>
                     <connections>
                         <outlet property="collectionView" destination="ZzT-90-CTs" id="tdL-LQ-Ff3"/>
+                        <outlet property="indexView" destination="N8J-Cz-f50" id="edh-CF-fcd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GAx-mP-cX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
