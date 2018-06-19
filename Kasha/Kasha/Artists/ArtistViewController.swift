@@ -21,7 +21,6 @@ class ArtistViewController: AlbumsViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

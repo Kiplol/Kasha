@@ -67,14 +67,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private
     func setupAppearance() {
         //Window
-        self.window?.tintColor = UIColor.red
+//        self.window?.tintColor = UIColor.red
 
         //Navigation Bar
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = UIColor.white
         UINavigationBar.appearance().prefersLargeTitles = true
-        UINavigationBar.appearance().largeTitleTextAttributes =
-            [NSAttributedStringKey.foregroundColor: self.window!.tintColor]
+//        UINavigationBar.appearance().largeTitleTextAttributes =
+//            [NSAttributedStringKey.foregroundColor: self.window!.tintColor]
         
         //Tab Bar
         UITabBar.appearance().isTranslucent = false
