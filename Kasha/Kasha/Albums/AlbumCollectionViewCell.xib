@@ -28,7 +28,7 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3Q-rd-MJc">
                                         <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="3ll-EG-1yd">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="3ll-EG-1yd">
                                                 <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                                 <color key="backgroundColor" red="0.55124022500000003" green="0.60123425549999998" blue="0.76822255709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
