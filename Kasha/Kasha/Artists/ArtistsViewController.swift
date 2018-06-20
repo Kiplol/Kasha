@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import BDKCollectionIndexView
 import MediaPlayer
 import UIKit
 
@@ -15,6 +16,7 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
 
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var indexView: BDKCollectionIndexView!
     
     // MARK: - ivars
     private let artistSections = MediaLibraryHelper.shared.allArtistSections()
@@ -29,8 +31,14 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //Collection View
         let artistCellNib = UINib(nibName: "ArtistTableViewCell", bundle: Bundle.main)
         self.tableView.register(artistCellNib, forCellReuseIdentifier: ArtistsViewController.cellID)
+        
+        //Section Index
+        self.indexView.addTarget(self, action: #selector(ArtistsViewController.indexViewValueChanged(sender:)),
+                                 for: .valueChanged)
+        self.indexView.indexTitles = self.artistSections.compactMap { $0.title }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,22 +75,17 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
         return ArtistTableViewCell.cellHeight
     }
     
-    // MARK: Section Indeces
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return self.artistSections.compactMap { $0.title }
-    }
-    
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return index
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sectionIndexTitles(for: tableView)?[section]
-    }
-    
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 
+}
+
+extension ArtistsViewController {
+    // MARK: - Index View
+    @objc func indexViewValueChanged(sender: BDKCollectionIndexView) {
+        let path = IndexPath(item: 0, section: Int(sender.currentIndex))
+        self.tableView.scrollToRow(at: path, at: .top, animated: false)
+    }
 }
