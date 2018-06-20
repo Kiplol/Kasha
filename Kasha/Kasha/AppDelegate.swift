@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import BDKCollectionIndexView
 import MediaPlayer
 import UIKit
 
@@ -78,6 +79,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Tab Bar
         UITabBar.appearance().isTranslucent = false
+        
+        if let tintColor = self.window?.tintColor {
+            BDKCollectionIndexView.appearance().tintColor = tintColor
+        }
     }
 
 }

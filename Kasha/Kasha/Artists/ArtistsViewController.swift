@@ -75,6 +75,11 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
         return ArtistTableViewCell.cellHeight
     }
     
+    // MARK: Section Indeces
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.artistSections.compactMap { $0.title }[section]
+    }
+    
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
