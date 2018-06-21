@@ -1,10 +1,19 @@
 PODS:
+  - AppCenter (1.7.1):
+    - AppCenter/Analytics (= 1.7.1)
+    - AppCenter/Crashes (= 1.7.1)
+  - AppCenter/Analytics (1.7.1):
+    - AppCenter/Core
+  - AppCenter/Core (1.7.1)
+  - AppCenter/Crashes (1.7.1):
+    - AppCenter/Core
   - BDKCollectionIndexView (2.2.2)
   - Hue (3.0.1)
   - SwiftLint (0.24.2)
   - ViewAnimator (2.1.1)
 
 DEPENDENCIES:
+  - AppCenter
   - BDKCollectionIndexView
   - Hue
   - SwiftLint
@@ -12,17 +21,19 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AppCenter
     - BDKCollectionIndexView
     - Hue
     - SwiftLint
     - ViewAnimator
 
 SPEC CHECKSUMS:
+  AppCenter: 53349f138e596f2514f7559bb50a7e6e55219f17
   BDKCollectionIndexView: 489a0c57d27fafe6944ef61e5a4192902148ea84
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
   ViewAnimator: 43c31539508d995ea2c5e98338211f7c009b358f
 
-PODFILE CHECKSUM: db223282e8b3456a6928a8609cac49f56d5dcc55
+PODFILE CHECKSUM: e97b791625852a13093d6cca69ec92985bbdb4f9
 
 COCOAPODS: 1.5.3

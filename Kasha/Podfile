@@ -11,5 +11,6 @@ end
 # Pods for Kasha
 target 'Kasha' do
 	shared_pods
+	pod 'AppCenter'
 	pod 'ViewAnimator'
 end

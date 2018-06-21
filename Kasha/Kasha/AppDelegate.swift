@@ -6,6 +6,9 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 import BDKCollectionIndexView
 import MediaPlayer
 import UIKit
@@ -29,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - UIApplicationDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.setupAppearance()
+        self.initializeThirdPartyLibraries()
         return true
     }
 
@@ -83,6 +87,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let tintColor = self.window?.tintColor {
             BDKCollectionIndexView.appearance().tintColor = tintColor
         }
+    }
+    
+    private func initializeThirdPartyLibraries() {
+        // App Center
+        MSAppCenter.start("0a537f68-01d6-4054-b509-98c429fbbee2", withServices: [
+            MSAnalytics.self,
+            MSCrashes.self
+            ])
     }
 
 }
