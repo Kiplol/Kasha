@@ -56,7 +56,9 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         super.viewWillAppear(animated)
         let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
         self.collectionView.reloadData()
-        UIView.animate(views: self.collectionView.visibleCells, animations: animations, completion: {
+        self.collectionView.performBatchUpdates({
+            UIView.animate(views: self.collectionView.visibleCells, animations: animations, completion: {
+            })
         })
     }
     

@@ -9,6 +9,7 @@
 import BDKCollectionIndexView
 import MediaPlayer
 import UIKit
+import ViewAnimator
 
 class ArtistsViewController: KashaViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -41,10 +42,26 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
         self.indexView.indexTitles = self.artistSections.compactMap { $0.title }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+        self.tableView.reloadData()
+        UIView.animate(views: self.tableView.visibleCells, animations: animations, completion: {
+        })
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let selectedRow = self.tableView.indexPathForSelectedRow {
             self.tableView.deselectRow(at: selectedRow, animated: animated)
+        }
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let artistVC = segue.destination as? ArtistViewController, let artist = sender as? MPMediaItemCollection {
+            artistVC.artist = artist
         }
     }
     
@@ -82,7 +99,8 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let artist = self.artist(forIndexPath: indexPath)
+        self.performSegue(withIdentifier: "artistsToArtist", sender: artist)
     }
 
 }

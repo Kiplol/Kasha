@@ -50,7 +50,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3It-WP-dvM">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="347" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Hh2-fj-pZe" id="Ox7-Kp-1Ms"/>
@@ -68,9 +68,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ePU-uh-tSA" firstAttribute="top" secondItem="CAD-uF-Fy4" secondAttribute="top" id="C07-pz-JrG"/>
+                            <constraint firstItem="ePU-uh-tSA" firstAttribute="leading" secondItem="3It-WP-dvM" secondAttribute="trailing" id="JqM-cy-2xj"/>
                             <constraint firstItem="CAD-uF-Fy4" firstAttribute="bottom" secondItem="3It-WP-dvM" secondAttribute="bottom" id="WeP-VD-rq1"/>
                             <constraint firstItem="ePU-uh-tSA" firstAttribute="trailing" secondItem="CAD-uF-Fy4" secondAttribute="trailing" id="YSh-b4-hop"/>
-                            <constraint firstItem="CAD-uF-Fy4" firstAttribute="trailing" secondItem="3It-WP-dvM" secondAttribute="trailing" id="uJR-SX-j2v"/>
                             <constraint firstItem="3It-WP-dvM" firstAttribute="leading" secondItem="CAD-uF-Fy4" secondAttribute="leading" id="uTf-9V-ua3"/>
                             <constraint firstItem="3It-WP-dvM" firstAttribute="top" secondItem="CAD-uF-Fy4" secondAttribute="top" id="xRp-Z9-OT3"/>
                             <constraint firstItem="CAD-uF-Fy4" firstAttribute="bottom" secondItem="ePU-uh-tSA" secondAttribute="bottom" id="xVB-rh-jbp"/>
@@ -82,11 +82,27 @@
                     <connections>
                         <outlet property="indexView" destination="ePU-uh-tSA" id="8vc-y6-Oay"/>
                         <outlet property="tableView" destination="3It-WP-dvM" id="TFh-jy-ZUL"/>
+                        <segue destination="Asb-dc-Vvi" kind="show" identifier="artistsToArtist" id="6xQ-oU-gCI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EPP-EO-tFF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1750" y="-666"/>
+            <point key="canvasLocation" x="1749.5999999999999" y="-666.11694152923542"/>
+        </scene>
+        <!--Artist View Controller-->
+        <scene sceneID="jZE-SK-jlB">
+            <objects>
+                <viewController storyboardIdentifier="artist" id="Asb-dc-Vvi" customClass="ArtistViewController" customModule="Kasha" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ut4-Ch-nTz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Dnm-Sj-l43"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HWj-05-dJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2630" y="-666"/>
         </scene>
         <!--Songs View Controller-->
         <scene sceneID="tQX-Fo-wOR">
@@ -101,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inp-qk-vMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2674" y="-675"/>
+            <point key="canvasLocation" x="1750" y="-1371"/>
         </scene>
         <!--Albums-->
         <scene sceneID="erI-fa-UdE">
@@ -135,7 +151,7 @@
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="38" maxY="10"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="28" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>

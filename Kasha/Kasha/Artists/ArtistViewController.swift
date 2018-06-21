@@ -6,10 +6,17 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import MediaPlayer
 import UIKit
 
 class ArtistViewController: AlbumsViewController {
 
+    var artist: MPMediaItemCollection! {
+        didSet {
+            self.title = self.artist.representativeItem?.artist
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
