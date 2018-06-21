@@ -59,7 +59,7 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
+//        super.prepare(for: segue, sender: sender)
         if let artistVC = segue.destination as? ArtistViewController, let artist = sender as? MPMediaItemCollection {
             artistVC.artist = artist
         }

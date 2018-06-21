@@ -52,8 +52,8 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
         self.collectionView.reloadData()
         self.collectionView.performBatchUpdates({
