@@ -2,23 +2,27 @@ PODS:
   - BDKCollectionIndexView (2.2.2)
   - Hue (3.0.1)
   - SwiftLint (0.24.2)
+  - ViewAnimator (2.1.1)
 
 DEPENDENCIES:
   - BDKCollectionIndexView
   - Hue
   - SwiftLint
+  - ViewAnimator
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BDKCollectionIndexView
     - Hue
     - SwiftLint
+    - ViewAnimator
 
 SPEC CHECKSUMS:
   BDKCollectionIndexView: 489a0c57d27fafe6944ef61e5a4192902148ea84
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
+  ViewAnimator: 43c31539508d995ea2c5e98338211f7c009b358f
 
-PODFILE CHECKSUM: ae71b89747f063d1c1bc2c6ca75470cb3184fb1e
+PODFILE CHECKSUM: db223282e8b3456a6928a8609cac49f56d5dcc55
 
 COCOAPODS: 1.5.3

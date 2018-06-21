@@ -9,6 +9,7 @@
 import BDKCollectionIndexView
 import MediaPlayer
 import UIKit
+import ViewAnimator
 
 class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -49,6 +50,14 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
             let width = floor(self.collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
             flowLayout.itemSize = AlbumCollectionViewCell.sizeConstrained(toWidth: width, withData: nil)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+        self.collectionView.reloadData()
+        UIView.animate(views: self.collectionView.visibleCells, animations: animations, completion: {
+        })
     }
     
     // MARK: - Helpers
