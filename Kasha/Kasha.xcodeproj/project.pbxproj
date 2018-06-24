@@ -29,6 +29,7 @@
 		37414D3C20D820580076596E /* SelfSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3B20D820580076596E /* SelfSizing.swift */; };
 		37414D3E20D83C960076596E /* SongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3D20D83C960076596E /* SongsViewController.swift */; };
 		37414D4020D840720076596E /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3F20D840720076596E /* ArtistViewController.swift */; };
+		3789924C20DFF0C400A304B8 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924B20DFF0C400A304B8 /* Section.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		37414D3B20D820580076596E /* SelfSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizing.swift; sourceTree = "<group>"; };
 		37414D3D20D83C960076596E /* SongsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsViewController.swift; sourceTree = "<group>"; };
 		37414D3F20D840720076596E /* ArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
+		3789924B20DFF0C400A304B8 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Models/Section.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 		37066A5320C6270C0021D0A5 /* Kasha */ = {
 			isa = PBXGroup;
 			children = (
+				3789924B20DFF0C400A304B8 /* Section.swift */,
 				37414D3D20D83C960076596E /* SongsViewController.swift */,
 				37414D3820D75EB10076596E /* 3rd Party */,
 				37066A5420C6270C0021D0A5 /* AppDelegate.swift */,
@@ -337,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3789924C20DFF0C400A304B8 /* Section.swift in Sources */,
 				37414D3720D74CCC0076596E /* ImageContainerView.swift in Sources */,
 				373B1DD820D3220C0090D6FA /* AlbumCollectionViewCell.swift in Sources */,
 				373B1DDB20D326A90090D6FA /* ViewUtilities.swift in Sources */,

@@ -54,9 +54,10 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+        let animations = [AnimationType.zoom(scale: 0.9)]
         self.collectionView.reloadData()
         self.collectionView.performBatchUpdates({
+            UIView.animate(views: self.collectionView.visibleCells, animations: animations, reversed: false, initialAlpha: 0.6, finalAlpha: 1.0, delay: 0.0, animationInterval: 0.0, duration: 0.2)
             UIView.animate(views: self.collectionView.visibleCells, animations: animations, completion: {
             })
         })

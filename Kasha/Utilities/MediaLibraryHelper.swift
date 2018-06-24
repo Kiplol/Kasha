@@ -10,6 +10,7 @@ import MediaPlayer
 
 class MediaLibraryHelper: NSObject {
     
+    typealias Album = MPMediaItemCollection
     static let shared = MediaLibraryHelper()
     
     // MARK: - Artists

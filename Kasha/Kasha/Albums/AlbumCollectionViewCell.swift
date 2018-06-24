@@ -27,7 +27,6 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
         super.awakeFromNib()
         self.clipsToBounds = false
         self.contentView.clipsToBounds = false
-//        self.contentView.translatesAutoresizingMaskIntoConstraints = false
         self.imageAlbum.applyAlbumStyleRoundedCorners()
         self.imageContainer.applyAlbumStyleRoundedCorners()
         self.everythingContainer.applyAlbumsStyle()
@@ -47,6 +46,11 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
                 self.imageAlbum.image = image
             }
         }
+    }
+    
+    func updateAsAllSongs(forArtist artist: MPMediaItemCollection) {
+        self.update(withAlbum: artist)
+        self.labelAlbumName.text = "All Songs"
     }
     
     override func layoutSubviews() {
