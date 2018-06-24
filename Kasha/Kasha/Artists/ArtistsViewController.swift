@@ -37,6 +37,10 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
         UIView.animate(views: self.tableView.visibleCells, animations: animations, completion: nil)
     }
     
+    override func allowsSearch() -> Bool {
+        return true
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +94,8 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ArtistTableViewCell.cellHeight
+        return ArtistTableViewCell.sizeConstrained(toWidth: tableView.frame.size.width,
+                                                   withData: self.artist(forIndexPath: indexPath)).height
     }
     
     // MARK: Section Indeces

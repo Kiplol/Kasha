@@ -10,6 +10,7 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 import BDKCollectionIndexView
+import Hue
 import MediaPlayer
 import UIKit
 
@@ -72,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private
     func setupAppearance() {
         //Window
-//        self.window?.tintColor = UIColor.red
+        self.window?.tintColor = UIColor(hex: "#ff6fd1")
 
         //Navigation Bar
         UINavigationBar.appearance().isTranslucent = false

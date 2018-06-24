@@ -9,9 +9,7 @@
 import MediaPlayer
 import UIKit
 
-class ArtistTableViewCell: UITableViewCell {
-    
-    static let cellHeight: CGFloat = 70.0
+class ArtistTableViewCell: UITableViewCell, SelfSizing {
 
     // MARK: - IBOutlets
     @IBOutlet weak var imageArtist: ImageContainerView!
@@ -36,6 +34,11 @@ class ArtistTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    // MARK: - SelfSizing
+    static func sizeConstrained(toWidth width: CGFloat, withData: Any?) -> CGSize {
+        return CGSize(width: width, height: 70.0)
     }
     
 }

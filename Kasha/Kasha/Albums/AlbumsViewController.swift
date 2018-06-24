@@ -41,6 +41,10 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         })
     }
     
+    override func allowsSearch() -> Bool {
+        return true
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

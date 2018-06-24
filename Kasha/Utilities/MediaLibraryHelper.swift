@@ -87,5 +87,29 @@ class MediaLibraryHelper: NSObject {
             self.musicPlayer.play()
         }
     }
+    
+    // MARK: - Search
+    func searh(for query: String, completion: @escaping ([Song], [Album], [Artist]) -> Void) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            let songsQuery = MPMediaQuery.songs()
+            songsQuery.addFilterPredicate(MPMediaPropertyPredicate(value: query,
+                                                                   forProperty: MPMediaItemPropertyTitle,
+                                                                   comparisonType: .contains))
+            
+            let albumsQuery = MPMediaQuery.albums()
+            albumsQuery.addFilterPredicate(MPMediaPropertyPredicate(value: query,
+                                                                   forProperty: MPMediaItemPropertyAlbumTitle,
+                                                                   comparisonType: .contains))
+            
+            let artistQuery = MPMediaQuery.artists()
+            artistQuery.addFilterPredicate(MPMediaPropertyPredicate(value: query,
+                                                                    forProperty: MPMediaItemPropertyArtist,
+                                                                    comparisonType: .contains))
+            
+            DispatchQueue.main.async {
+                completion(songsQuery.items ?? [], albumsQuery.collections ?? [], artistQuery.collections ?? [])
+            }
+        }
+    }
 
 }
