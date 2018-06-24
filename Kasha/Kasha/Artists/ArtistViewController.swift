@@ -10,10 +10,12 @@ import MediaPlayer
 import SwiftIcons
 import UIKit
 
-class ArtistViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ArtistViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate,
+UICollectionViewDelegateFlowLayout {
     
     private static let albumCellID = "albumCellID"
     private static let allSongsCellID = "allSongsCellID"
+    private static let sectionHeaderID = "sectionHeader"
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -35,6 +37,11 @@ class ArtistViewController: KashaViewController, UICollectionViewDataSource, UIC
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: ArtistViewController.albumCellID)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: ArtistViewController.allSongsCellID)
+        
+        let sectionHeaderNib = UINib(nibName: "SectionHeaderCollectionReusableView", bundle: Bundle.main)
+        self.collectionView.register(sectionHeaderNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                     withReuseIdentifier: ArtistViewController.sectionHeaderID)
+        self.collectionView.flowLayout?.sectionHeadersPinToVisibleBounds = true
     }
     
     override func viewWillLayoutSubviews() {
@@ -109,6 +116,36 @@ class ArtistViewController: KashaViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
+    // MARK: Section Headers
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            guard let title = self.sections[indexPath.section].title else {
+                assert(false, "No title for ArtistViewController section")
+            }
+            let headerView = collectionView
+                .dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader,
+                                                  withReuseIdentifier: ArtistViewController.sectionHeaderID,
+                                                  for: indexPath)
+            if let sectionHeaderView = headerView as? SectionHeaderCollectionReusableView {
+                sectionHeaderView.text = title
+            }
+            return headerView
+        default:
+            assert(false, "Unexpected element kind")
+        }
+    }
+    
     // MARK: - UICollectionViewDelegate
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        guard let title = self.sections[section].title else {
+            return .zero
+        }
+        return SectionHeaderCollectionReusableView.sizeConstrained(toWidth: collectionView.usableWidth(),
+                                                                   withData: title)
+    }
 
 }

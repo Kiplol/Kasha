@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="SectionHeaderCollectionReusableView" customModule="Kasha" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDJ-qN-HfN">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UiC-gQ-Tsy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdB-2I-lbs">
+                                <rect key="frame" x="12" y="10" width="296" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="HdB-2I-lbs" secondAttribute="bottom" constant="10" id="Blz-hN-rKZ"/>
+                            <constraint firstAttribute="trailing" secondItem="HdB-2I-lbs" secondAttribute="trailing" constant="12" id="Je6-cx-97a"/>
+                            <constraint firstItem="HdB-2I-lbs" firstAttribute="top" secondItem="UiC-gQ-Tsy" secondAttribute="top" constant="10" id="kSz-qu-J4S"/>
+                            <constraint firstItem="HdB-2I-lbs" firstAttribute="leading" secondItem="UiC-gQ-Tsy" secondAttribute="leading" constant="12" id="rwg-zL-WhC"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="light"/>
+                </visualEffectView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="JDJ-qN-HfN" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="2rH-0y-pzO"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="JDJ-qN-HfN" secondAttribute="trailing" id="Ck9-9m-TyO"/>
+                <constraint firstAttribute="bottom" secondItem="JDJ-qN-HfN" secondAttribute="bottom" id="ka3-Oo-x0h"/>
+                <constraint firstItem="JDJ-qN-HfN" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="nC8-xU-Dyz"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="label" destination="HdB-2I-lbs" id="Lp0-Ig-PZE"/>
+            </connections>
+        </collectionReusableView>
+    </objects>
+</document>
