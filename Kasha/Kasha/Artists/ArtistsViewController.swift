@@ -31,6 +31,12 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
                                              size: CGSize(width: 50.0, height: 50.0))
     }
     
+    override func doFirstLayoutAnimation() {
+        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
+        self.tableView.reloadData()
+        UIView.animate(views: self.tableView.visibleCells, animations: animations, completion: nil)
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +49,6 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
         self.indexView.addTarget(self, action: #selector(ArtistsViewController.indexViewValueChanged(sender:)),
                                  for: .valueChanged)
         self.indexView.indexTitles = self.artistSections.compactMap { $0.title }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
-        self.tableView.reloadData()
-        UIView.animate(views: self.tableView.visibleCells, animations: animations, completion: {
-        })
     }
     
     override func viewDidAppear(_ animated: Bool) {

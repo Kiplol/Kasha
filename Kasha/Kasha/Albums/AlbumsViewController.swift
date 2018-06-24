@@ -31,6 +31,16 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
                                              size: CGSize(width: 50.0, height: 50.0))
     }
     
+    override func doFirstLayoutAnimation() {
+        let animations = [AnimationType.zoom(scale: 0.9)]
+        self.collectionView.reloadData()
+        self.collectionView.performBatchUpdates({
+            UIView.animate(views: self.collectionView.visibleCells, animations: animations, reversed: false, initialAlpha: 0.6, finalAlpha: 1.0, delay: 0.0, animationInterval: 0.0, duration: 0.2)
+            UIView.animate(views: self.collectionView.visibleCells, animations: animations, completion: {
+            })
+        })
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,17 +63,6 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
             let width = floor(self.collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
             flowLayout.itemSize = AlbumCollectionViewCell.sizeConstrained(toWidth: width, withData: nil)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        let animations = [AnimationType.zoom(scale: 0.9)]
-        self.collectionView.reloadData()
-        self.collectionView.performBatchUpdates({
-            UIView.animate(views: self.collectionView.visibleCells, animations: animations, reversed: false, initialAlpha: 0.6, finalAlpha: 1.0, delay: 0.0, animationInterval: 0.0, duration: 0.2)
-            UIView.animate(views: self.collectionView.visibleCells, animations: animations, completion: {
-            })
-        })
     }
     
     // MARK: - Navigation

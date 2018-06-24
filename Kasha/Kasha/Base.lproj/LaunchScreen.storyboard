@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +17,27 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash-Background" translatesAutoresizingMaskIntoConstraints="NO" id="s9g-Vn-CIe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="Icon-Shape" translatesAutoresizingMaskIntoConstraints="NO" id="nUV-Mn-ckA">
+                                <rect key="frame" x="62.5" y="227" width="250" height="213"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="Fan-vC-gHX"/>
+                                    <constraint firstAttribute="width" secondItem="nUV-Mn-ckA" secondAttribute="height" multiplier="385:328" id="ooL-2W-bo8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nUV-Mn-ckA" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4dw-br-iYJ"/>
+                            <constraint firstItem="s9g-Vn-CIe" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="CDG-mI-Snc"/>
+                            <constraint firstAttribute="bottom" secondItem="s9g-Vn-CIe" secondAttribute="bottom" id="PXn-S4-2nX"/>
+                            <constraint firstItem="nUV-Mn-ckA" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="aUw-N0-Wbb"/>
+                            <constraint firstAttribute="trailing" secondItem="s9g-Vn-CIe" secondAttribute="trailing" id="fu5-bs-p1g"/>
+                            <constraint firstItem="s9g-Vn-CIe" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="wAT-V2-gW6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -22,4 +46,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Icon-Shape" width="385" height="328"/>
+        <image name="Splash-Background" width="1024" height="1024"/>
+    </resources>
 </document>
