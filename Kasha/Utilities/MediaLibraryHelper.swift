@@ -14,6 +14,8 @@ class MediaLibraryHelper: NSObject {
     typealias Artist = MPMediaItemCollection
     typealias Song = MPMediaItem
     
+    private let musicPlayer = MPMusicPlayerController.systemMusicPlayer
+    
     static let shared = MediaLibraryHelper()
     
     // MARK: - Artists
@@ -44,7 +46,7 @@ class MediaLibraryHelper: NSObject {
         return MediaLibraryHelper.shared.allAlbums()[currentLocation]
     }
     
-    func albums(forArtist artist: MPMediaItemCollection) -> [Album] {
+    func albums(forArtist artist: Artist) -> [Album] {
         let artistID = artist.persistentID
         let albumsQuery = MPMediaQuery.albums()
         albumsQuery.addFilterPredicate(MPMediaPropertyPredicate(value: artistID,
@@ -67,6 +69,23 @@ class MediaLibraryHelper: NSObject {
         songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: albumID,
                                                               forProperty: MPMediaItemPropertyAlbumPersistentID))
         return songQuery.items ?? []
+    }
+    
+    // MARK: - Playback
+    func play(_ song: Song, inQueue queue: [Song]? = nil) {
+        if let queue = queue {
+            self.musicPlayer.setQueue(with: MPMediaItemCollection(items: queue))
+            self.musicPlayer.nowPlayingItem = song
+        } else {
+            self.musicPlayer.setQueue(with: MPMediaItemCollection(items: [song]))
+        }
+        self.musicPlayer.prepareToPlay { [unowned self] error in
+            guard error == nil else {
+                debugPrint(error ?? "")
+                return
+            }
+            self.musicPlayer.play()
+        }
     }
 
 }

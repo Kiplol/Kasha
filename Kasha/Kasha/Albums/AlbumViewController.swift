@@ -90,5 +90,12 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         }
         return 50.0
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        if let song = row.data as? MediaLibraryHelper.Song {
+            MediaLibraryHelper.shared.play(song, inQueue: self.songs)
+        }
+    }
 
 }
