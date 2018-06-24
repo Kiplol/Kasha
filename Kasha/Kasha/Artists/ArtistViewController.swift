@@ -7,6 +7,7 @@
 //
 
 import MediaPlayer
+import SwiftIcons
 import UIKit
 
 class ArtistViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate {

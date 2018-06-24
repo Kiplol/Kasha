@@ -9,6 +9,7 @@ PODS:
     - AppCenter/Core
   - BDKCollectionIndexView (2.2.2)
   - Hue (3.0.1)
+  - SwiftIcons (2.0.1)
   - SwiftLint (0.24.2)
   - ViewAnimator (2.1.1)
 
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - AppCenter
   - BDKCollectionIndexView
   - Hue
+  - SwiftIcons (~> 2.0.1)
   - SwiftLint
   - ViewAnimator
 
@@ -24,6 +26,7 @@ SPEC REPOS:
     - AppCenter
     - BDKCollectionIndexView
     - Hue
+    - SwiftIcons
     - SwiftLint
     - ViewAnimator
 
@@ -31,9 +34,10 @@ SPEC CHECKSUMS:
   AppCenter: 53349f138e596f2514f7559bb50a7e6e55219f17
   BDKCollectionIndexView: 489a0c57d27fafe6944ef61e5a4192902148ea84
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
+  SwiftIcons: e475a56ae2c2da40672dbf16061ca5dd5cee7dbb
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
   ViewAnimator: 43c31539508d995ea2c5e98338211f7c009b358f
 
-PODFILE CHECKSUM: e97b791625852a13093d6cca69ec92985bbdb4f9
+PODFILE CHECKSUM: fd7d1abb6b8dce8d1da0dccf837ff521f52f0553
 
 COCOAPODS: 1.5.3

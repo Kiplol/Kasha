@@ -7,6 +7,7 @@
 //
 
 import MediaPlayer
+import SwiftIcons
 import UIKit
 
 class SongsViewController: KashaViewController {
@@ -21,6 +22,14 @@ class SongsViewController: KashaViewController {
         } else {
             preconditionFailure("That wasn't a SongsViewController")
         }
+    }
+    
+    // MARK: - KashaViewController
+    override func commonInit() {
+        super.commonInit()
+        self.title = "Albums"
+        self.tabBarItem.image = UIImage.init(icon: .googleMaterialDesign(.audiotrack),
+                                             size: CGSize(width: 50.0, height: 50.0))
     }
     
     // MARK: - View Lifecycle

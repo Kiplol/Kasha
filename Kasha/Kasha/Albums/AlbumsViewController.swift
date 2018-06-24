@@ -8,6 +8,7 @@
 
 import BDKCollectionIndexView
 import MediaPlayer
+import SwiftIcons
 import UIKit
 import ViewAnimator
 
@@ -26,6 +27,8 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     override func commonInit() {
         super.commonInit()
         self.title = "Albums"
+        self.tabBarItem.image = UIImage.init(icon: .googleMaterialDesign(.album),
+                                             size: CGSize(width: 50.0, height: 50.0))
     }
     
     // MARK: - View Lifecycle
