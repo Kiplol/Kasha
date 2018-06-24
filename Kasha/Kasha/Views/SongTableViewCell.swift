@@ -17,12 +17,24 @@ class SongTableViewCell: UITableViewCell, SelfSizing {
     
     func update(withSong song: MediaLibraryHelper.Song) {
         self.labelSongName.text = song.title
+        self.updateDetailLabel(withSong: song)
         DispatchQueue.global(qos: .default).async {
             let image = song.artwork?.image(at: CGSize(width: 54.0, height: 54.0))
             DispatchQueue.main.async {
                 self.imageAlbum.image = image
             }
         }
+    }
+    
+    private func updateDetailLabel(withSong song: MediaLibraryHelper.Song) {
+        var details = "Track \(song.albumTrackNumber)"
+        if let albumName = song.albumTitle {
+            details += " on \(albumName)"
+        }
+        if let artistName = song.artist {
+            details += " by \(artistName)"
+        }
+        self.labelDetails.text = details
     }
     
     // MARK: - SelfSizing
