@@ -35,7 +35,7 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //Collection View
+        //Table View
         let artistCellNib = UINib(nibName: "ArtistTableViewCell", bundle: Bundle.main)
         self.tableView.register(artistCellNib, forCellReuseIdentifier: ArtistsViewController.cellID)
         

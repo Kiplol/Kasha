@@ -17,10 +17,10 @@ class ArtistTableViewCell: UITableViewCell {
     @IBOutlet weak var imageArtist: ImageContainerView!
     @IBOutlet weak var labelArtistName: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.imageArtist.applyAlbumsStyle()
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        self.imageArtist.applyAlbumsStyle()
+//    }
     
     func update(withArtist artist: MPMediaItemCollection) {
         self.labelArtistName.text = artist.representativeItem?.artist ?? "Unknown Artist"

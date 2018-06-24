@@ -54,15 +54,18 @@ UICollectionViewDelegateFlowLayout {
         }
     }
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        if let albumVC = segue.destination as? AlbumViewController {
+            if let album = sender as? MediaLibraryHelper.Album {
+                albumVC.album = album
+            } else if let songs = sender as? [MediaLibraryHelper.Song] {
+                albumVC.title = self.title
+                albumVC.songs = songs
+            }
+        }
     }
-    */
     
     // MARK: - Helpers
     private func populateSections() {
@@ -138,6 +141,16 @@ UICollectionViewDelegateFlowLayout {
     }
     
     // MARK: - UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let data = self.sections[indexPath.section].rows[indexPath.row].data else {
+            return
+        }
+        if let album = data as? MediaLibraryHelper.Album {
+            self.performSegue(withIdentifier: "artistToAlbum", sender: album)
+        } else if let songs = data as? [MediaLibraryHelper.Song] {
+            self.performSegue(withIdentifier: "artistToAlbum", sender: songs)
+        }
+    }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

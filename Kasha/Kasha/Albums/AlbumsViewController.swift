@@ -66,6 +66,16 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         })
     }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let albumVC = segue.destination as? AlbumViewController {
+            if let album = sender as? MediaLibraryHelper.Album {
+                albumVC.album = album
+            }
+        }
+    }
+    
     // MARK: - Helpers
     private func album(forIndexPath indexPath: IndexPath) -> MPMediaItemCollection {
         let section = self.albumSections[indexPath.section]
@@ -93,11 +103,8 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let songsVC = SongsViewController.fromStoryboard()
         let album = self.album(forIndexPath: indexPath)
-        songsVC.songs = MediaLibraryHelper.shared.allSongs(fromAlbum: album)
-        songsVC.title = album.representativeItem?.albumTitle
-        self.show(songsVC, sender: album)
+        self.performSegue(withIdentifier: "albumsToAlbum", sender: album)
     }
 }
 

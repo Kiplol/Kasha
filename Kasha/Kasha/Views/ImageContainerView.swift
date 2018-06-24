@@ -43,6 +43,7 @@ class ImageContainerView: UIView {
         self.imageView.contentMode = .scaleAspectFill
         self.insertSubview(self.imageView, at: 0)
         self.addObserver(self, forKeyPath: #keyPath(layer.cornerRadius), options: [.new], context: nil)
+        self.applyAlbumsStyle()
     }
     
     deinit {

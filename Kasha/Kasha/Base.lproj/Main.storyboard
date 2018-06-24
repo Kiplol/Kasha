@@ -124,26 +124,46 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="598-IA-4lF" id="O47-8V-WDS"/>
+                        <segue destination="a7P-yh-tLs" kind="show" identifier="artistToAlbum" id="VCy-qB-VeD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWj-05-dJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2630" y="-666"/>
         </scene>
-        <!--Songs View Controller-->
+        <!--Album View Controller-->
         <scene sceneID="tQX-Fo-wOR">
             <objects>
-                <viewController storyboardIdentifier="songs" id="a7P-yh-tLs" customClass="SongsViewController" customModule="Kasha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="songs" id="a7P-yh-tLs" customClass="AlbumViewController" customModule="Kasha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aVa-TO-WPY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GFg-cQ-2Cq">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="a7P-yh-tLs" id="bFq-pq-PDe"/>
+                                    <outlet property="delegate" destination="a7P-yh-tLs" id="8SJ-HE-tgb"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GFg-cQ-2Cq" firstAttribute="leading" secondItem="TJF-GP-bJB" secondAttribute="leading" id="4iB-Y1-87m"/>
+                            <constraint firstItem="TJF-GP-bJB" firstAttribute="trailing" secondItem="GFg-cQ-2Cq" secondAttribute="trailing" id="WBI-Ja-kku"/>
+                            <constraint firstItem="TJF-GP-bJB" firstAttribute="bottom" secondItem="GFg-cQ-2Cq" secondAttribute="bottom" id="YfP-EQ-CCN"/>
+                            <constraint firstItem="GFg-cQ-2Cq" firstAttribute="top" secondItem="TJF-GP-bJB" secondAttribute="top" id="u81-03-AXq"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="TJF-GP-bJB"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="GFg-cQ-2Cq" id="6O2-oP-DEq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inp-qk-vMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1750" y="-1371"/>
+            <point key="canvasLocation" x="2630" y="87"/>
         </scene>
         <!--Albums-->
         <scene sceneID="erI-fa-UdE">
@@ -208,6 +228,7 @@
                     <connections>
                         <outlet property="collectionView" destination="ZzT-90-CTs" id="tdL-LQ-Ff3"/>
                         <outlet property="indexView" destination="N8J-Cz-f50" id="edh-CF-fcd"/>
+                        <segue destination="a7P-yh-tLs" kind="show" identifier="albumsToAlbum" id="fnn-C2-VP7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GAx-mP-cX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -233,4 +254,7 @@
             <point key="canvasLocation" x="-4" y="0.0"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fnn-C2-VP7"/>
+    </inferredMetricsTieBreakers>
 </document>
