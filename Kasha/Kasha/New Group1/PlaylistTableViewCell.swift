@@ -18,7 +18,12 @@ class PlaylistTableViewCell: UITableViewCell, SelfSizing {
     
     func update(withPlaylist playlist: MediaLibraryHelper.Playlist) {
         self.labelTitle.text = playlist.name
-        self.labelDetails.text = "\(playlist.count) songs"
+        if playlist.isFolder {
+            self.labelDetails.isHidden = true
+        } else {
+            self.labelDetails.text = "\(playlist.count) songs"
+            self.labelDetails.isHidden = false
+        }
         DispatchQueue.global(qos: .default).async {
             let image = playlist.representativeItem?.artwork?.image(at: CGSize(width: 54.0, height: 54.0))
             DispatchQueue.main.async {

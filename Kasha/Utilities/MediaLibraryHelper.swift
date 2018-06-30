@@ -87,8 +87,16 @@ class MediaLibraryHelper: NSObject {
     
     func allPlaylistsNotInFolders() -> [Playlist] {
         let playlists = self.allPlaylists()
-        let folders = self.allPlaylistFolders()
-        return playlists.filter { !folders.contains($0) }
+        return playlists.filter { !$0.isFolder }.filter { $0.parentPersistentID == nil || $0.parentPersistentID == 0 }
+    }
+
+    func allPlaylists(inPlaylistFolder playlistFolder: PlaylistFolder) -> [Playlist]? {
+        let playlistPersistentID = playlistFolder.persistentID
+        let allPlaylists = self.allPlaylists()
+        let matches = allPlaylists.filter { $0.parentPersistentID != nil }.filter {
+            $0.parentPersistentID! == playlistPersistentID
+        }
+        return matches.isEmpty ? nil : matches
     }
     
     // MARK: - Playback
@@ -136,12 +144,20 @@ class MediaLibraryHelper: NSObject {
 
 extension MediaLibraryHelper.Playlist {
     
-    var name: String {
-        return (self.value(forProperty: MPMediaPlaylistPropertyName) as? String) ?? "Unknown Playlist"
-    }
-    
     var isFolder: Bool {
         return (self.value(forProperty: "isFolder") as? Bool) ?? false
+    }
+    
+    var parentPersistentID: MPMediaEntityPersistentID? {
+        return self.value(forProperty: "parentPersistentID") as? MPMediaEntityPersistentID
+    }
+    
+}
+
+extension MediaLibraryHelper.PlaylistFolder {
+    
+    var name: String {
+        return (self.value(forProperty: MPMediaPlaylistPropertyName) as? String) ?? "Unknown Playlist"
     }
     
 }

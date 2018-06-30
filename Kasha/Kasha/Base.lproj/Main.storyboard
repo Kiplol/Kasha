@@ -255,7 +255,7 @@
         <!--Playlists View Controller-->
         <scene sceneID="9tH-yH-fj4">
             <objects>
-                <viewController id="MuM-HR-cZp" customClass="PlaylistsViewController" customModule="Kasha" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playlists" id="MuM-HR-cZp" customClass="PlaylistsViewController" customModule="Kasha" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OJs-Hc-rMf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
