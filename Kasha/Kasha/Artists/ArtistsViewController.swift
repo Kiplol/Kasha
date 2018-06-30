@@ -32,6 +32,7 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     }
     
     override func doFirstLayoutAnimation() {
+        super.doFirstLayoutAnimation()
         let animations = [AnimationType.from(direction: .bottom, offset: 30.0)]
         self.tableView.reloadData()
         UIView.animate(views: self.tableView.visibleCells, animations: animations, completion: nil)

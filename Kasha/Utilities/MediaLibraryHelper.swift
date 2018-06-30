@@ -13,6 +13,8 @@ class MediaLibraryHelper: NSObject {
     typealias Album = MPMediaItemCollection
     typealias Artist = MPMediaItemCollection
     typealias Song = MPMediaItem
+    typealias Playlist = MPMediaPlaylist
+    typealias PlaylistFolder = MPMediaItemCollection
     
     private let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     
@@ -71,6 +73,24 @@ class MediaLibraryHelper: NSObject {
         return songQuery.items ?? []
     }
     
+    // MARK: - Playlists
+    func allPlaylists() -> [Playlist] {
+        let playlistQuery = MPMediaQuery.playlists()
+        return (playlistQuery.collections as? [Playlist] ?? []).filter { $0.count > 0 }
+    }
+    
+    func allPlaylistFolders() -> [PlaylistFolder] {
+        let playlistQuery = MPMediaQuery.playlists()
+        let playlists = playlistQuery.collections as? [Playlist] ?? []
+        return playlists.filter { $0.isFolder }
+    }
+    
+    func allPlaylistsNotInFolders() -> [Playlist] {
+        let playlists = self.allPlaylists()
+        let folders = self.allPlaylistFolders()
+        return playlists.filter { !folders.contains($0) }
+    }
+    
     // MARK: - Playback
     func play(_ song: Song, inQueue queue: [Song]? = nil) {
         if let queue = queue {
@@ -112,4 +132,16 @@ class MediaLibraryHelper: NSObject {
         }
     }
 
+}
+
+extension MediaLibraryHelper.Playlist {
+    
+    var name: String {
+        return (self.value(forProperty: MPMediaPlaylistPropertyName) as? String) ?? "Unknown Playlist"
+    }
+    
+    var isFolder: Bool {
+        return (self.value(forProperty: "isFolder") as? Bool) ?? false
+    }
+    
 }

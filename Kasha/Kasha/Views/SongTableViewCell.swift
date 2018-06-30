@@ -19,7 +19,7 @@ class SongTableViewCell: UITableViewCell, SelfSizing {
         self.labelSongName.text = song.title
         self.updateDetailLabel(withSong: song)
         DispatchQueue.global(qos: .default).async {
-            let image = song.artwork?.image(at: CGSize(width: 54.0, height: 54.0))
+            let image = song.artwork?.image(at: CGSize(width: 80.0, height: 80.0))
             DispatchQueue.main.async {
                 self.imageAlbum.image = image
             }

@@ -107,6 +107,7 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.sections[section].title
+        
     }
     
     // MARK: - UITableViewDelegate
