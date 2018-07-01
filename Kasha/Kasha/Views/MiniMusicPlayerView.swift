@@ -36,15 +36,12 @@ class MiniMusicPlayerView: UIView {
         super.awakeFromNib()
         self.applyAlbumsStyle()
         
-        self.buttonPrevious.setIcon(icon: .googleMaterialDesign(.skipPrevious), forState: .normal)
-        self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.playArrow), forState: .normal)
-        self.buttonNext.setIcon(icon: .googleMaterialDesign(.skipNext), forState: .normal)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.volumeDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerVolumeDidChange, object: nil)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
         self.update(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
+        self.updateButtons(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
         //@TODO: Volume
     }
 
@@ -110,7 +107,21 @@ class MiniMusicPlayerView: UIView {
     }
     
     // MARK: -
+    private func updateButtons(withPlaybackState playbackState: MPMusicPlaybackState, andColor color: UIColor = UIColor.black) {
+        let iconSize: CGFloat = 36.0
+        self.buttonPrevious.setIcon(icon: .googleMaterialDesign(.skipPrevious), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
+        self.buttonNext.setIcon(icon: .googleMaterialDesign(.skipNext), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
+        
+        switch playbackState {
+        case .playing:
+            self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.pause), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
+        default:
+            self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.playArrow), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
+        }
+    }
+    
     private func update(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
+        self.updateColors(withNowPlayingItem: nowPlayingItem)
         guard let nowPlayingItem = nowPlayingItem else {
             self.imageArtwork.image = nil
             self.labelTitle.text = "--"
@@ -120,7 +131,7 @@ class MiniMusicPlayerView: UIView {
         DispatchQueue.global(qos: .default).async {
             let image = nowPlayingItem.artwork?.image(at: CGSize(width: 54.0, height: 54.0))
             DispatchQueue.main.async {
-                self.imageArtwork.image = image
+                self.imageArtwork.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
             }
         }
         self.labelTitle.text = nowPlayingItem.title ?? "Unknown Song"
@@ -134,19 +145,55 @@ class MiniMusicPlayerView: UIView {
             }
             return details.joined(separator: " - ")
         }()
+        
+        // Colors
+        self.updateColors(withNowPlayingItem: nowPlayingItem)
+    }
+    
+    private func updateColors(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
+        guard let nowPlayingItem = nowPlayingItem else {
+            self.resetColors()
+            return
+        }
+        
+        DispatchQueue.global(qos: .default).async {
+            guard let image = nowPlayingItem.artwork?.image(at: CGSize(width: 54.0, height: 54.0)) else {
+                DispatchQueue.main.async {
+                    self.resetColors()
+                }
+                return
+            }
+            let (background, primary, secondary, detail) = image.colors()
+            DispatchQueue.main.async {
+                self.backgroundColor = background
+                self.sliderProgress.thumbTintColor = primary
+                self.sliderProgress.minimumTrackTintColor = secondary
+                self.sliderProgress.maximumTrackTintColor = secondary
+                self.labelTitle.textColor = primary
+                self.labelDetails.textColor = detail
+                self.updateButtons(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, andColor: primary)
+            }
+        }
+    }
+    
+    private func resetColors() {
+        self.backgroundColor = UIColor.white
+        self.sliderProgress.thumbTintColor = UIColor.kashaPrimaryColor
+        self.sliderProgress.minimumTrackTintColor = UIColor.kashaSecondaryColor
+        self.sliderProgress.maximumTrackTintColor = UIColor.kashaSecondaryColor
+        self.labelTitle.textColor = UIColor.black
+        self.labelDetails.textColor = UIColor.lightGray
+        self.updateButtons(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
     }
     
     private func update(withPlaybackState playbackState: MPMusicPlaybackState) {
         switch playbackState {
         case .playing:
-            self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.pause), forState: .normal)
             self.startPlaybackTracking()
-        case .paused, .stopped:
-            self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.playArrow), forState: .normal)
-            self.stopPlaybackTracking()
         default:
             self.stopPlaybackTracking()
         }
+        self.updateButtons(withPlaybackState: playbackState)
     }
     
     // MARK: - Slider
