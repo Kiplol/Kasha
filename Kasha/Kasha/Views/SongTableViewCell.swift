@@ -15,16 +15,19 @@ class SongTableViewCell: UITableViewCell, SelfSizing {
     @IBOutlet weak var labelSongName: UILabel!
     @IBOutlet weak var labelDetails: UILabel!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var nowPlayingDot: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.containerView.applyAlbumsStyle()
         self.containerView.layer.shadowOpacity = 0.0
+        self.nowPlayingDot.layer.cornerRadius = 2.0
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         let animations = {
             self.containerView.layer.shadowOpacity = selected ? 0.1 : 0.0
+            self.nowPlayingDot.isHidden = !selected
         }
         if animated {
             UIView.animate(withDuration: 0.2, animations: animations)

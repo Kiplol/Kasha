@@ -23,14 +23,32 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6s-h1-5DF">
                         <rect key="frame" x="5" y="3" width="310" height="65.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVJ-dz-cpj" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="CqR-ty-AVO">
                                 <rect key="frame" x="5" y="8" width="50" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <subviews>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHM-L5-rAc">
+                                        <rect key="frame" x="-5" y="22.5" width="5" height="5"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="6wb-ed-rJi"/>
+                                            <constraint firstAttribute="width" constant="5" id="Sz6-Ae-tDf"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVJ-dz-cpj" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="PgN-34-SBS"/>
+                                            <constraint firstAttribute="width" secondItem="oVJ-dz-cpj" secondAttribute="height" id="QdL-Eq-lD1"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="PgN-34-SBS"/>
-                                    <constraint firstAttribute="width" secondItem="oVJ-dz-cpj" secondAttribute="height" id="QdL-Eq-lD1"/>
+                                    <constraint firstAttribute="bottom" secondItem="oVJ-dz-cpj" secondAttribute="bottom" id="0fS-Bc-suf"/>
+                                    <constraint firstItem="oVJ-dz-cpj" firstAttribute="top" secondItem="CqR-ty-AVO" secondAttribute="top" id="YKq-CP-u3i"/>
+                                    <constraint firstAttribute="height" constant="50" id="jg3-fu-Z14"/>
                                 </constraints>
-                            </view>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9iI-CX-X7Y">
                                 <rect key="frame" x="63" y="14.5" width="219" height="37"/>
                                 <subviews>
@@ -51,11 +69,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9iI-CX-X7Y" firstAttribute="leading" secondItem="oVJ-dz-cpj" secondAttribute="trailing" constant="8" id="1Rz-zF-y6k"/>
+                            <constraint firstItem="CqR-ty-AVO" firstAttribute="centerY" secondItem="a6s-h1-5DF" secondAttribute="centerY" id="3hK-Gp-iBi"/>
+                            <constraint firstItem="CqR-ty-AVO" firstAttribute="leading" secondItem="a6s-h1-5DF" secondAttribute="leading" constant="5" id="D2L-JS-nGg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9iI-CX-X7Y" secondAttribute="trailing" constant="20" id="J6e-7G-iTz"/>
-                            <constraint firstItem="oVJ-dz-cpj" firstAttribute="leading" secondItem="a6s-h1-5DF" secondAttribute="leading" constant="5" id="YgL-7N-CuX"/>
-                            <constraint firstItem="oVJ-dz-cpj" firstAttribute="centerY" secondItem="a6s-h1-5DF" secondAttribute="centerY" id="ZU6-Hh-U1H"/>
                             <constraint firstItem="9iI-CX-X7Y" firstAttribute="centerY" secondItem="a6s-h1-5DF" secondAttribute="centerY" id="u1S-u5-Mci"/>
+                            <constraint firstItem="9iI-CX-X7Y" firstAttribute="leading" secondItem="CqR-ty-AVO" secondAttribute="trailing" constant="8" id="vT0-Xs-TOt"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -72,6 +90,7 @@
                 <outlet property="imageAlbum" destination="oVJ-dz-cpj" id="DmW-iA-Plh"/>
                 <outlet property="labelDetails" destination="xlj-NS-6Yz" id="BLc-d9-pBA"/>
                 <outlet property="labelSongName" destination="Bjr-fs-hKP" id="tEp-x7-sGg"/>
+                <outlet property="nowPlayingDot" destination="eHM-L5-rAc" id="Bxo-rU-d5C"/>
             </connections>
         </tableViewCell>
     </objects>
