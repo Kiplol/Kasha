@@ -36,6 +36,7 @@ class MusicAwareTabBarController: UITabBarController {
         self.miniPlayer.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.view.addSubview(self.miniPlayer)
         self.positionMiniPlayer(forPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, animated: false)
+        NotificationCenter.default.addObserver(self, selector: #selector(MusicAwareTabBarController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
     }
     
     private func positionMiniPlayer(forPlaybackState playbackState: MPMusicPlaybackState, animated: Bool = true) {
@@ -105,6 +106,14 @@ class MusicAwareTabBarController: UITabBarController {
                 listener.musicAwareTabBarController(self, didHideMiniMusicPlayerView: self.miniPlayer)
             }
         }
+    }
+    
+    // MARK: - Media Notifications
+    @objc func playbackStateDidChange(_ notif: Notification) {
+        guard let player = notif.object as? MPMusicPlayerController else {
+            return
+        }
+        self.positionMiniPlayer(forPlaybackState: player.playbackState)
     }
 }
 
