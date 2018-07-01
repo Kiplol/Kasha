@@ -30,6 +30,11 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         }
     }
     private var sections: [Section] = []
+    
+    // MARK: - KashaViewController
+    override func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
+        return self.tableView
+    }
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {

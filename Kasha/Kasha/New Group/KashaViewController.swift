@@ -78,10 +78,23 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener 
     
     func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController, didShowMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView) {
         //Override
+        if let scrollView = self.scrollViewToInsetForMiniPlayer() {
+            scrollView.contentInset.bottom = miniMusicPlayerView.bounds.size.height + 10.0
+            scrollView.scrollIndicatorInsets = scrollView.contentInset
+        }
     }
     
     func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController, didHideMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView) {
         //Override
+        if let scrollView = self.scrollViewToInsetForMiniPlayer() {
+            scrollView.contentInset.bottom = 0.0
+            scrollView.scrollIndicatorInsets = scrollView.contentInset
+        }
+    }
+    
+    func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
+        //Override
+        return nil
     }
 
 }

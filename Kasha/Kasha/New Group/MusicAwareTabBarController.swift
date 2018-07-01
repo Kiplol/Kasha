@@ -31,8 +31,8 @@ class MusicAwareTabBarController: UITabBarController {
                                                         preconditionFailure("Couldn't load MiniMusicControlsView from nib")
         }
         self.miniPlayer = player
-        self.miniPlayer.frame.origin.x = 10.0
-        self.miniPlayer.frame.size.width = self.view.bounds.size.width - 20.0
+        self.miniPlayer.frame.origin.x = 30.0
+        self.miniPlayer.frame.size.width = self.view.bounds.size.width - 60.0
         self.miniPlayer.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.view.addSubview(self.miniPlayer)
         self.positionMiniPlayer(forPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, animated: false)

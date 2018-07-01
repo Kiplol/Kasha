@@ -29,6 +29,11 @@ UICollectionViewDelegateFlowLayout {
     }
     private var sections: [Section] = []
     
+    // MARK: - KashaViewController
+    override func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
+        return self.collectionView
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

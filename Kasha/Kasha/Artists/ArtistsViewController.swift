@@ -42,6 +42,10 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
         return true
     }
     
+    override func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
+        return self.tableView
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

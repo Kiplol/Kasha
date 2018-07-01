@@ -45,6 +45,10 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         return true
     }
     
+    override func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
+        return self.collectionView
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
