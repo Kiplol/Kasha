@@ -20,42 +20,55 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="71.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVJ-dz-cpj" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
-                        <rect key="frame" x="10" y="11" width="50" height="50"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6s-h1-5DF">
+                        <rect key="frame" x="5" y="3" width="310" height="65.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVJ-dz-cpj" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
+                                <rect key="frame" x="5" y="8" width="50" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="PgN-34-SBS"/>
+                                    <constraint firstAttribute="width" secondItem="oVJ-dz-cpj" secondAttribute="height" id="QdL-Eq-lD1"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9iI-CX-X7Y">
+                                <rect key="frame" x="63" y="14.5" width="219" height="37"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjr-fs-hKP">
+                                        <rect key="frame" x="0.0" y="0.0" width="219" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlj-NS-6Yz">
+                                        <rect key="frame" x="0.0" y="20.5" width="219" height="16.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="PgN-34-SBS"/>
-                            <constraint firstAttribute="width" secondItem="oVJ-dz-cpj" secondAttribute="height" id="QdL-Eq-lD1"/>
+                            <constraint firstItem="9iI-CX-X7Y" firstAttribute="leading" secondItem="oVJ-dz-cpj" secondAttribute="trailing" constant="8" id="1Rz-zF-y6k"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9iI-CX-X7Y" secondAttribute="trailing" constant="20" id="J6e-7G-iTz"/>
+                            <constraint firstItem="oVJ-dz-cpj" firstAttribute="leading" secondItem="a6s-h1-5DF" secondAttribute="leading" constant="5" id="YgL-7N-CuX"/>
+                            <constraint firstItem="oVJ-dz-cpj" firstAttribute="centerY" secondItem="a6s-h1-5DF" secondAttribute="centerY" id="ZU6-Hh-U1H"/>
+                            <constraint firstItem="9iI-CX-X7Y" firstAttribute="centerY" secondItem="a6s-h1-5DF" secondAttribute="centerY" id="u1S-u5-Mci"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9iI-CX-X7Y">
-                        <rect key="frame" x="68" y="17.5" width="226" height="37"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjr-fs-hKP">
-                                <rect key="frame" x="0.0" y="0.0" width="226" height="20.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlj-NS-6Yz">
-                                <rect key="frame" x="0.0" y="20.5" width="226" height="16.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="oVJ-dz-cpj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8dE-z1-Y4s"/>
-                    <constraint firstItem="9iI-CX-X7Y" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ijz-mT-wtI"/>
-                    <constraint firstItem="oVJ-dz-cpj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Oph-lf-KQX"/>
-                    <constraint firstItem="9iI-CX-X7Y" firstAttribute="leading" secondItem="oVJ-dz-cpj" secondAttribute="trailing" constant="8" id="QCI-sn-kuV"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9iI-CX-X7Y" secondAttribute="trailing" constant="10" id="yo3-Gr-rBG"/>
+                    <constraint firstAttribute="trailing" secondItem="a6s-h1-5DF" secondAttribute="trailing" constant="5" id="5yB-d9-z01"/>
+                    <constraint firstItem="a6s-h1-5DF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="E26-Ku-49n"/>
+                    <constraint firstAttribute="bottom" secondItem="a6s-h1-5DF" secondAttribute="bottom" constant="3" id="Exu-eh-xes"/>
+                    <constraint firstItem="a6s-h1-5DF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="Uhj-55-4mV"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="containerView" destination="a6s-h1-5DF" id="UvQ-EJ-KU3"/>
                 <outlet property="imageAlbum" destination="oVJ-dz-cpj" id="DmW-iA-Plh"/>
                 <outlet property="labelDetails" destination="xlj-NS-6Yz" id="BLc-d9-pBA"/>
                 <outlet property="labelSongName" destination="Bjr-fs-hKP" id="tEp-x7-sGg"/>

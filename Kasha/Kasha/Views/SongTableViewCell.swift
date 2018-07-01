@@ -14,6 +14,24 @@ class SongTableViewCell: UITableViewCell, SelfSizing {
     @IBOutlet weak var imageAlbum: ImageContainerView!
     @IBOutlet weak var labelSongName: UILabel!
     @IBOutlet weak var labelDetails: UILabel!
+    @IBOutlet weak var containerView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.containerView.applyAlbumsStyle()
+        self.containerView.layer.shadowOpacity = 0.0
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        let animations = {
+            self.containerView.layer.shadowOpacity = selected ? 0.1 : 0.0
+        }
+        if animated {
+            UIView.animate(withDuration: 0.2, animations: animations)
+        } else {
+            animations()
+        }
+    }
     
     func update(withSong song: MediaLibraryHelper.Song) {
         self.labelSongName.text = song.title
