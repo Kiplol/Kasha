@@ -27,17 +27,39 @@
                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9fv-5o-o0j">
                     <rect key="frame" x="63" y="10" width="249" height="81.5"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kpo-LL-B7I">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kpo-LL-B7I" customClass="MarqueeLabel" customModule="MarqueeLabel">
                             <rect key="frame" x="0.0" y="0.0" width="249" height="20.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                    <real key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="animationDelay">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpv-Dk-gdP">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpv-Dk-gdP" customClass="MarqueeLabel" customModule="MarqueeLabel">
                             <rect key="frame" x="0.0" y="20.5" width="249" height="17"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                    <real key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="animationDelay">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ZgI-QD-Qh2">
                             <rect key="frame" x="0.0" y="37.5" width="249" height="44"/>
@@ -91,6 +113,10 @@
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="siU-SX-q4c">
                     <rect key="frame" x="8" y="95.5" width="359" height="31"/>
                     <connections>
+                        <action selector="sliderBeganSliding:" destination="iN0-l3-epB" eventType="touchDown" id="ruG-18-M6d"/>
+                        <action selector="sliderEndedSliding:" destination="iN0-l3-epB" eventType="touchUpInside" id="Rrc-Mp-rJC"/>
+                        <action selector="sliderEndedSliding:" destination="iN0-l3-epB" eventType="touchCancel" id="bc2-Uz-wVG"/>
+                        <action selector="sliderEndedSliding:" destination="iN0-l3-epB" eventType="touchUpOutside" id="guR-QQ-GVw"/>
                         <action selector="sliderValueDidChange:" destination="iN0-l3-epB" eventType="valueChanged" id="bTm-7x-rBe"/>
                     </connections>
                 </slider>

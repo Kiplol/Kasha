@@ -23,6 +23,7 @@ class MusicAwareTabBarController: UITabBarController {
     
     private(set) var miniPlayer: MiniMusicPlayerView!
     private(set) var miniPlayerIsHidden: Bool = true
+    static let padding: CGFloat = 30.0
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -32,8 +33,8 @@ class MusicAwareTabBarController: UITabBarController {
                                                         preconditionFailure("Couldn't load MiniMusicControlsView from nib")
         }
         self.miniPlayer = player
-        self.miniPlayer.frame.origin.x = 30.0
-        self.miniPlayer.frame.size.width = self.view.bounds.size.width - 60.0
+        self.miniPlayer.frame.origin.x = MusicAwareTabBarController.padding
+        self.miniPlayer.frame.size.width = self.view.bounds.size.width - (2.0 * MusicAwareTabBarController.padding)
         self.miniPlayer.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.view.addSubview(self.miniPlayer)
         self.positionMiniPlayer(forPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, animated: false)
@@ -81,7 +82,7 @@ class MusicAwareTabBarController: UITabBarController {
     private func showMiniPlayer(_ animated: Bool = true) {
         self.miniPlayerIsHidden = false
         var newFrame = self.miniPlayer.frame
-        newFrame.origin.y = self.tabBar.frame.origin.y - self.miniPlayer.bounds.size.height - 10.0
+        newFrame.origin.y = self.tabBar.frame.origin.y - self.miniPlayer.bounds.size.height - MusicAwareTabBarController.padding
         self.informViewControllersOfMiniPlayerFrameChange(newFrame)
         let animation = {
             self.miniPlayer.frame = newFrame

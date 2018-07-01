@@ -36,6 +36,8 @@ class MiniMusicPlayerView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.applyAlbumsStyle()
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowRadius = 20.0
         
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
@@ -207,5 +209,19 @@ class MiniMusicPlayerView: UIView {
         
         let playbackTime = Double(sender.value) * songDuration
         MediaLibraryHelper.shared.musicPlayer.currentPlaybackTime = playbackTime
+        self.progress = Double(sender.value)
     }
+    
+    @IBAction func sliderBeganSliding(_ sender: Any) {
+        self.stopPlaybackTracking()
+    }
+    
+    @IBAction func sliderEndedSliding(_ sender: Any) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            if MediaLibraryHelper.shared.musicPlayer.playbackState == .playing {
+                self.startPlaybackTracking()
+            }
+        })
+    }
+    
 }

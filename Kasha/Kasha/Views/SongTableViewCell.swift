@@ -27,12 +27,12 @@ class SongTableViewCell: UITableViewCell, SelfSizing {
     }
     
     private func updateDetailLabel(withSong song: MediaLibraryHelper.Song) {
-        var details = "Track \(song.albumTrackNumber)"
-        if let albumName = song.albumTitle {
-            details += " on \(albumName)"
-        }
+        var details = "\(song.albumTrackNumber)."
         if let artistName = song.artist {
-            details += " by \(artistName)"
+            details += " \(artistName)"
+        }
+        if let albumName = song.albumTitle {
+            details += " - \(albumName)"
         }
         self.labelDetails.text = details
     }
