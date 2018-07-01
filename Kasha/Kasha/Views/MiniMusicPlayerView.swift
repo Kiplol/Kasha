@@ -19,7 +19,8 @@ class MiniMusicPlayerView: UIView {
     @IBOutlet weak var labelTitle: UILabel!//MarqueeLabel!
     @IBOutlet weak var labelDetails: UILabel!//MarqueeLabel!
     @IBOutlet weak var buttonPrevious: UIButton!
-    @IBOutlet weak var buttonPlayPause: UIButton!
+    @IBOutlet weak var buttonPlay: UIButton!
+    @IBOutlet weak var buttonPause: UIButton!
     @IBOutlet weak var buttonNext: UIButton!
     @IBOutlet weak var sliderProgress: UISlider!
     
@@ -41,7 +42,6 @@ class MiniMusicPlayerView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.volumeDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerVolumeDidChange, object: nil)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
         self.update(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
-        self.updateButtons(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
         //@TODO: Volume
     }
 
@@ -50,11 +50,15 @@ class MiniMusicPlayerView: UIView {
         MediaLibraryHelper.shared.previous()
     }
     
-    @IBAction func playPauseTapped(_ sender: Any) {
+    @IBAction func playTapped(_ sender: Any) {
+        if MediaLibraryHelper.shared.musicPlayer.playbackState != .playing {
+            MediaLibraryHelper.shared.play()
+        }
+    }
+    
+    @IBAction func pauseTapped(_ sender: Any) {
         if MediaLibraryHelper.shared.musicPlayer.playbackState == .playing {
             MediaLibraryHelper.shared.pause()
-        } else {
-            MediaLibraryHelper.shared.play()
         }
     }
     
@@ -62,7 +66,6 @@ class MiniMusicPlayerView: UIView {
         MediaLibraryHelper.shared.next()
     }
     
-    // MARK: - Playback Progress
     // MARK: - Playback Progress
     private func startPlaybackTracking() {
         self.stopPlaybackTracking()
@@ -107,17 +110,12 @@ class MiniMusicPlayerView: UIView {
     }
     
     // MARK: -
-    private func updateButtons(withPlaybackState playbackState: MPMusicPlaybackState, andColor color: UIColor = UIColor.black) {
+    private func updateButtons(withColor color: UIColor) {
         let iconSize: CGFloat = 36.0
         self.buttonPrevious.setIcon(icon: .googleMaterialDesign(.skipPrevious), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
         self.buttonNext.setIcon(icon: .googleMaterialDesign(.skipNext), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
-        
-        switch playbackState {
-        case .playing:
-            self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.pause), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
-        default:
-            self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.playArrow), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
-        }
+        self.buttonPlay.setIcon(icon: .googleMaterialDesign(.playArrow), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
+        self.buttonPause.setIcon(icon: .googleMaterialDesign(.pause), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
     }
     
     private func update(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
@@ -145,9 +143,6 @@ class MiniMusicPlayerView: UIView {
             }
             return details.joined(separator: " - ")
         }()
-        
-        // Colors
-        self.updateColors(withNowPlayingItem: nowPlayingItem)
     }
     
     private func updateColors(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
@@ -171,7 +166,7 @@ class MiniMusicPlayerView: UIView {
                 self.sliderProgress.maximumTrackTintColor = secondary
                 self.labelTitle.textColor = primary
                 self.labelDetails.textColor = detail
-                self.updateButtons(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, andColor: primary)
+                self.updateButtons(withColor: primary)
             }
         }
     }
@@ -183,17 +178,20 @@ class MiniMusicPlayerView: UIView {
         self.sliderProgress.maximumTrackTintColor = UIColor.kashaSecondaryColor
         self.labelTitle.textColor = UIColor.black
         self.labelDetails.textColor = UIColor.lightGray
-        self.updateButtons(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
+        self.updateButtons(withColor: .black)
     }
     
     private func update(withPlaybackState playbackState: MPMusicPlaybackState) {
         switch playbackState {
         case .playing:
             self.startPlaybackTracking()
+            self.buttonPlay.isHidden = true
+            self.buttonPause.isHidden = false
         default:
             self.stopPlaybackTracking()
+            self.buttonPlay.isHidden = false
+            self.buttonPause.isHidden = true
         }
-        self.updateButtons(withPlaybackState: playbackState)
     }
     
     // MARK: - Slider

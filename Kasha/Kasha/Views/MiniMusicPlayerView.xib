@@ -55,7 +55,13 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdN-Et-X4B">
                                     <rect key="frame" x="102.5" y="0.0" width="44" height="44"/>
                                     <connections>
-                                        <action selector="playPauseTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="z9z-D8-Cdz"/>
+                                        <action selector="playTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="z9z-D8-Cdz"/>
+                                    </connections>
+                                </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ix-Ok-xwY">
+                                    <rect key="frame" x="146.5" y="0.0" width="44" height="44"/>
+                                    <connections>
+                                        <action selector="pauseTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="246-o6-lmO"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTc-0w-KiQ">
@@ -67,9 +73,11 @@
                             </subviews>
                             <constraints>
                                 <constraint firstItem="5AA-bF-Twz" firstAttribute="height" secondItem="qTc-0w-KiQ" secondAttribute="height" id="OKu-og-LZE"/>
+                                <constraint firstItem="5ix-Ok-xwY" firstAttribute="height" secondItem="5AA-bF-Twz" secondAttribute="height" id="UEU-Pu-tBT"/>
                                 <constraint firstItem="5AA-bF-Twz" firstAttribute="width" secondItem="qTc-0w-KiQ" secondAttribute="width" id="iN7-AU-Ff7"/>
                                 <constraint firstItem="5AA-bF-Twz" firstAttribute="width" secondItem="BdN-Et-X4B" secondAttribute="width" id="yAY-2N-hV0"/>
                                 <constraint firstItem="5AA-bF-Twz" firstAttribute="height" secondItem="BdN-Et-X4B" secondAttribute="height" id="ye2-eq-LUc"/>
+                                <constraint firstItem="5ix-Ok-xwY" firstAttribute="width" secondItem="5AA-bF-Twz" secondAttribute="width" id="z97-My-Iju"/>
                             </constraints>
                         </stackView>
                     </subviews>
@@ -102,7 +110,8 @@
             <viewLayoutGuide key="safeArea" id="idl-SZ-5vC"/>
             <connections>
                 <outlet property="buttonNext" destination="qTc-0w-KiQ" id="R84-tv-gXH"/>
-                <outlet property="buttonPlayPause" destination="BdN-Et-X4B" id="0Zc-jo-qvO"/>
+                <outlet property="buttonPause" destination="5ix-Ok-xwY" id="aVk-PI-Iwi"/>
+                <outlet property="buttonPlay" destination="BdN-Et-X4B" id="0Zc-jo-qvO"/>
                 <outlet property="buttonPrevious" destination="5AA-bF-Twz" id="Pea-tb-xAt"/>
                 <outlet property="imageArtwork" destination="Dgm-Wo-JA6" id="tGw-sJ-EEa"/>
                 <outlet property="labelDetails" destination="Jpv-Dk-gdP" id="8qh-l5-1pW"/>
