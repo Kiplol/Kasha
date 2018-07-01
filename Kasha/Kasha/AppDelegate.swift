@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private
     func setupAppearance() {
         //Window
-        self.window?.tintColor = UIColor(hex: "#ff6fd1")
+        self.window?.tintColor = UIColor.kashaPrimaryColor
 
         //Navigation Bar
         UINavigationBar.appearance().isTranslucent = false

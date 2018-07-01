@@ -47,7 +47,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-Shape" width="385" height="328"/>
-        <image name="Splash-Background" width="1024" height="1024"/>
+        <image name="Icon-Shape" width="382" height="405"/>
+        <image name="Splash-Background" width="500" height="500"/>
     </resources>
 </document>

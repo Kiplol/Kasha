@@ -11,7 +11,7 @@ import MediaPlayer
 import SwiftIcons
 import UIKit
 
-class MiniMusicControlsView: UIView {
+class MiniMusicPlayerView: UIView {
 
     // MARK: - IBOutlets
     @IBOutlet weak var imageArtwork: ImageContainerView!
@@ -30,9 +30,9 @@ class MiniMusicControlsView: UIView {
         self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.playArrow), forState: .normal)
         self.buttonNext.setIcon(icon: .googleMaterialDesign(.skipNext), forState: .normal)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicControlsView.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicControlsView.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicControlsView.volumeDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerVolumeDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.volumeDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerVolumeDidChange, object: nil)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
     }
 
