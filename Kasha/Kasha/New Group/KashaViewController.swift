@@ -9,7 +9,7 @@
 import MediaPlayer
 import UIKit
 
-class KashaViewController: UIViewController {
+class KashaViewController: UIViewController, MusicAwareTabBarControllerListener {
     
     private var isFirstLayout = true
     private lazy var searchController = UISearchController(searchResultsController: SearchResultsViewController())
@@ -42,6 +42,14 @@ class KashaViewController: UIViewController {
 //            self.searchController.hidesNavigationBarDuringPresentation = false
             self.definesPresentationContext = true
         }
+        
+        if let musicAwareTabBarController = self.musicAwareTabBarController {
+            if musicAwareTabBarController.miniPlayerIsHidden {
+                self.musicAwareTabBarController(musicAwareTabBarController, didHideMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
+            } else {
+                self.musicAwareTabBarController(musicAwareTabBarController, didShowMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,6 +69,19 @@ class KashaViewController: UIViewController {
     func allowsSearch() -> Bool {
         //Override
         return false
+    }
+    
+    // MARK: - MusicAwareTabBarControllerListener
+    func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController, willMoveMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView, toFrame frame: CGRect) {
+        //Override
+    }
+    
+    func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController, didShowMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView) {
+        //Override
+    }
+    
+    func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController, didHideMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView) {
+        //Override
     }
 
 }

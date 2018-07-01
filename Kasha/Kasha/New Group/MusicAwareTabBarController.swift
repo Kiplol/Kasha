@@ -11,17 +11,18 @@ import UIKit
 
 protocol MusicAwareTabBarControllerListener {
     func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController,
-                                   willMoveMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView,
-                                   toFrame frame: CGRect)
+                                    willMoveMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView,
+                                    toFrame frame: CGRect)
     func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController,
-                                   didShowMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView)
+                                    didShowMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView)
     func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController,
-                                   didHideMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView)
+                                    didHideMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView)
 }
 
 class MusicAwareTabBarController: UITabBarController {
     
-    public private(set) var miniPlayer: MiniMusicPlayerView!
+    private(set) var miniPlayer: MiniMusicPlayerView!
+    private(set) var miniPlayerIsHidden: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,7 @@ class MusicAwareTabBarController: UITabBarController {
     }
     
     private func hideMiniPlayer(_ animated: Bool = true) {
+        self.miniPlayerIsHidden = true
         var newFrame = self.miniPlayer.frame
         newFrame.origin.y = self.view.bounds.size.height + (AppDelegate.instance.window?.safeAreaInsets.bottom ?? 0.0)
         self.informViewControllersOfMiniPlayerFrameChange(newFrame)
@@ -64,6 +66,7 @@ class MusicAwareTabBarController: UITabBarController {
     }
     
     private func showMiniPlayer(_ animated: Bool = true) {
+        self.miniPlayerIsHidden = false
         var newFrame = self.miniPlayer.frame
         newFrame.origin.y = self.tabBar.frame.origin.y - self.miniPlayer.bounds.size.height - 10.0 - (AppDelegate.instance.window?.safeAreaInsets.bottom ?? 0.0)
         self.informViewControllersOfMiniPlayerFrameChange(newFrame)
@@ -103,6 +106,21 @@ class MusicAwareTabBarController: UITabBarController {
             }
         }
     }
+}
+
+extension UIViewController {
+    
+    var musicAwareTabBarController: MusicAwareTabBarController? {
+        var parent: UIViewController? = self
+        while parent != nil {
+            if let matbc = parent as? MusicAwareTabBarController {
+                return matbc
+            }
+            parent = parent?.parent
+        }
+        return nil
+    }
+    
 }
 
 extension UINavigationController: MusicAwareTabBarControllerListener {

@@ -49,6 +49,20 @@ class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITab
         return true
     }
     
+    override func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController, didShowMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView) {
+        if self.isViewLoaded {
+            self.tableView.contentInset.bottom = miniMusicPlayerView.bounds.size.height + 10.0
+            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+        }
+    }
+    
+    override func musicAwareTabBarController(_ tabBarController: MusicAwareTabBarController, didHideMiniMusicPlayerView miniMusicPlayerView: MiniMusicPlayerView) {
+        if self.isViewLoaded {
+            self.tableView.contentInset.bottom = 0.0
+            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
+        }
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

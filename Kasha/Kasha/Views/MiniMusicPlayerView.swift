@@ -34,10 +34,13 @@ class MiniMusicPlayerView: UIView {
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.volumeDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerVolumeDidChange, object: nil)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
+        self.update(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
+        //@TODO: Volume
     }
 
     // MARK: - User Interaction
     @IBAction func previousTapped(_ sender: Any) {
+        MediaLibraryHelper.shared.previous()
     }
     
     @IBAction func playPauseTapped(_ sender: Any) {
@@ -49,6 +52,7 @@ class MiniMusicPlayerView: UIView {
     }
     
     @IBAction func nextTapped(_ sender: Any) {
+        MediaLibraryHelper.shared.next()
     }
     
     // MARK: - Media Notifications

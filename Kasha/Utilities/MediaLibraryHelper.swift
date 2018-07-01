@@ -112,16 +112,37 @@ class MediaLibraryHelper: NSObject {
                 debugPrint(error ?? "")
                 return
             }
-            self.musicPlayer.play()
+            self.play()
         }
     }
     
     func play() {
-        self.musicPlayer.play()
+        if self.musicPlayer.isPreparedToPlay {
+            self.musicPlayer.play()
+        } else {
+            if let nowPlayItem = self.musicPlayer.nowPlayingItem {
+                self.musicPlayer.setQueue(with: MPMediaItemCollection(items: [nowPlayItem]))
+            }
+            self.musicPlayer.prepareToPlay { error in
+                guard error == nil else {
+                    debugPrint(error ?? "")
+                    return
+                }
+                self.play()
+            }
+        }
     }
     
     func pause() {
         self.musicPlayer.pause()
+    }
+    
+    func next() {
+        self.musicPlayer.skipToNextItem()
+    }
+    
+    func previous() {
+        self.musicPlayer.skipToPreviousItem()
     }
     
     // MARK: - Search
