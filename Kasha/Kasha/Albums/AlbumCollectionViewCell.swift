@@ -43,7 +43,7 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
         DispatchQueue.global(qos: .default).async {
             let image = album.representativeItem?.artwork?.image(at: CGSize(width: 200.0, height: 200.0))
             DispatchQueue.main.async {
-                self.imageAlbum.image = image
+                self.imageAlbum.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
             }
         }
     }

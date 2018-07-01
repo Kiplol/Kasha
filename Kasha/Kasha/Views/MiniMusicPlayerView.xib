@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MiniMusicPlayerView" customModule="Kasha" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgm-Wo-JA6" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
@@ -80,13 +80,22 @@
                         <constraint firstItem="Jpv-Dk-gdP" firstAttribute="leading" secondItem="9fv-5o-o0j" secondAttribute="leading" id="RaY-71-grN"/>
                     </constraints>
                 </stackView>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="siU-SX-q4c">
+                    <rect key="frame" x="8" y="95.5" width="359" height="31"/>
+                    <connections>
+                        <action selector="sliderValueDidChange:" destination="iN0-l3-epB" eventType="valueChanged" id="bTm-7x-rBe"/>
+                    </connections>
+                </slider>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="9fv-5o-o0j" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2bY-MP-W7U"/>
                 <constraint firstItem="9fv-5o-o0j" firstAttribute="leading" secondItem="Dgm-Wo-JA6" secondAttribute="trailing" constant="8" id="4qI-md-iX8"/>
+                <constraint firstItem="siU-SX-q4c" firstAttribute="top" secondItem="9fv-5o-o0j" secondAttribute="bottom" constant="4" id="D8C-lT-ICn"/>
                 <constraint firstItem="Dgm-Wo-JA6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="O8a-YC-kZW"/>
                 <constraint firstItem="Dgm-Wo-JA6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Yeu-46-mQt"/>
+                <constraint firstItem="idl-SZ-5vC" firstAttribute="trailing" secondItem="siU-SX-q4c" secondAttribute="trailing" constant="10" id="cLc-Aq-JRv"/>
+                <constraint firstItem="siU-SX-q4c" firstAttribute="leading" secondItem="idl-SZ-5vC" secondAttribute="leading" constant="10" id="iJ9-dA-NsV"/>
                 <constraint firstItem="9fv-5o-o0j" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="wLg-PU-yrw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -98,7 +107,9 @@
                 <outlet property="imageArtwork" destination="Dgm-Wo-JA6" id="tGw-sJ-EEa"/>
                 <outlet property="labelDetails" destination="Jpv-Dk-gdP" id="8qh-l5-1pW"/>
                 <outlet property="labelTitle" destination="kpo-LL-B7I" id="vsH-zD-ZII"/>
+                <outlet property="sliderProgress" destination="siU-SX-q4c" id="x1o-bO-VeF"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="29"/>
         </view>
     </objects>
 </document>

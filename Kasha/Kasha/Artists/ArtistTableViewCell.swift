@@ -25,7 +25,7 @@ class ArtistTableViewCell: UITableViewCell, SelfSizing {
         DispatchQueue.global(qos: .default).async {
             let image = artist.representativeItem?.artwork?.image(at: CGSize(width: 54.0, height: 54.0))
             DispatchQueue.main.async {
-                self.imageArtist.image = image
+                self.imageArtist.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
             }
         }
     }

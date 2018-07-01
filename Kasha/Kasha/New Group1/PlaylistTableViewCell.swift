@@ -27,7 +27,7 @@ class PlaylistTableViewCell: UITableViewCell, SelfSizing {
         DispatchQueue.global(qos: .default).async {
             let image = playlist.representativeItem?.artwork?.image(at: CGSize(width: 54.0, height: 54.0))
             DispatchQueue.main.async {
-                self.imageCover.image = image
+                self.imageCover.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
             }
         }
     }

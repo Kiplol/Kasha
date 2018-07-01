@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import Hue
 //import MarqueeLabel
 import MediaPlayer
 import SwiftIcons
@@ -20,6 +21,15 @@ class MiniMusicPlayerView: UIView {
     @IBOutlet weak var buttonPrevious: UIButton!
     @IBOutlet weak var buttonPlayPause: UIButton!
     @IBOutlet weak var buttonNext: UIButton!
+    @IBOutlet weak var sliderProgress: UISlider!
+    
+    // MARK: - ivars
+    private var displayLink: CADisplayLink?
+    private var progress: Double = 0.0 {
+        didSet {
+            self.sliderProgress.value = Float(progress)
+        }
+    }
     
     // MARK: -
     override func awakeFromNib() {
@@ -53,6 +63,31 @@ class MiniMusicPlayerView: UIView {
     
     @IBAction func nextTapped(_ sender: Any) {
         MediaLibraryHelper.shared.next()
+    }
+    
+    // MARK: - Playback Progress
+    // MARK: - Playback Progress
+    private func startPlaybackTracking() {
+        self.stopPlaybackTracking()
+        self.displayLink = CADisplayLink(target: self, selector: #selector(MiniMusicPlayerView.displayLinkTick))
+        self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+    }
+    
+    private func stopPlaybackTracking() {
+        self.displayLink?.invalidate()
+        self.displayLink = nil
+    }
+    
+    @objc func displayLinkTick() {
+        guard let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem,
+            let songDuration = nowPlayingItem.value(forProperty: MPMediaItemPropertyPlaybackDuration) as? TimeInterval else {
+                self.progress = 0.0
+                return
+        }
+        
+        let currentTime = MediaLibraryHelper.shared.musicPlayer.currentPlaybackTime
+        let progress = currentTime / songDuration
+        self.progress = progress
     }
     
     // MARK: - Media Notifications
@@ -105,10 +140,27 @@ class MiniMusicPlayerView: UIView {
         switch playbackState {
         case .playing:
             self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.pause), forState: .normal)
+            self.startPlaybackTracking()
         case .paused, .stopped:
             self.buttonPlayPause.setIcon(icon: .googleMaterialDesign(.playArrow), forState: .normal)
+            self.stopPlaybackTracking()
         default:
-            break
+            self.stopPlaybackTracking()
         }
+    }
+    
+    // MARK: - Slider
+    @IBAction func sliderValueDidChange(_ sender: UISlider) {
+        guard sender == self.sliderProgress else {
+            return
+        }
+        
+        guard let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem,
+            let songDuration = nowPlayingItem.value(forProperty: MPMediaItemPropertyPlaybackDuration) as? TimeInterval else {
+                return
+        }
+        
+        let playbackTime = Double(sender.value) * songDuration
+        MediaLibraryHelper.shared.musicPlayer.currentPlaybackTime = playbackTime
     }
 }

@@ -24,6 +24,7 @@ class MusicAwareTabBarController: UITabBarController {
     private(set) var miniPlayer: MiniMusicPlayerView!
     private(set) var miniPlayerIsHidden: Bool = true
 
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,6 +40,17 @@ class MusicAwareTabBarController: UITabBarController {
         NotificationCenter.default.addObserver(self, selector: #selector(MusicAwareTabBarController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.positionMiniPlayer(forPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, animated: false)
+    }
+    
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        self.positionMiniPlayer(forPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, animated: false)
+    }
+    
+    // MARK: - Mini Player
     private func positionMiniPlayer(forPlaybackState playbackState: MPMusicPlaybackState, animated: Bool = true) {
         switch playbackState {
         case .playing, .paused:
@@ -69,7 +81,7 @@ class MusicAwareTabBarController: UITabBarController {
     private func showMiniPlayer(_ animated: Bool = true) {
         self.miniPlayerIsHidden = false
         var newFrame = self.miniPlayer.frame
-        newFrame.origin.y = self.tabBar.frame.origin.y - self.miniPlayer.bounds.size.height - 10.0 - (AppDelegate.instance.window?.safeAreaInsets.bottom ?? 0.0)
+        newFrame.origin.y = self.tabBar.frame.origin.y - self.miniPlayer.bounds.size.height - 10.0
         self.informViewControllersOfMiniPlayerFrameChange(newFrame)
         let animation = {
             self.miniPlayer.frame = newFrame

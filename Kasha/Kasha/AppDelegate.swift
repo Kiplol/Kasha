@@ -73,22 +73,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Private
     func setupAppearance() {
-        //Window
+        // Window
         self.window?.tintColor = UIColor.kashaPrimaryColor
 
-        //Navigation Bar
+        // Navigation Bar
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = UIColor.white
         UINavigationBar.appearance().prefersLargeTitles = true
 //        UINavigationBar.appearance().largeTitleTextAttributes =
 //            [NSAttributedStringKey.foregroundColor: self.window!.tintColor]
         
-        //Tab Bar
+        // Tab Bar
         UITabBar.appearance().isTranslucent = false
         
-        if let tintColor = self.window?.tintColor {
-            BDKCollectionIndexView.appearance().tintColor = tintColor
-        }
+        // Collection Index View
+        BDKCollectionIndexView.appearance().tintColor = UIColor.kashaPrimaryColor
+        
+        // Slider
+        UISlider.appearance().thumbTintColor = UIColor.kashaPrimaryColor
+        UISlider.appearance().minimumTrackTintColor = UIColor.kashaSecondaryColor
+        UISlider.appearance().maximumTrackTintColor = UIColor.kashaSecondaryColor
     }
     
     private func initializeThirdPartyLibraries() {
