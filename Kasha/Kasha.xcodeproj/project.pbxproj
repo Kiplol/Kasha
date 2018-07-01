@@ -38,6 +38,9 @@
 		3789925B20E7274C00A304B8 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789925A20E7274C00A304B8 /* PlaylistsViewController.swift */; };
 		3789925E20E72B5A00A304B8 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789925C20E72B5A00A304B8 /* PlaylistTableViewCell.swift */; };
 		3789925F20E72B5A00A304B8 /* PlaylistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3789925D20E72B5A00A304B8 /* PlaylistTableViewCell.xib */; };
+		37A9DC3120E878F400E5C43E /* MusicAwareTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9DC3020E878F400E5C43E /* MusicAwareTabBarController.swift */; };
+		37A9DC3320E87A5B00E5C43E /* MiniMusicControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9DC3220E87A5B00E5C43E /* MiniMusicControlsView.swift */; };
+		37A9DC3520E87A6C00E5C43E /* MiniMusicControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A9DC3420E87A6C00E5C43E /* MiniMusicControlsView.xib */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +79,9 @@
 		3789925A20E7274C00A304B8 /* PlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
 		3789925C20E72B5A00A304B8 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		3789925D20E72B5A00A304B8 /* PlaylistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistTableViewCell.xib; sourceTree = "<group>"; };
+		37A9DC3020E878F400E5C43E /* MusicAwareTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAwareTabBarController.swift; sourceTree = "<group>"; };
+		37A9DC3220E87A5B00E5C43E /* MiniMusicControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMusicControlsView.swift; sourceTree = "<group>"; };
+		37A9DC3420E87A6C00E5C43E /* MiniMusicControlsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MiniMusicControlsView.xib; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,6 +192,8 @@
 		37414D3520D74CB30076596E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37A9DC3220E87A5B00E5C43E /* MiniMusicControlsView.swift */,
+				37A9DC3420E87A6C00E5C43E /* MiniMusicControlsView.xib */,
 				3789925320E0084A00A304B8 /* SongTableViewCell.swift */,
 				3789925420E0084A00A304B8 /* SongTableViewCell.xib */,
 				3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */,
@@ -206,6 +214,7 @@
 		3789925920E04BFF00A304B8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				37A9DC3020E878F400E5C43E /* MusicAwareTabBarController.swift */,
 				373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */,
 				3789925720E04BF900A304B8 /* SearchResultsViewController.swift */,
 			);
@@ -327,6 +336,7 @@
 				37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */,
 				37066A5C20C6270C0021D0A5 /* Main.storyboard in Resources */,
 				3789925F20E72B5A00A304B8 /* PlaylistTableViewCell.xib in Resources */,
+				37A9DC3520E87A6C00E5C43E /* MiniMusicControlsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +384,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kasha/Pods-Kasha-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BDKCollectionIndexView/BDKCollectionIndexView.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework",
 				"${BUILT_PRODUCTS_DIR}/ViewAnimator/ViewAnimator.framework",
 			);
@@ -381,6 +392,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BDKCollectionIndexView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIcons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ViewAnimator.framework",
 			);
@@ -404,6 +416,8 @@
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,
 				3789925220E001C500A304B8 /* AlbumViewController.swift in Sources */,
 				3789925820E04BF900A304B8 /* SearchResultsViewController.swift in Sources */,
+				37A9DC3120E878F400E5C43E /* MusicAwareTabBarController.swift in Sources */,
+				37A9DC3320E87A5B00E5C43E /* MiniMusicControlsView.swift in Sources */,
 				37414D3C20D820580076596E /* SelfSizing.swift in Sources */,
 				373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */,
 				373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */,

@@ -3,8 +3,8 @@ platform :ios, '11.0'
 
 def shared_pods
 	use_frameworks!
-	pod 'BDKCollectionIndexView'
 	pod 'Hue'
+	pod 'MarqueeLabel/Swift'
 	pod 'SwiftIcons', '~> 2.0.1'
 	pod 'SwiftLint'
 end
@@ -13,5 +13,6 @@ end
 target 'Kasha' do
 	shared_pods
 	pod 'AppCenter'
+	pod 'BDKCollectionIndexView'
 	pod 'ViewAnimator'
 end

@@ -16,7 +16,7 @@ class MediaLibraryHelper: NSObject {
     typealias Playlist = MPMediaPlaylist
     typealias PlaylistFolder = MPMediaItemCollection
     
-    private let musicPlayer = MPMusicPlayerController.systemMusicPlayer
+    let musicPlayer = MPMusicPlayerController.systemMusicPlayer
     
     static let shared = MediaLibraryHelper()
     
@@ -114,6 +114,14 @@ class MediaLibraryHelper: NSObject {
             }
             self.musicPlayer.play()
         }
+    }
+    
+    func play() {
+        self.musicPlayer.play()
+    }
+    
+    func pause() {
+        self.musicPlayer.pause()
     }
     
     // MARK: - Search

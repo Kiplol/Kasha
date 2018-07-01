@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class ImageContainerView: UIView {
     
     let imageView = UIImageView()
