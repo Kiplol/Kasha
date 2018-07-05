@@ -23,6 +23,7 @@ class MusicAwareTabBarController: UITabBarController {
     
     private(set) var miniPlayer: MiniMusicPlayerView!
     private(set) var miniPlayerIsHidden: Bool = true
+    private var swipeUpGestureRecognizer: UISwipeGestureRecognizer!
     static let padding: CGFloat = 30.0
 
     // MARK: - View Lifecycle
@@ -38,6 +39,12 @@ class MusicAwareTabBarController: UITabBarController {
         self.miniPlayer.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         self.view.addSubview(self.miniPlayer)
         self.positionMiniPlayer(forPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, animated: false)
+        
+        self.swipeUpGestureRecognizer = UISwipeGestureRecognizer(target: self,
+                                                                 action: #selector(MusicAwareTabBarController.didSwipeMiniPlayerUp(_:)))
+        self.swipeUpGestureRecognizer.direction = .up
+        self.miniPlayer.addGestureRecognizer(self.swipeUpGestureRecognizer)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(MusicAwareTabBarController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
     }
     
@@ -49,6 +56,19 @@ class MusicAwareTabBarController: UITabBarController {
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
         self.positionMiniPlayer(forPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, animated: false)
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let playerVC = segue.destination as? PlayerViewController {
+            playerVC.initialBackgroundColor = self.miniPlayer.backgroundColor
+        }
+    }
+    
+    // MARK: - User Interaction
+    @objc func didSwipeMiniPlayerUp(_ sender: UISwipeGestureRecognizer) {
+        self.performSegue(withIdentifier: "showPlayer", sender: sender)
     }
     
     // MARK: - Mini Player

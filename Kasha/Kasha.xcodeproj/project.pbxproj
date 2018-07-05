@@ -11,6 +11,7 @@
 		37066A5C20C6270C0021D0A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5A20C6270C0021D0A5 /* Main.storyboard */; };
 		37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5D20C6270D0021D0A5 /* Assets.xcassets */; };
 		37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */; };
+		371CC57A20EE6BEA0096FBC7 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CC57920EE6BEA0096FBC7 /* PlayerViewController.swift */; };
 		373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DB120C8B91E0090D6FA /* Constants.swift */; };
 		373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */; };
 		373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */; };
@@ -52,6 +53,7 @@
 		37066A5D20C6270D0021D0A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		37066A6020C6270D0021D0A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		37066A6220C6270D0021D0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		371CC57920EE6BEA0096FBC7 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		373B1DB120C8B91E0090D6FA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_AVTL547TZF.p8; sourceTree = "<group>"; };
 		373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashaViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 		3789925920E04BFF00A304B8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				371CC57920EE6BEA0096FBC7 /* PlayerViewController.swift */,
 				37A9DC3020E878F400E5C43E /* MusicAwareTabBarController.swift */,
 				373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */,
 				3789925720E04BF900A304B8 /* SearchResultsViewController.swift */,
@@ -383,6 +386,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Kasha/Pods-Kasha-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BDKCollectionIndexView/BDKCollectionIndexView.framework",
+				"${BUILT_PRODUCTS_DIR}/DeckTransition/DeckTransition.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework",
@@ -391,6 +395,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BDKCollectionIndexView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DeckTransition.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIcons.framework",
@@ -411,6 +416,7 @@
 				3789924C20DFF0C400A304B8 /* Section.swift in Sources */,
 				37414D3720D74CCC0076596E /* ImageContainerView.swift in Sources */,
 				373B1DD820D3220C0090D6FA /* AlbumCollectionViewCell.swift in Sources */,
+				371CC57A20EE6BEA0096FBC7 /* PlayerViewController.swift in Sources */,
 				373B1DDB20D326A90090D6FA /* ViewUtilities.swift in Sources */,
 				373B1DD520D31E6B0090D6FA /* AlbumsViewController.swift in Sources */,
 				37066A5520C6270C0021D0A5 /* AppDelegate.swift in Sources */,

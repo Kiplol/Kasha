@@ -16,9 +16,15 @@ class MediaLibraryHelper: NSObject {
     typealias Playlist = MPMediaPlaylist
     typealias PlaylistFolder = MPMediaItemCollection
     
-    let musicPlayer = MPMusicPlayerController.systemMusicPlayer
-    
     static let shared = MediaLibraryHelper()
+    
+    // MARK: - ivars
+    let musicPlayer = MPMusicPlayerController.systemMusicPlayer
+    private(set) var queue: MPMediaItemCollection = MPMediaItemCollection(items: []) {
+        didSet {
+            self.musicPlayer.setQueue(with: self.queue)
+        }
+    }
     
     // MARK: - Artists
     func allArists() -> [MPMediaItemCollection] {
@@ -102,10 +108,10 @@ class MediaLibraryHelper: NSObject {
     // MARK: - Playback
     func play(_ song: Song, inQueue queue: [Song]? = nil) {
         if let queue = queue {
-            self.musicPlayer.setQueue(with: MPMediaItemCollection(items: queue))
+            self.queue = MPMediaItemCollection(items: queue)
             self.musicPlayer.nowPlayingItem = song
         } else {
-            self.musicPlayer.setQueue(with: MPMediaItemCollection(items: [song]))
+            self.queue = MPMediaItemCollection(items: [song])
         }
         self.musicPlayer.prepareToPlay { [unowned self] error in
             guard error == nil else {
@@ -121,7 +127,7 @@ class MediaLibraryHelper: NSObject {
             self.musicPlayer.play()
         } else {
             if let nowPlayItem = self.musicPlayer.nowPlayingItem {
-                self.musicPlayer.setQueue(with: MPMediaItemCollection(items: [nowPlayItem]))
+                self.queue = MPMediaItemCollection(items: [nowPlayItem])
             }
             self.musicPlayer.prepareToPlay { error in
                 guard error == nil else {

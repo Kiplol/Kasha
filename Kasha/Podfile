@@ -14,5 +14,6 @@ target 'Kasha' do
 	shared_pods
 	pod 'AppCenter'
 	pod 'BDKCollectionIndexView'
+    pod 'DeckTransition', '~> 2.0'
 	pod 'ViewAnimator'
 end
