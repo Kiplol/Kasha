@@ -237,7 +237,7 @@
                                                         <rect key="frame" x="47.5" y="363" width="240" height="74"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
-                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaQ-rB-NTY">
+                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaQ-rB-NTY">
                                                         <rect key="frame" x="18" y="457" width="299" height="31"/>
                                                     </slider>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9L7-3n-ylH" userLabel="Buttons">

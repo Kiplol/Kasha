@@ -44,6 +44,7 @@ class PlayerViewController: KashaViewController {
             self.progressSlider.value = Float(self.progress)
         }
     }
+    private var displayLink: CADisplayLink?
     
     // MARK: - KashaViewController
     override func apply(theme: Theme) {
@@ -143,14 +144,39 @@ class PlayerViewController: KashaViewController {
     private func update(withPlaybackState playbackState: MPMusicPlaybackState) {
         switch playbackState {
         case .playing:
-            self.buttonPlay.isHidden = true
-            self.buttonPause.isHidden = false
-            self.startWaveView()
+            self.startPlaybackTracking()
         default:
-            self.buttonPlay.isHidden = false
-            self.buttonPause.isHidden = true
-            self.stopWaveView()
+            self.stopPlaybackTracking()
         }
+    }
+    
+    private func startPlaybackTracking() {
+        self.buttonPlay.isHidden = true
+        self.buttonPause.isHidden = false
+        self.startWaveView()
+        self.displayLink = CADisplayLink(target: self, selector: #selector(PlayerViewController.displayLinkTick))
+        self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+    }
+    
+    private func stopPlaybackTracking() {
+        self.buttonPlay.isHidden = false
+        self.buttonPause.isHidden = true
+        self.stopWaveView()
+        self.displayLink?.invalidate()
+        self.displayLink = nil
+    }
+    
+    // MARK: - DisplayLink
+    @objc func displayLinkTick() {
+        guard let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem,
+            let songDuration = nowPlayingItem.value(forProperty: MPMediaItemPropertyPlaybackDuration) as? TimeInterval else {
+                self.progress = 0.0
+                return
+        }
+        
+        let currentTime = MediaLibraryHelper.shared.musicPlayer.currentPlaybackTime
+        let progress = currentTime / songDuration
+        self.progress = progress
     }
     
     // MARK: - Wave View
