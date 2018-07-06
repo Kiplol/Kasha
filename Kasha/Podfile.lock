@@ -15,6 +15,7 @@ PODS:
   - SwiftIcons (2.0.1)
   - SwiftLint (0.24.2)
   - ViewAnimator (2.1.1)
+  - YXWaveView (0.5.0)
 
 DEPENDENCIES:
   - AppCenter
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - SwiftIcons (~> 2.0.1)
   - SwiftLint
   - ViewAnimator
+  - YXWaveView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -38,6 +40,7 @@ SPEC REPOS:
     - SwiftIcons
     - SwiftLint
     - ViewAnimator
+    - YXWaveView
 
 SPEC CHECKSUMS:
   AppCenter: 53349f138e596f2514f7559bb50a7e6e55219f17
@@ -49,7 +52,8 @@ SPEC CHECKSUMS:
   SwiftIcons: e475a56ae2c2da40672dbf16061ca5dd5cee7dbb
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
   ViewAnimator: 43c31539508d995ea2c5e98338211f7c009b358f
+  YXWaveView: 3570d7244b08effd077a5c63b0693aa44b7cd369
 
-PODFILE CHECKSUM: 216009099aaf6be3dd04dc3856e51d627931f5e1
+PODFILE CHECKSUM: 196441c4a6ef19dede12f5595d497d5bc6b7d5b7
 
 COCOAPODS: 1.5.3

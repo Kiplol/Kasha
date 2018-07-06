@@ -6,11 +6,20 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import MediaPlayer
 import UIKit
+import YXWaveView
 
 class PlayerViewController: KashaViewController {
+    
+    private static let stoppedWaveHeight: CGFloat = 5.0
+    private static let stoppedWaveSpeed: CGFloat = 0.6
+    private static let playingWaveHeightMax: CGFloat = 15.0
+    private static let playingWaveHeightMin: CGFloat = 10.0
+    private static let playingWaveSpeed: CGFloat = 1.0
 
     // MARK: - IBOutlets
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageArtwork: ImageContainerView!
     @IBOutlet weak var artworkContainer: UIView!
     @IBOutlet weak var buttonPrevious: UIButton!
@@ -18,9 +27,23 @@ class PlayerViewController: KashaViewController {
     @IBOutlet weak var buttonPause: UIButton!
     @IBOutlet weak var buttonNext: UIButton!
     @IBOutlet var allButtons: [UIButton]!
+    @IBOutlet weak var labelSongTitle: UILabel!
+    @IBOutlet weak var labelSongInfo: UILabel!
+    @IBOutlet weak var waveContainer: UIView!
+    @IBOutlet weak var topBackgroundView: UIView!
+    @IBOutlet weak var progressSlider: UISlider!
     
     // MARK: - ivars
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    private let waveView: YXWaveView = YXWaveView(frame: .zero, color: UIColor.kashaPrimary)
+    private var progress: Double = 0.0 {
+        didSet {
+            guard self.isViewLoaded else {
+                return
+            }
+            self.progressSlider.value = Float(self.progress)
+        }
+    }
     
     // MARK: - KashaViewController
     override func apply(theme: Theme) {
@@ -34,32 +57,80 @@ class PlayerViewController: KashaViewController {
             $0.tintColor = theme.playerDetailColor
             $0.layer.shadowColor = shadowColor.cgColor
         }
+        self.waveView.realWaveColor = theme.playerBackgroundColor
+        self.waveView.maskWaveColor = theme.playerBackgroundColor.alpha(0.4)
+        self.scrollView.backgroundColor = theme.playerBackgroundColor
+        
+        self.progressSlider.thumbTintColor = theme.playerDetailColor
+        self.progressSlider.maximumTrackTintColor = theme.playerPrimaryColor
+        self.progressSlider.minimumTrackTintColor = theme.playerPrimaryColor
     }
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modalPresentationCapturesStatusBarAppearance = true
-        self.update(withNowplayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
         
         self.imageArtwork.layer.cornerRadius = 15.0
         self.imageArtwork.layer.shadowRadius = 10.0
         self.artworkContainer.applyAlbumsStyle()
         self.artworkContainer.layer.cornerRadius = 20.0
         self.artworkContainer.layer.shadowRadius = 15.0
+        
+        self.waveView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+        self.waveContainer.addSubview(self.waveView)
+        self.waveView.frame = self.waveContainer.bounds
+        self.waveView.start()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+        
+        self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
+        self.update(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.update(withNowplayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
+        self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
+    }
+    
+    // MARK: - User Interaction
+    @IBAction func previousTapped(_ sender: Any) {
+        MediaLibraryHelper.shared.previous()
+    }
+    
+    @IBAction func playTapped(_ sender: Any) {
+        MediaLibraryHelper.shared.play()
+    }
+    
+    @IBAction func pauseTapped(_ sender: Any) {
+        MediaLibraryHelper.shared.pause()
+    }
+    
+    @IBAction func nextTapped(_ sender: Any) {
+        MediaLibraryHelper.shared.next()
     }
     
     // MARK: - Helpers
-    private func update(withNowplayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
+    private func update(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
         guard let nowPlayingItem = nowPlayingItem else {
+            self.labelSongInfo.text = "---"
+            self.labelSongTitle.text = "---"
             self.imageArtwork.image = #imageLiteral(resourceName: "placeholder-artwork")
             return
         }
+        
+        self.labelSongTitle.text = nowPlayingItem.title
+        self.labelSongInfo.text = {
+            var components: [String] = []
+            if let artist = nowPlayingItem.artist {
+                components.append(artist)
+            }
+            if let album = nowPlayingItem.albumTitle {
+                components.append(album)
+            }
+            return components.joined(separator: " - ")
+        }()
         
         DispatchQueue.global(qos: .default).async {
             let image = nowPlayingItem.artwork?.image(at: CGSize(width: 80.0, height: 80.0))
@@ -67,5 +138,53 @@ class PlayerViewController: KashaViewController {
                 self.imageArtwork.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
             }
         }
+    }
+    
+    private func update(withPlaybackState playbackState: MPMusicPlaybackState) {
+        switch playbackState {
+        case .playing:
+            self.buttonPlay.isHidden = true
+            self.buttonPause.isHidden = false
+            self.startWaveView()
+        default:
+            self.buttonPlay.isHidden = false
+            self.buttonPause.isHidden = true
+            self.stopWaveView()
+        }
+    }
+    
+    // MARK: - Wave View
+    private func stopWaveView() {
+        self.waveView.waveHeight = PlayerViewController.stoppedWaveHeight
+        self.waveView.waveSpeed = PlayerViewController.stoppedWaveSpeed
+        self.waveView.start()
+    }
+    
+    private func startWaveView() {
+        let waveHeight = CGFloat.random(min: PlayerViewController.playingWaveHeightMin,
+                                        max: PlayerViewController.playingWaveHeightMax)
+        self.waveView.waveHeight = waveHeight
+        self.waveView.waveSpeed = PlayerViewController.playingWaveSpeed
+        self.waveView.start()
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: { [weak self] in
+//            if MediaLibraryHelper.shared.musicPlayer.playbackState == .playing {
+//                self?.startWaveView()
+//            }
+//        })
+    }
+    
+    // MARK: - Media Notifications
+    @objc func playbackStateDidChange(_ notif: Notification) {
+        guard let player = notif.object as? MPMusicPlayerController else {
+            return
+        }
+        self.update(withPlaybackState: player.playbackState)
+    }
+    
+    @objc func nowPlayingItemDidChange(_ notif: Notification) {
+        guard let player = notif.object as? MPMusicPlayerController else {
+            return
+        }
+        self.update(withNowPlayingItem: player.nowPlayingItem)
     }
 }

@@ -17,4 +17,5 @@ target 'Kasha' do
 	pod 'BDKCollectionIndexView'
     pod 'DeckTransition', '~> 2.0'
 	pod 'ViewAnimator'
+	pod 'YXWaveView'
 end
