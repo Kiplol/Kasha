@@ -78,14 +78,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.tintColor = UIColor.kashaPrimary
 
         // Navigation Bar
-        UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = UIColor.white
-        UINavigationBar.appearance().prefersLargeTitles = true
-//        UINavigationBar.appearance().largeTitleTextAttributes =
-//            [NSAttributedStringKey.foregroundColor: self.window!.tintColor]
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.isTranslucent = false
+        navigationBarAppearance.barTintColor = UIColor.white
+        navigationBarAppearance.prefersLargeTitles = true
         
         // Tab Bar
-        UITabBar.appearance().isTranslucent = false
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.isTranslucent = false
         
         // Collection Index View
         BDKCollectionIndexView.appearance().tintColor = UIColor.kashaPrimary

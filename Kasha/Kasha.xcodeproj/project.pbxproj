@@ -13,6 +13,7 @@
 		37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37066A5F20C6270D0021D0A5 /* LaunchScreen.storyboard */; };
 		371CC57A20EE6BEA0096FBC7 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CC57920EE6BEA0096FBC7 /* PlayerViewController.swift */; };
 		371CC57F20EFE2200096FBC7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CC57E20EFE2200096FBC7 /* Theme.swift */; };
+		371CC58120EFFEE90096FBC7 /* KashaNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CC58020EFFEE90096FBC7 /* KashaNavigationController.swift */; };
 		373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DB120C8B91E0090D6FA /* Constants.swift */; };
 		373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */; };
 		373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */; };
@@ -56,6 +57,7 @@
 		37066A6220C6270D0021D0A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		371CC57920EE6BEA0096FBC7 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		371CC57E20EFE2200096FBC7 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = Kasha/Models/Theme.swift; sourceTree = SOURCE_ROOT; };
+		371CC58020EFFEE90096FBC7 /* KashaNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashaNavigationController.swift; sourceTree = "<group>"; };
 		373B1DB120C8B91E0090D6FA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		373B1DB520C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_AVTL547TZF.p8; sourceTree = "<group>"; };
 		373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashaViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		3789925920E04BFF00A304B8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				371CC58020EFFEE90096FBC7 /* KashaNavigationController.swift */,
 				371CC57920EE6BEA0096FBC7 /* PlayerViewController.swift */,
 				37A9DC3020E878F400E5C43E /* MusicAwareTabBarController.swift */,
 				373B1DB820C8D6FD0090D6FA /* KashaViewController.swift */,
@@ -442,6 +445,7 @@
 				3789924F20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift in Sources */,
 				373B1DD220D318570090D6FA /* ArtistTableViewCell.swift in Sources */,
 				37414D4020D840720076596E /* ArtistViewController.swift in Sources */,
+				371CC58120EFFEE90096FBC7 /* KashaNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

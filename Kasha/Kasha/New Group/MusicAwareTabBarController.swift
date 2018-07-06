@@ -29,6 +29,12 @@ class MusicAwareTabBarController: UITabBarController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBar.layer.shadowColor = UIColor.black.cgColor
+        self.tabBar.layer.shadowOpacity = 0.1
+        self.tabBar.layer.shadowOffset = CGSize(width: 0.0, height: -5.0)
+        self.tabBar.layer.shadowRadius = 10.0
+        self.tabBar.shadowImage = UIImage()
+        self.tabBar.backgroundImage = UIImage()
 
         guard let player = Bundle.main.loadNibNamed("MiniMusicPlayerView", owner: self, options: nil)?[0] as? MiniMusicPlayerView else {
                                                         preconditionFailure("Couldn't load MiniMusicControlsView from nib")

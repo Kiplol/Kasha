@@ -177,6 +177,7 @@
             <constraints>
                 <constraint firstItem="ZgI-QD-Qh2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6pJ-D0-3wm"/>
                 <constraint firstItem="Rtb-eC-hlv" firstAttribute="width" secondItem="5AA-bF-Twz" secondAttribute="width" id="7xi-lt-Gte"/>
+                <constraint firstAttribute="bottom" secondItem="Dgm-Wo-JA6" secondAttribute="bottom" constant="10" id="Kbs-Ge-nes"/>
                 <constraint firstItem="Dgm-Wo-JA6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="O8a-YC-kZW"/>
                 <constraint firstItem="ZgI-QD-Qh2" firstAttribute="centerY" secondItem="Dgm-Wo-JA6" secondAttribute="centerY" id="Qbw-wV-1pJ"/>
                 <constraint firstAttribute="trailing" secondItem="egc-mK-kZr" secondAttribute="trailing" id="S2h-oh-LYE"/>
@@ -184,7 +185,6 @@
                 <constraint firstItem="Dgm-Wo-JA6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Yeu-46-mQt"/>
                 <constraint firstItem="egc-mK-kZr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="foM-mR-Arg"/>
                 <constraint firstAttribute="bottom" secondItem="egc-mK-kZr" secondAttribute="bottom" id="kDR-rL-22L"/>
-                <constraint firstItem="idl-SZ-5vC" firstAttribute="bottom" secondItem="Dgm-Wo-JA6" secondAttribute="bottom" constant="10" id="rtB-ju-tD9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="idl-SZ-5vC"/>
