@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias ColorSet = (background: UIColor?, primary: UIColor?, secondary: UIColor?, detail: UIColor?)
+
 extension UIView {
     
     func applyAlbumStyleShadow() {

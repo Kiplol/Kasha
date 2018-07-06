@@ -65,7 +65,8 @@ class MusicAwareTabBarController: UITabBarController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let playerVC = segue.destination as? PlayerViewController {
-            playerVC.initialBackgroundColor = self.miniPlayer.backgroundColor
+            playerVC.applyColors(self.miniPlayer.colorSet.background, primary: self.miniPlayer.colorSet.primary,
+                                 secondary: self.miniPlayer.colorSet.secondary, detail: self.miniPlayer.colorSet.detail)
         }
     }
     

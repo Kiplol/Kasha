@@ -35,6 +35,7 @@ class MiniMusicPlayerView: UIView {
         }
     }
     var expandTapAction: ((UIButton) -> Void)?
+    private(set) var colorSet: ColorSet = ColorSet(background: .white, primary: .kashaPrimaryColor, secondary: .kashaSecondaryColor, detail: .black)
     
     // MARK: -
     override func awakeFromNib() {
@@ -117,7 +118,7 @@ class MiniMusicPlayerView: UIView {
     }
     
     // MARK: -
-    private func updateButtons(withPrimaryColorColor color: UIColor, andShadowColor shadowColor: UIColor = .black) {
+    private func updateButtons(withColor color: UIColor, andShadowColor shadowColor: UIColor = .black) {
         [self.buttonPause, self.buttonPlay].forEach { $0?.backgroundColor = shadowColor.alpha(0.7) }
         self.allButtons.forEach {
             $0.tintColor = color
@@ -152,22 +153,23 @@ class MiniMusicPlayerView: UIView {
                 }
                 return
             }
-            let (background, primary, _, detail) = image.colors()
+            let (background, primary, secondary, detail) = image.colors()
+            self.colorSet = ColorSet(background, primary, secondary, detail)
             DispatchQueue.main.async {
                 self.backgroundColor = background
-                self.fillView.backgroundColor = detail
+                self.fillView.backgroundColor = primary
                 let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
-                self.updateButtons(withPrimaryColorColor: primary, andShadowColor: buttonShadowColor)
-                
+                self.updateButtons(withColor: detail, andShadowColor: buttonShadowColor)
             }
         }
     }
     
     private func resetColors() {
+        self.colorSet = ColorSet(.white, .kashaPrimaryColor, .kashaSecondaryColor, .black)
         self.backgroundColor = UIColor.white
         self.fillView.backgroundColor = UIColor.kashaSecondaryColor
         let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
-        self.updateButtons(withPrimaryColorColor: buttonShadowColor)
+        self.updateButtons(withColor: buttonShadowColor)
     }
     
     private func update(withPlaybackState playbackState: MPMusicPlaybackState) {
