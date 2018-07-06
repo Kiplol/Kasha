@@ -46,7 +46,7 @@ class PlayerViewController: KashaViewController {
     }
     
     // MARK: - Helpers
-    func applyColors(_ background: UIColor? = nil, primary: UIColor? = nil, secondary: UIColor? = nil, detail: UIColor? = nil) {
+    func applyColors(background: UIColor? = nil, primary: UIColor? = nil, secondary: UIColor? = nil, detail: UIColor? = nil) {
         if let background = background {
             self.backgroundColor = background
         }
@@ -103,7 +103,7 @@ class PlayerViewController: KashaViewController {
                 return
             }
             let (background, primary, secondary, detail) = image.colors()
-            self.applyColors(background, primary: primary, secondary: secondary, detail: detail)
+            self.applyColors(background: background, primary: primary, secondary: secondary, detail: detail)
         }
     }
     
