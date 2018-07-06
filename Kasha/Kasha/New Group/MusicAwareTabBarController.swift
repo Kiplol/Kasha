@@ -44,6 +44,9 @@ class MusicAwareTabBarController: UITabBarController {
                                                                  action: #selector(MusicAwareTabBarController.didSwipeMiniPlayerUp(_:)))
         self.swipeUpGestureRecognizer.direction = .up
         self.miniPlayer.addGestureRecognizer(self.swipeUpGestureRecognizer)
+        self.miniPlayer.expandTapAction = { button in
+            self.performSegue(withIdentifier: "showPlayer", sender: button)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(MusicAwareTabBarController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
     }

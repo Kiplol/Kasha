@@ -26,12 +26,35 @@
                                 <constraint firstAttribute="width" id="X6r-9U-DNb"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rtb-eC-hlv">
+                            <rect key="frame" x="321" y="14" width="44" height="36"/>
+                            <state key="normal" image="expand"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                    <real key="value" value="0.59999999999999998"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                    <size key="value" width="0.0" height="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="expandTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="bGW-MD-TwR"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="jaQ-EH-M9b" firstAttribute="top" secondItem="egc-mK-kZr" secondAttribute="top" id="7JF-t0-bd5"/>
                         <constraint firstAttribute="bottom" secondItem="jaQ-EH-M9b" secondAttribute="bottom" id="8jZ-ps-wAl"/>
+                        <constraint firstAttribute="trailing" secondItem="Rtb-eC-hlv" secondAttribute="trailing" constant="10" id="IdJ-d6-hvk"/>
                         <constraint firstItem="jaQ-EH-M9b" firstAttribute="leading" secondItem="egc-mK-kZr" secondAttribute="leading" id="S4e-eX-dIk"/>
+                        <constraint firstItem="Rtb-eC-hlv" firstAttribute="centerY" secondItem="egc-mK-kZr" secondAttribute="centerY" id="k0s-Ly-KQl"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dgm-Wo-JA6" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
@@ -42,24 +65,25 @@
                         <constraint firstAttribute="width" constant="45" id="RfJ-aY-dDP"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ZgI-QD-Qh2">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ZgI-QD-Qh2" userLabel="Buttons">
                     <rect key="frame" x="121" y="10.5" width="132" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5AA-bF-Twz">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5AA-bF-Twz">
                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Ckn-iT-IGY"/>
                                 <constraint firstAttribute="width" constant="44" id="b6m-O7-KPy"/>
                             </constraints>
+                            <state key="normal" image="fast_rewind"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.59999999999999998"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                    <real key="value" value="3"/>
+                                    <real key="value" value="0.10000000000000001"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                    <size key="value" width="0.0" height="1"/>
+                                    <size key="value" width="1" height="1"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                     <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,57 +93,66 @@
                                 <action selector="previousTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="Mjy-2p-yva"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdN-Et-X4B">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdN-Et-X4B">
                             <rect key="frame" x="44" y="0.0" width="44" height="44"/>
+                            <state key="normal" image="play"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.59999999999999998"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                     <real key="value" value="3"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                    <size key="value" width="0.0" height="1"/>
+                                    <size key="value" width="1" height="1"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                     <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="22"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="playTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="z9z-D8-Cdz"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ix-Ok-xwY">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ix-Ok-xwY">
                             <rect key="frame" x="88" y="0.0" width="44" height="44"/>
+                            <state key="normal" image="pause"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.59999999999999998"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                     <real key="value" value="3"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                    <size key="value" width="0.0" height="1"/>
+                                    <size key="value" width="1" height="1"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                     <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="22"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="pauseTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="246-o6-lmO"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTc-0w-KiQ">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTc-0w-KiQ">
                             <rect key="frame" x="88" y="0.0" width="44" height="44"/>
+                            <state key="normal" image="fast_forward"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.59999999999999998"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                    <real key="value" value="3"/>
+                                    <real key="value" value="0.10000000000000001"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                    <size key="value" width="0.0" height="1"/>
+                                    <size key="value" width="1" height="1"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                     <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -143,6 +176,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ZgI-QD-Qh2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6pJ-D0-3wm"/>
+                <constraint firstItem="Rtb-eC-hlv" firstAttribute="width" secondItem="5AA-bF-Twz" secondAttribute="width" id="7xi-lt-Gte"/>
                 <constraint firstItem="Dgm-Wo-JA6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="O8a-YC-kZW"/>
                 <constraint firstItem="ZgI-QD-Qh2" firstAttribute="centerY" secondItem="Dgm-Wo-JA6" secondAttribute="centerY" id="Qbw-wV-1pJ"/>
                 <constraint firstAttribute="trailing" secondItem="egc-mK-kZr" secondAttribute="trailing" id="S2h-oh-LYE"/>
@@ -155,6 +189,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="idl-SZ-5vC"/>
             <connections>
+                <outlet property="buttonExpand" destination="Rtb-eC-hlv" id="8hg-6C-CeK"/>
                 <outlet property="buttonNext" destination="qTc-0w-KiQ" id="R84-tv-gXH"/>
                 <outlet property="buttonPause" destination="5ix-Ok-xwY" id="aVk-PI-Iwi"/>
                 <outlet property="buttonPlay" destination="BdN-Et-X4B" id="0Zc-jo-qvO"/>
@@ -167,8 +202,16 @@
                 <outletCollection property="allButtons" destination="BdN-Et-X4B" collectionClass="NSMutableArray" id="Lew-8M-gR3"/>
                 <outletCollection property="allButtons" destination="5ix-Ok-xwY" collectionClass="NSMutableArray" id="MGI-fM-VFP"/>
                 <outletCollection property="allButtons" destination="qTc-0w-KiQ" collectionClass="NSMutableArray" id="avR-Dw-TPE"/>
+                <outletCollection property="allButtons" destination="Rtb-eC-hlv" collectionClass="NSMutableArray" id="Hay-ST-qzd"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="29"/>
         </view>
     </objects>
+    <resources>
+        <image name="expand" width="36" height="36"/>
+        <image name="fast_forward" width="36" height="36"/>
+        <image name="fast_rewind" width="36" height="36"/>
+        <image name="pause" width="36" height="36"/>
+        <image name="play" width="36" height="36"/>
+    </resources>
 </document>

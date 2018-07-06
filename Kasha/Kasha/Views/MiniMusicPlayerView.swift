@@ -8,7 +8,6 @@
 
 import Hue
 import MediaPlayer
-import SwiftIcons
 import UIKit
 
 class MiniMusicPlayerView: UIView {
@@ -19,6 +18,7 @@ class MiniMusicPlayerView: UIView {
     @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var buttonPause: UIButton!
     @IBOutlet weak var buttonNext: UIButton!
+    @IBOutlet weak var buttonExpand: UIButton!
     @IBOutlet var allButtons: [UIButton]!
     @IBOutlet weak var fillContainer: UIView!
     @IBOutlet weak var fillView: UIView!
@@ -34,6 +34,7 @@ class MiniMusicPlayerView: UIView {
             }
         }
     }
+    var expandTapAction: ((UIButton) -> Void)?
     
     // MARK: -
     override func awakeFromNib() {
@@ -45,7 +46,6 @@ class MiniMusicPlayerView: UIView {
         
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.volumeDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerVolumeDidChange, object: nil)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
         self.update(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
         
@@ -73,6 +73,9 @@ class MiniMusicPlayerView: UIView {
         MediaLibraryHelper.shared.next()
     }
     
+    @IBAction func expandTapped(_ sender: Any) {
+        expandTapAction?(self.buttonExpand)
+    }
     // MARK: - Playback Progress
     private func startPlaybackTracking() {
         self.stopPlaybackTracking()
@@ -83,7 +86,7 @@ class MiniMusicPlayerView: UIView {
     private func stopPlaybackTracking() {
         self.displayLink?.invalidate()
         self.displayLink = nil
-        self.progress = 0.0
+//        self.progress = 0.0
     }
     
     @objc func displayLinkTick() {
@@ -113,18 +116,13 @@ class MiniMusicPlayerView: UIView {
         self.update(withNowPlayingItem: player.nowPlayingItem)
     }
     
-    @objc func volumeDidChange(_ notif: Notification) {
-        
-    }
-    
     // MARK: -
     private func updateButtons(withPrimaryColorColor color: UIColor, andShadowColor shadowColor: UIColor = .black) {
-        let iconSize: CGFloat = 36.0
-        self.buttonPrevious.setIcon(icon: .googleMaterialDesign(.skipPrevious), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
-        self.buttonNext.setIcon(icon: .googleMaterialDesign(.skipNext), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
-        self.buttonPlay.setIcon(icon: .googleMaterialDesign(.playArrow), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
-        self.buttonPause.setIcon(icon: .googleMaterialDesign(.pause), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
-        self.allButtons.forEach { $0.layer.shadowColor = shadowColor.cgColor }
+        [self.buttonPause, self.buttonPlay].forEach { $0?.backgroundColor = shadowColor }
+        self.allButtons.forEach {
+            $0.tintColor = color
+            $0.layer.shadowColor = shadowColor.cgColor
+        }
     }
     
     private func update(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
