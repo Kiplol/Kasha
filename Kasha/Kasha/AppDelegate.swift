@@ -82,6 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.isTranslucent = false
         navigationBarAppearance.barTintColor = UIColor.white
         navigationBarAppearance.prefersLargeTitles = true
+        UINavigationBar.appearance().largeTitleTextAttributes =
+            [NSAttributedStringKey.foregroundColor: UIColor.kashaPrimary]
         
         // Tab Bar
         let tabBarAppearance = UITabBar.appearance()

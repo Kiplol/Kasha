@@ -96,6 +96,10 @@ class PlayerViewController: KashaViewController {
     }
     
     // MARK: - User Interaction
+    @IBAction func closeTapped(_ sender: Any) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func previousTapped(_ sender: Any) {
         MediaLibraryHelper.shared.previous()
     }

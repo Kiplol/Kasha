@@ -10,7 +10,7 @@ import Gestalt
 import MediaPlayer
 import UIKit
 
-class KashaViewController: UIViewController, MusicAwareTabBarControllerListener {
+class KashaViewController: UIViewController, MusicAwareTabBarControllerListener, SearchResultsViewControllerDelegate {
     
     private var isFirstLayout = true
     private lazy var searchController = UISearchController(searchResultsController: SearchResultsViewController())
@@ -42,6 +42,7 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener 
                 assert(false, "searchResultsController was not an instance of SearchResultsViewController")
                 return
             }
+            searchResultsVC.delegate = self
             self.searchController.searchResultsUpdater = searchResultsVC
 //            self.searchController.hidesNavigationBarDuringPresentation = false
             self.definesPresentationContext = true
@@ -99,6 +100,19 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener 
     func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
         //Override
         return nil
+    }
+    
+    // MARK: - SearchResultsViewControllerDelegate
+    func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectAlbum album: MediaLibraryHelper.Album) {
+        
+    }
+    
+    func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectArtist artist: MediaLibraryHelper.Artist) {
+        guard let artistVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "artist") as? ArtistViewController else {
+            preconditionFailure("Couldn't instantiant an ArtistViewController from its storyboard.")
+        }
+        artistVC.artist = artist
+        self.show(artistVC, sender: artist)
     }
     
     // MARK: - Gestalt

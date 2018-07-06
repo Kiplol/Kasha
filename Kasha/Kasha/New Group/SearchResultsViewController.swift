@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol SearchResultsViewControllerDelegate: class {
+    func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectAlbum album: MediaLibraryHelper.Album)
+    func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectArtist artist: MediaLibraryHelper.Artist)
+}
+
 class SearchResultsViewController: KashaViewController, UISearchResultsUpdating {
     
     private static let songCellID = "songCellID"
     private static let artistCellID = "artistCellID"
+    private static let albumCellID = "albumCellID"
+    private static let maxResultPerSection = 6
     
     // MARK: - ivars
     let tableView = UITableView(frame: .zero, style: .plain)
@@ -19,6 +26,7 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
     var albums: [MediaLibraryHelper.Album] = []
     var artists: [MediaLibraryHelper.Artist] = []
     private var sections: [Section] = []
+    weak var delegate: SearchResultsViewControllerDelegate?
     
     // MARK: - KashaViewController
     override func allowsSearch() -> Bool {
@@ -89,6 +97,7 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //@TODO: return min(self.sections[section].rows.count, SearchResultsViewController.maxResultPerSection)
         return self.sections[section].rows.count
     }
     
@@ -127,7 +136,10 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
             MediaLibraryHelper.shared.play(song)
         } else if let artist = row.data as? MediaLibraryHelper.Artist,
             row.cellReuseIdentifier == SearchResultsViewController.artistCellID {
-            //@TODO: Show artist VC
+            self.delegate?.searchResultsViewController(self, didSelectArtist: artist)
+        } else if let album = row.data as? MediaLibraryHelper.Album,
+            row.cellReuseIdentifier == SearchResultsViewController.albumCellID {
+            self.delegate?.searchResultsViewController(self, didSelectAlbum: album)
         }
     }
 }
