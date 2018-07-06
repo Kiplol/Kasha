@@ -127,10 +127,15 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
 //                tableView.deselectRow(at: $0, animated: true)
 //            }
 //        }
+        
         let row = self.sections[indexPath.section].rows[indexPath.row]
         if let song = row.data as? MediaLibraryHelper.Song {
             MediaLibraryHelper.shared.play(song, inQueue: self.songs)
         }
+    }
+    
+    private func bar() {
+        
     }
 
 }

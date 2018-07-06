@@ -7,7 +7,6 @@
 //
 
 import Hue
-//import MarqueeLabel
 import MediaPlayer
 import SwiftIcons
 import UIKit
@@ -16,19 +15,23 @@ class MiniMusicPlayerView: UIView {
 
     // MARK: - IBOutlets
     @IBOutlet weak var imageArtwork: ImageContainerView!
-    @IBOutlet weak var labelTitle: UILabel!//MarqueeLabel!
-    @IBOutlet weak var labelDetails: UILabel!//MarqueeLabel!
     @IBOutlet weak var buttonPrevious: UIButton!
     @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var buttonPause: UIButton!
     @IBOutlet weak var buttonNext: UIButton!
-    @IBOutlet weak var sliderProgress: UISlider!
+    @IBOutlet var allButtons: [UIButton]!
+    @IBOutlet weak var fillContainer: UIView!
+    @IBOutlet weak var fillView: UIView!
+    @IBOutlet weak var constraintFillWidth: NSLayoutConstraint!
     
     // MARK: - ivars
     private var displayLink: CADisplayLink?
     private var progress: Double = 0.0 {
         didSet {
-            self.sliderProgress.value = Float(progress)
+            DispatchQueue.main.async {
+                self.constraintFillWidth.constant = CGFloat(self.progress) * self.bounds.size.width
+                self.layoutIfNeeded()
+            }
         }
     }
     
@@ -38,13 +41,15 @@ class MiniMusicPlayerView: UIView {
         self.applyAlbumsStyle()
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 20.0
+        self.fillContainer.layer.cornerRadius = self.cornerRadius
         
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MiniMusicPlayerView.volumeDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerVolumeDidChange, object: nil)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
         self.update(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
-        //@TODO: Volume
+        
+        self.resetColors()
     }
 
     // MARK: - User Interaction
@@ -78,6 +83,7 @@ class MiniMusicPlayerView: UIView {
     private func stopPlaybackTracking() {
         self.displayLink?.invalidate()
         self.displayLink = nil
+        self.progress = 0.0
     }
     
     @objc func displayLinkTick() {
@@ -112,20 +118,19 @@ class MiniMusicPlayerView: UIView {
     }
     
     // MARK: -
-    private func updateButtons(withColor color: UIColor) {
+    private func updateButtons(withPrimaryColorColor color: UIColor, andShadowColor shadowColor: UIColor = .black) {
         let iconSize: CGFloat = 36.0
         self.buttonPrevious.setIcon(icon: .googleMaterialDesign(.skipPrevious), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
         self.buttonNext.setIcon(icon: .googleMaterialDesign(.skipNext), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
         self.buttonPlay.setIcon(icon: .googleMaterialDesign(.playArrow), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
         self.buttonPause.setIcon(icon: .googleMaterialDesign(.pause), iconSize: iconSize, color: color, backgroundColor: .clear, forState: .normal)
+        self.allButtons.forEach { $0.layer.shadowColor = shadowColor.cgColor }
     }
     
     private func update(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
         self.updateColors(withNowPlayingItem: nowPlayingItem)
         guard let nowPlayingItem = nowPlayingItem else {
-            self.imageArtwork.image = nil
-            self.labelTitle.text = "--"
-            self.labelDetails.text = "--"
+            self.imageArtwork.image = #imageLiteral(resourceName: "placeholder-artwork")
             return
         }
         DispatchQueue.global(qos: .default).async {
@@ -134,17 +139,6 @@ class MiniMusicPlayerView: UIView {
                 self.imageArtwork.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
             }
         }
-        self.labelTitle.text = nowPlayingItem.title ?? "Unknown Song"
-        self.labelDetails.text = {
-            var details: [String] = []
-            if let artist = nowPlayingItem.artist {
-                details.append(artist)
-            }
-            if let album = nowPlayingItem.albumTitle {
-                details.append(album)
-            }
-            return details.joined(separator: " - ")
-        }()
     }
     
     private func updateColors(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
@@ -160,27 +154,22 @@ class MiniMusicPlayerView: UIView {
                 }
                 return
             }
-            let (background, primary, secondary, detail) = image.colors()
+            let (background, primary, _, detail) = image.colors()
             DispatchQueue.main.async {
                 self.backgroundColor = background
-                self.sliderProgress.thumbTintColor = primary
-                self.sliderProgress.minimumTrackTintColor = secondary
-                self.sliderProgress.maximumTrackTintColor = secondary
-                self.labelTitle.textColor = primary
-                self.labelDetails.textColor = detail
-                self.updateButtons(withColor: primary)
+                self.fillView.backgroundColor = detail
+                let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
+                self.updateButtons(withPrimaryColorColor: primary, andShadowColor: buttonShadowColor)
+                
             }
         }
     }
     
     private func resetColors() {
         self.backgroundColor = UIColor.white
-        self.sliderProgress.thumbTintColor = UIColor.kashaPrimaryColor
-        self.sliderProgress.minimumTrackTintColor = UIColor.kashaSecondaryColor
-        self.sliderProgress.maximumTrackTintColor = UIColor.kashaSecondaryColor
-        self.labelTitle.textColor = UIColor.black
-        self.labelDetails.textColor = UIColor.lightGray
-        self.updateButtons(withColor: .black)
+        self.fillView.backgroundColor = UIColor.kashaSecondaryColor
+        let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
+        self.updateButtons(withPrimaryColorColor: buttonShadowColor)
     }
     
     private func update(withPlaybackState playbackState: MPMusicPlaybackState) {
@@ -195,33 +184,4 @@ class MiniMusicPlayerView: UIView {
             self.buttonPause.isHidden = true
         }
     }
-    
-    // MARK: - Slider
-    @IBAction func sliderValueDidChange(_ sender: UISlider) {
-        guard sender == self.sliderProgress else {
-            return
-        }
-        
-        guard let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem,
-            let songDuration = nowPlayingItem.value(forProperty: MPMediaItemPropertyPlaybackDuration) as? TimeInterval else {
-                return
-        }
-        
-        let playbackTime = Double(sender.value) * songDuration
-        MediaLibraryHelper.shared.musicPlayer.currentPlaybackTime = playbackTime
-        self.progress = Double(sender.value)
-    }
-    
-    @IBAction func sliderBeganSliding(_ sender: Any) {
-        self.stopPlaybackTracking()
-    }
-    
-    @IBAction func sliderEndedSliding(_ sender: Any) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-            if MediaLibraryHelper.shared.musicPlayer.playbackState == .playing {
-                self.startPlaybackTracking()
-            }
-        })
-    }
-    
 }
