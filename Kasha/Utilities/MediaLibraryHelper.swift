@@ -6,6 +6,8 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import Gestalt
+import Hue
 import MediaPlayer
 
 class MediaLibraryHelper: NSObject {
@@ -23,6 +25,15 @@ class MediaLibraryHelper: NSObject {
     private(set) var queue: MPMediaItemCollection = MPMediaItemCollection(items: []) {
         didSet {
             self.musicPlayer.setQueue(with: self.queue)
+        }
+    }
+    
+    // MARK: - Initializers
+    override init() {
+        super.init()
+        NotificationCenter.default.addObserver(self, selector: #selector(MediaLibraryHelper.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
+        if let nowPlayingItem = self.musicPlayer.nowPlayingItem {
+            self.makeTheme(fromNowPlayingItem: nowPlayingItem)
         }
     }
     
@@ -172,6 +183,31 @@ class MediaLibraryHelper: NSObject {
             DispatchQueue.main.async {
                 completion(songsQuery.items ?? [], albumsQuery.collections ?? [], artistQuery.collections ?? [])
             }
+        }
+    }
+    
+    // MARK: - Media Notifications
+    @objc func nowPlayingItemDidChange(_ notif: Notification) {
+        guard let nowPlayingItem = (notif.object as? MPMusicPlayerController)?.nowPlayingItem else {
+            ThemeManager.default.theme = Theme.light
+            return
+        }
+        
+        self.makeTheme(fromNowPlayingItem: nowPlayingItem)
+    }
+    
+    private func makeTheme(fromNowPlayingItem nowPlayingItem: MPMediaItem) {
+        DispatchQueue.global(qos: .default).async {
+            guard let image = nowPlayingItem.artwork?.image(at: CGSize(width: 54.0, height: 54.0)) else {
+                DispatchQueue.main.async {
+                    ThemeManager.default.theme = Theme.light
+                }
+                return
+            }
+            let (background, primary, secondary, detail) = image.colors()
+            let newTheme = Theme(playerBackgroundColor: background, playerPrimaryColor: primary,
+                                 playerSecondaryColor: secondary, playerDetailColor: detail)
+            ThemeManager.default.theme = newTheme
         }
     }
 

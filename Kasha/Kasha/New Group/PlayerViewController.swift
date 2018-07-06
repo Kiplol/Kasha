@@ -21,16 +21,25 @@ class PlayerViewController: KashaViewController {
     
     // MARK: - ivars
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
-    private var backgroundColor: UIColor = .white
-    private var primaryColor: UIColor = .kashaPrimaryColor
-    private var secondaryColor: UIColor = .kashaSecondaryColor
-    private var detailColor: UIColor = .black
+    
+    // MARK: - KashaViewController
+    override func apply(theme: Theme) {
+        super.apply(theme: theme)
+        let shadowColor = self.view.backgroundColor!.isDark ? UIColor.white : UIColor.black
+        let playPauseBackgoundColor = theme.playerDetailColor.isDark ? UIColor.white : UIColor.black
+        [self.buttonPause, self.buttonPlay].forEach {
+            $0?.backgroundColor = playPauseBackgoundColor.alpha(0.7)
+        }
+        self.allButtons.forEach {
+            $0.tintColor = theme.playerDetailColor
+            $0.layer.shadowColor = shadowColor.cgColor
+        }
+    }
     
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modalPresentationCapturesStatusBarAppearance = true
-        self.applyColors()
         self.update(withNowplayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
         
         self.imageArtwork.layer.cornerRadius = 15.0
@@ -46,36 +55,7 @@ class PlayerViewController: KashaViewController {
     }
     
     // MARK: - Helpers
-    func applyColors(background: UIColor? = nil, primary: UIColor? = nil, secondary: UIColor? = nil, detail: UIColor? = nil) {
-        if let background = background {
-            self.backgroundColor = background
-        }
-        if let primary = primary {
-            self.primaryColor = primary
-        }
-        if let secondary = secondary {
-            self.secondaryColor = secondary
-        }
-        if let detail = detail {
-            self.detailColor = detail
-        }
-        
-        DispatchQueue.main.async {
-            guard let view = self.viewIfLoaded else {
-                return
-            }
-            //view.backgroundColor = self.backgroundColor
-            let shadowColor = view.backgroundColor!.isDark ? UIColor.white : UIColor.black
-            [self.buttonPause, self.buttonPlay].forEach { $0?.backgroundColor = shadowColor.alpha(0.7) }
-            self.allButtons.forEach {
-                $0.tintColor = self.detailColor
-                $0.layer.shadowColor = shadowColor.cgColor
-            }
-        }
-    }
-    
     private func update(withNowplayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
-        self.updateColors(withNowplayingItem: nowPlayingItem)
         guard let nowPlayingItem = nowPlayingItem else {
             self.imageArtwork.image = #imageLiteral(resourceName: "placeholder-artwork")
             return
@@ -88,27 +68,4 @@ class PlayerViewController: KashaViewController {
             }
         }
     }
-    
-    // MARK: Colors
-    private func updateColors(withNowplayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
-        guard let nowPlayingItem = nowPlayingItem else {
-            self.resetColors()
-            return
-        }
-        DispatchQueue.global(qos: .default).async {
-            guard let image = nowPlayingItem.artwork?.image(at: CGSize(width: 54.0, height: 54.0)) else {
-                DispatchQueue.main.async {
-                    self.resetColors()
-                }
-                return
-            }
-            let (background, primary, secondary, detail) = image.colors()
-            self.applyColors(background: background, primary: primary, secondary: secondary, detail: detail)
-        }
-    }
-    
-    private func resetColors() {
-        self.view.backgroundColor = .white
-    }
-
 }

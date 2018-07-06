@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import Gestalt
 import MediaPlayer
 import UIKit
 
@@ -32,6 +33,9 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
+            themeable.apply(theme: theme)
+        }
         if self.allowsSearch() {
             self.navigationItem.searchController = self.searchController
             guard let searchResultsVC = self.searchController.searchResultsController as? SearchResultsViewController else {
@@ -96,5 +100,9 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener 
         //Override
         return nil
     }
-
+    
+    // MARK: - Gestalt
+    func apply(theme: Theme) {
+        //Override
+    }
 }

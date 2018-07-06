@@ -3,6 +3,7 @@ platform :ios, '11.0'
 
 def shared_pods
 	use_frameworks!
+	pod 'Gestalt'
 	pod 'Hue'
 	pod 'MarqueeLabel/Swift'
 	pod 'SwiftIcons', '~> 2.0.1'

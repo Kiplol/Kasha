@@ -9,6 +9,7 @@ PODS:
     - AppCenter/Core
   - BDKCollectionIndexView (2.2.2)
   - DeckTransition (2.0.0)
+  - Gestalt (1.1.0)
   - Hue (3.0.1)
   - MarqueeLabel/Swift (3.1.6)
   - SwiftIcons (2.0.1)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - AppCenter
   - BDKCollectionIndexView
   - DeckTransition (~> 2.0)
+  - Gestalt
   - Hue
   - MarqueeLabel/Swift
   - SwiftIcons (~> 2.0.1)
@@ -30,6 +32,7 @@ SPEC REPOS:
     - AppCenter
     - BDKCollectionIndexView
     - DeckTransition
+    - Gestalt
     - Hue
     - MarqueeLabel
     - SwiftIcons
@@ -40,12 +43,13 @@ SPEC CHECKSUMS:
   AppCenter: 53349f138e596f2514f7559bb50a7e6e55219f17
   BDKCollectionIndexView: 489a0c57d27fafe6944ef61e5a4192902148ea84
   DeckTransition: 2300694f94fbeca2c103f365dc9dc09ffae14a4f
+  Gestalt: be239fdeee2de30b2468865cf5e24b7923f507c2
   Hue: 93e852fa6211ab35922ad8c293f51c43d6c79eb2
   MarqueeLabel: 0c41f08ef5773e29c0f71064a8fa788a2fd8b365
   SwiftIcons: e475a56ae2c2da40672dbf16061ca5dd5cee7dbb
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
   ViewAnimator: 43c31539508d995ea2c5e98338211f7c009b358f
 
-PODFILE CHECKSUM: 4dc5938b23d75615699b212cbbd3b9995a5eac3f
+PODFILE CHECKSUM: 216009099aaf6be3dd04dc3856e51d627931f5e1
 
 COCOAPODS: 1.5.3

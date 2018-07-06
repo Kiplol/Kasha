@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import Gestalt
 import Hue
 import MediaPlayer
 import UIKit
@@ -35,7 +36,6 @@ class MiniMusicPlayerView: UIView {
         }
     }
     var expandTapAction: ((UIButton) -> Void)?
-    private(set) var colorSet: ColorSet = ColorSet(background: .white, primary: .kashaPrimaryColor, secondary: .kashaSecondaryColor, detail: .black)
     
     // MARK: -
     override func awakeFromNib() {
@@ -50,7 +50,14 @@ class MiniMusicPlayerView: UIView {
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
         self.update(withPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState)
         
-        self.resetColors()
+        ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
+            DispatchQueue.main.async {
+                themeable.backgroundColor = theme.playerBackgroundColor
+                themeable.fillView.backgroundColor = theme.playerPrimaryColor
+                let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
+                themeable.updateButtons(withColor: theme.playerDetailColor, andShadowColor: buttonShadowColor)
+            }
+        }
     }
 
     // MARK: - User Interaction
@@ -127,7 +134,6 @@ class MiniMusicPlayerView: UIView {
     }
     
     private func update(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
-        self.updateColors(withNowPlayingItem: nowPlayingItem)
         guard let nowPlayingItem = nowPlayingItem else {
             self.imageArtwork.image = #imageLiteral(resourceName: "placeholder-artwork")
             return
@@ -138,38 +144,6 @@ class MiniMusicPlayerView: UIView {
                 self.imageArtwork.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
             }
         }
-    }
-    
-    private func updateColors(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
-        guard let nowPlayingItem = nowPlayingItem else {
-            self.resetColors()
-            return
-        }
-        
-        DispatchQueue.global(qos: .default).async {
-            guard let image = nowPlayingItem.artwork?.image(at: CGSize(width: 54.0, height: 54.0)) else {
-                DispatchQueue.main.async {
-                    self.resetColors()
-                }
-                return
-            }
-            let (background, primary, secondary, detail) = image.colors()
-            self.colorSet = ColorSet(background, primary, secondary, detail)
-            DispatchQueue.main.async {
-                self.backgroundColor = background
-                self.fillView.backgroundColor = primary
-                let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
-                self.updateButtons(withColor: detail, andShadowColor: buttonShadowColor)
-            }
-        }
-    }
-    
-    private func resetColors() {
-        self.colorSet = ColorSet(.white, .kashaPrimaryColor, .kashaSecondaryColor, .black)
-        self.backgroundColor = UIColor.white
-        self.fillView.backgroundColor = UIColor.kashaSecondaryColor
-        let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
-        self.updateButtons(withColor: buttonShadowColor)
     }
     
     private func update(withPlaybackState playbackState: MPMusicPlaybackState) {

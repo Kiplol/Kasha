@@ -10,6 +10,7 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 import BDKCollectionIndexView
+import Gestalt
 import Hue
 import MediaPlayer
 import UIKit
@@ -74,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Private
     func setupAppearance() {
         // Window
-        self.window?.tintColor = UIColor.kashaPrimaryColor
+        self.window?.tintColor = UIColor.kashaPrimary
 
         // Navigation Bar
         UINavigationBar.appearance().isTranslucent = false
@@ -87,12 +88,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().isTranslucent = false
         
         // Collection Index View
-        BDKCollectionIndexView.appearance().tintColor = UIColor.kashaPrimaryColor
+        BDKCollectionIndexView.appearance().tintColor = UIColor.kashaPrimary
         
         // Slider
-        UISlider.appearance().thumbTintColor = UIColor.kashaPrimaryColor
-        UISlider.appearance().minimumTrackTintColor = UIColor.kashaSecondaryColor
-        UISlider.appearance().maximumTrackTintColor = UIColor.kashaSecondaryColor
+        UISlider.appearance().thumbTintColor = UIColor.kashaPrimary
+        UISlider.appearance().minimumTrackTintColor = UIColor.kashaSecondary
+        UISlider.appearance().maximumTrackTintColor = UIColor.kashaSecondary
     }
     
     private func initializeThirdPartyLibraries() {
@@ -101,6 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             MSAnalytics.self,
             MSCrashes.self
             ])
+        
+        // Gestalt
+        ThemeManager.default.theme = Theme.light
     }
 
 }

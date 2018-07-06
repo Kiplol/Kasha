@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias ColorSet = (background: UIColor?, primary: UIColor?, secondary: UIColor?, detail: UIColor?)
+//typealias ColorSet = (background: UIColor?, primary: UIColor?, secondary: UIColor?, detail: UIColor?)
 
 extension UIView {
     

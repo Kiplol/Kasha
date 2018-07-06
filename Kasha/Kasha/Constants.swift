@@ -17,7 +17,7 @@ class Constants {
 
 extension UIColor {
     
-    class var kashaPrimaryColor: UIColor { return UIColor(hex: "#ff5252") }
-    class var kashaSecondaryColor: UIColor { return UIColor(hex: "#00d2ff")}
+    class var kashaPrimary: UIColor { return UIColor(hex: "#ff5252") }
+    class var kashaSecondary: UIColor { return UIColor(hex: "#00d2ff")}
     
 }
