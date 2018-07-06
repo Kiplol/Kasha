@@ -180,23 +180,35 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtK-rJ-6Ma" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwg-dZ-cUD" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
-                                                <rect key="frame" x="30" y="30" width="315" height="315"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sya-fc-dXe">
+                                                <rect key="frame" x="50" y="50" width="275" height="275"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mwg-dZ-cUD" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="20" width="235" height="235"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="mwg-dZ-cUD" secondAttribute="height" id="Nk8-pd-h82"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="image" value="placeholder-artwork"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="mwg-dZ-cUD" secondAttribute="height" id="Nk8-pd-h82"/>
+                                                    <constraint firstItem="mwg-dZ-cUD" firstAttribute="leading" secondItem="sya-fc-dXe" secondAttribute="leading" constant="20" id="4oF-jZ-Gjg"/>
+                                                    <constraint firstItem="mwg-dZ-cUD" firstAttribute="top" secondItem="sya-fc-dXe" secondAttribute="top" constant="20" id="H7V-yh-ovp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mwg-dZ-cUD" secondAttribute="trailing" constant="20" id="N4E-Rw-XcB"/>
+                                                    <constraint firstAttribute="bottom" secondItem="mwg-dZ-cUD" secondAttribute="bottom" constant="20" id="q8X-KG-0nx"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="placeholder-artwork"/>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="mwg-dZ-cUD" firstAttribute="leading" secondItem="dtK-rJ-6Ma" secondAttribute="leading" constant="30" id="9gl-ib-N34"/>
-                                            <constraint firstItem="mwg-dZ-cUD" firstAttribute="top" secondItem="dtK-rJ-6Ma" secondAttribute="top" constant="30" id="YQZ-qT-lhY"/>
-                                            <constraint firstAttribute="trailing" secondItem="mwg-dZ-cUD" secondAttribute="trailing" constant="30" id="ago-xh-agC"/>
-                                            <constraint firstAttribute="bottom" secondItem="mwg-dZ-cUD" secondAttribute="bottom" constant="30" id="jDp-9v-zwL"/>
+                                            <constraint firstAttribute="trailing" secondItem="sya-fc-dXe" secondAttribute="trailing" constant="50" id="SJv-bJ-0A4"/>
+                                            <constraint firstAttribute="bottom" secondItem="sya-fc-dXe" secondAttribute="bottom" constant="50" id="Tnz-B3-8Sy"/>
+                                            <constraint firstItem="sya-fc-dXe" firstAttribute="leading" secondItem="dtK-rJ-6Ma" secondAttribute="leading" constant="50" id="ZW4-4s-dIL"/>
+                                            <constraint firstItem="sya-fc-dXe" firstAttribute="top" secondItem="dtK-rJ-6Ma" secondAttribute="top" constant="50" id="bmg-kw-rrN"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -220,6 +232,7 @@
                         <viewLayoutGuide key="safeArea" id="dgg-QR-HYv"/>
                     </view>
                     <connections>
+                        <outlet property="artworkContainer" destination="sya-fc-dXe" id="rea-F9-5aq"/>
                         <outlet property="imageArtwork" destination="mwg-dZ-cUD" id="81v-a3-ObG"/>
                     </connections>
                 </viewController>

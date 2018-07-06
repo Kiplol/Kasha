@@ -12,6 +12,7 @@ class PlayerViewController: KashaViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var imageArtwork: ImageContainerView!
+    @IBOutlet weak var artworkContainer: UIView!
     
     // MARK: - ivars
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -25,6 +26,12 @@ class PlayerViewController: KashaViewController {
             self.view.backgroundColor = initialBackgroundColor
         }
         self.update(withNowplayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
+        
+        self.imageArtwork.layer.cornerRadius = 15.0
+        self.imageArtwork.layer.shadowRadius = 10.0
+        self.artworkContainer.applyAlbumsStyle()
+        self.artworkContainer.layer.cornerRadius = 20.0
+        self.artworkContainer.layer.shadowRadius = 15.0
     }
 
     override func viewWillAppear(_ animated: Bool) {

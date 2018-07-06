@@ -118,7 +118,7 @@ class MiniMusicPlayerView: UIView {
     
     // MARK: -
     private func updateButtons(withPrimaryColorColor color: UIColor, andShadowColor shadowColor: UIColor = .black) {
-        [self.buttonPause, self.buttonPlay].forEach { $0?.backgroundColor = shadowColor }
+        [self.buttonPause, self.buttonPlay].forEach { $0?.backgroundColor = shadowColor.alpha(0.7) }
         self.allButtons.forEach {
             $0.tintColor = color
             $0.layer.shadowColor = shadowColor.cgColor
