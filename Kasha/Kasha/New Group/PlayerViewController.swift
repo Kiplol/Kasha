@@ -32,6 +32,8 @@ class PlayerViewController: KashaViewController {
     @IBOutlet weak var waveContainer: UIView!
     @IBOutlet weak var topBackgroundView: UIView!
     @IBOutlet weak var progressSlider: UISlider!
+    @IBOutlet weak var labelTimeRemaining: UILabel!
+    @IBOutlet weak var labelTimeElapsed: UILabel!
     
     // MARK: - ivars
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -62,9 +64,16 @@ class PlayerViewController: KashaViewController {
         self.waveView.maskWaveColor = theme.playerBackgroundColor.alpha(0.4)
         self.scrollView.backgroundColor = theme.playerBackgroundColor
         
-        self.progressSlider.thumbTintColor = theme.playerDetailColor
+//        self.progressSlider.thumbTintColor = theme.playerDetailColor
         self.progressSlider.maximumTrackTintColor = theme.playerPrimaryColor
         self.progressSlider.minimumTrackTintColor = theme.playerPrimaryColor
+        
+        let (labelsColor, labelsShadowColor) = theme.playerBackgroundColor.isDark ? (UIColor.white, UIColor.black.alpha(0.3)) :
+            (UIColor.black, UIColor.white.alpha(0.3))
+        [self.labelTimeRemaining, self.labelTimeElapsed].forEach {
+            $0?.textColor = labelsColor
+            $0?.shadowColor = labelsShadowColor
+        }
     }
     
     // MARK: - View Lifecycle
@@ -82,6 +91,10 @@ class PlayerViewController: KashaViewController {
         self.waveContainer.addSubview(self.waveView)
         self.waveView.frame = self.waveContainer.bounds
         self.waveView.start()
+        
+        self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .normal)
+        self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .highlighted)
+        self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .selected)
         
         NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)
@@ -158,6 +171,10 @@ class PlayerViewController: KashaViewController {
         self.buttonPlay.isHidden = true
         self.buttonPause.isHidden = false
         self.startWaveView()
+        self.startDisplayLink()
+    }
+    
+    private func startDisplayLink() {
         self.displayLink = CADisplayLink(target: self, selector: #selector(PlayerViewController.displayLinkTick))
         self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
@@ -166,6 +183,10 @@ class PlayerViewController: KashaViewController {
         self.buttonPlay.isHidden = false
         self.buttonPause.isHidden = true
         self.stopWaveView()
+        self.stopDisplayLink()
+    }
+    
+    private func stopDisplayLink() {
         self.displayLink?.invalidate()
         self.displayLink = nil
     }
@@ -181,6 +202,14 @@ class PlayerViewController: KashaViewController {
         let currentTime = MediaLibraryHelper.shared.musicPlayer.currentPlaybackTime
         let progress = currentTime / songDuration
         self.progress = progress
+        
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional
+        formatter.allowedUnits = [.minute, .second]
+        formatter.zeroFormattingBehavior = .pad
+        
+        self.labelTimeElapsed.text = formatter.string(from: currentTime)
+        self.labelTimeRemaining.text = "-\(formatter.string(from: songDuration - currentTime) ?? "")"
     }
     
     // MARK: - Wave View
@@ -202,6 +231,35 @@ class PlayerViewController: KashaViewController {
 //            }
 //        })
     }
+    
+    // MARK: - Slider
+    @IBAction func sliderValueDidChange(_ sender: UISlider) {
+        guard sender == self.progressSlider else {
+            return
+        }
+        
+        guard let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem,
+            let songDuration = nowPlayingItem.value(forProperty: MPMediaItemPropertyPlaybackDuration) as? TimeInterval else {
+                return
+        }
+        
+        let playbackTime = Double(sender.value) * songDuration
+        MediaLibraryHelper.shared.musicPlayer.currentPlaybackTime = playbackTime
+        self.progress = Double(sender.value)
+    }
+    
+    @IBAction func sliderBeganSliding(_ sender: Any) {
+        self.stopDisplayLink()
+    }
+    
+    @IBAction func sliderEndedSliding(_ sender: Any) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+            if MediaLibraryHelper.shared.musicPlayer.playbackState == .playing {
+                self.startDisplayLink()
+            }
+        })
+    }
+
     
     // MARK: - Media Notifications
     @objc func playbackStateDidChange(_ notif: Notification) {

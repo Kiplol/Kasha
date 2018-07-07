@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         BDKCollectionIndexView.appearance().tintColor = UIColor.kashaPrimary
         
         // Slider
-        UISlider.appearance().thumbTintColor = UIColor.kashaPrimary
+//        UISlider.appearance().thumbTintColor = UIColor.kashaPrimary
         UISlider.appearance().minimumTrackTintColor = UIColor.kashaSecondary
         UISlider.appearance().maximumTrackTintColor = UIColor.kashaSecondary
     }
