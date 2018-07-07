@@ -27,8 +27,7 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     override func commonInit() {
         super.commonInit()
         self.title = "Artists"
-        self.tabBarItem.image = UIImage.init(icon: .googleMaterialDesign(.person),
-                                             size: CGSize(width: 50.0, height: 50.0))
+        self.tabBarItem.image = #imageLiteral(resourceName: "artists")
     }
     
     override func doFirstLayoutAnimation() {

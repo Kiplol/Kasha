@@ -34,8 +34,7 @@ class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITab
     override func commonInit() {
         super.commonInit()
         self.title = "Playlists"
-        self.tabBarItem.image = UIImage.init(icon: .googleMaterialDesign(.list),
-                                             size: CGSize(width: 50.0, height: 50.0))
+        self.tabBarItem.image = #imageLiteral(resourceName: "playlists")
     }
     
     override func doFirstLayoutAnimation() {

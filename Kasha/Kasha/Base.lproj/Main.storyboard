@@ -247,14 +247,14 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" verticalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="wfS-0Q-MCz" userLabel="Filler">
-                                                        <rect key="frame" x="47.5" y="363" width="240" height="50"/>
+                                                        <rect key="frame" x="47.5" y="363" width="240" height="3.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFL-3c-7KY">
-                                                        <rect key="frame" x="0.0" y="433" width="335" height="54"/>
+                                                        <rect key="frame" x="0.0" y="386.5" width="335" height="50.5"/>
                                                         <subviews>
                                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaQ-rB-NTY">
-                                                                <rect key="frame" x="-2" y="0.0" width="339" height="34.5"/>
+                                                                <rect key="frame" x="-2" y="0.0" width="339" height="31"/>
                                                                 <connections>
                                                                     <action selector="sliderBeganSliding:" destination="adD-Z6-8SG" eventType="touchDown" id="NuL-nw-UNc"/>
                                                                     <action selector="sliderEndedSliding:" destination="adD-Z6-8SG" eventType="touchUpInside" id="CjD-gt-dEG"/>
@@ -263,13 +263,13 @@
                                                                 </connections>
                                                             </slider>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBz-sz-Y8s">
-                                                                <rect key="frame" x="0.0" y="39.5" width="26.5" height="14.5"/>
+                                                                <rect key="frame" x="0.0" y="36" width="26.5" height="14.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0T-3P-Fmq">
-                                                                <rect key="frame" x="308.5" y="39.5" width="26.5" height="14.5"/>
+                                                                <rect key="frame" x="308.5" y="36" width="26.5" height="14.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -290,7 +290,7 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9L7-3n-ylH" userLabel="Buttons">
-                                                        <rect key="frame" x="91.5" y="507" width="152" height="60"/>
+                                                        <rect key="frame" x="91.5" y="457" width="152" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jbD-ds-w07">
                                                                 <rect key="frame" x="0.0" y="12" width="36" height="36"/>
@@ -372,11 +372,20 @@
                                                             <constraint firstItem="uf3-n9-0qV" firstAttribute="width" secondItem="qeN-eb-CRr" secondAttribute="width" id="cN5-OR-vOK"/>
                                                         </constraints>
                                                     </stackView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRF-Q8-SdN" customClass="MPVolumeView">
+                                                        <rect key="frame" x="0.0" y="537" width="335" height="30"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="gtU-ut-LpK"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="sya-fc-dXe" firstAttribute="leading" secondItem="gCr-Rk-vVu" secondAttribute="leading" constant="30" id="0Cp-nx-5ny"/>
                                                     <constraint firstAttribute="trailing" secondItem="sya-fc-dXe" secondAttribute="trailing" constant="30" id="R3u-7i-ul4"/>
                                                     <constraint firstItem="XFL-3c-7KY" firstAttribute="leading" secondItem="gCr-Rk-vVu" secondAttribute="leading" id="S5g-w7-h15"/>
+                                                    <constraint firstItem="qRF-Q8-SdN" firstAttribute="leading" secondItem="gCr-Rk-vVu" secondAttribute="leading" id="Wfw-ee-t4H"/>
+                                                    <constraint firstAttribute="trailing" secondItem="qRF-Q8-SdN" secondAttribute="trailing" id="iZ9-Ya-mV5"/>
                                                     <constraint firstAttribute="trailing" secondItem="XFL-3c-7KY" secondAttribute="trailing" id="nDM-Mk-KoO"/>
                                                 </constraints>
                                             </stackView>
@@ -442,6 +451,7 @@
                         <outlet property="progressSlider" destination="aaQ-rB-NTY" id="84L-Qu-Pkv"/>
                         <outlet property="scrollView" destination="nr2-nc-5IR" id="wCl-91-vkn"/>
                         <outlet property="topBackgroundView" destination="Qdg-JI-D4E" id="WYc-JY-F3K"/>
+                        <outlet property="volumeView" destination="qRF-Q8-SdN" id="W48-mY-V0R"/>
                         <outlet property="waveContainer" destination="iBx-iJ-lNO" id="7ig-6o-lpX"/>
                         <outletCollection property="allButtons" destination="uf3-n9-0qV" collectionClass="NSMutableArray" id="x2p-en-4qj"/>
                         <outletCollection property="allButtons" destination="jbD-ds-w07" collectionClass="NSMutableArray" id="KOi-8n-hi5"/>

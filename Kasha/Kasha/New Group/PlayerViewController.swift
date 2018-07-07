@@ -34,6 +34,7 @@ class PlayerViewController: KashaViewController {
     @IBOutlet weak var progressSlider: UISlider!
     @IBOutlet weak var labelTimeRemaining: UILabel!
     @IBOutlet weak var labelTimeElapsed: UILabel!
+    @IBOutlet weak var volumeView: MPVolumeView!
     
     // MARK: - ivars
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -73,6 +74,8 @@ class PlayerViewController: KashaViewController {
             $0?.textColor = theme.playerPrimaryColor
             $0?.shadowColor = labelsShadowColor
         }
+        
+        self.volumeView.tintColor = theme.playerPrimaryColor
     }
     
     // MARK: - View Lifecycle
@@ -94,6 +97,8 @@ class PlayerViewController: KashaViewController {
         self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .normal)
         self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .highlighted)
         self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .selected)
+
+        self.volumeView.setRouteButtonImage(#imageLiteral(resourceName: "airplay"), for: .normal)
         
         NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)

@@ -94,8 +94,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Slider
 //        UISlider.appearance().thumbTintColor = UIColor.kashaPrimary
-        UISlider.appearance().minimumTrackTintColor = UIColor.kashaSecondary
-        UISlider.appearance().maximumTrackTintColor = UIColor.kashaSecondary
+//        UISlider.appearance().minimumTrackTintColor = UIColor.kashaSecondary
+//        UISlider.appearance().maximumTrackTintColor = UIColor.kashaSecondary
+        let volumeSliderAppearance = UISlider.appearance(whenContainedInInstancesOf: [MPVolumeView.self])
+        volumeSliderAppearance.maximumValueImage = #imageLiteral(resourceName: "volume_up")
+        volumeSliderAppearance.minimumValueImage = #imageLiteral(resourceName: "volume_down")
     }
     
     private func initializeThirdPartyLibraries() {

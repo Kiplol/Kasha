@@ -27,8 +27,7 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     override func commonInit() {
         super.commonInit()
         self.title = "Albums"
-        self.tabBarItem.image = UIImage.init(icon: .googleMaterialDesign(.album),
-                                             size: CGSize(width: 50.0, height: 50.0))
+        self.tabBarItem.image = #imageLiteral(resourceName: "albums")
     }
     
     override func doFirstLayoutAnimation() {
