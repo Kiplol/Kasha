@@ -99,6 +99,7 @@ class PlayerViewController: KashaViewController {
         self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .selected)
 
         self.volumeView.setRouteButtonImage(#imageLiteral(resourceName: "airplay"), for: .normal)
+        self.volumeView.showsVolumeSlider = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PlayerViewController.nowPlayingItemDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerNowPlayingItemDidChange, object: nil)

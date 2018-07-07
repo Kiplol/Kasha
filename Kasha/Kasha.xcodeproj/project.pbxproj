@@ -44,6 +44,7 @@
 		37A9DC3120E878F400E5C43E /* MusicAwareTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9DC3020E878F400E5C43E /* MusicAwareTabBarController.swift */; };
 		37A9DC3320E87A5B00E5C43E /* MiniMusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9DC3220E87A5B00E5C43E /* MiniMusicPlayerView.swift */; };
 		37A9DC3520E87A6C00E5C43E /* MiniMusicPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A9DC3420E87A6C00E5C43E /* MiniMusicPlayerView.xib */; };
+		37B2FFEB20F174340082E15E /* WavesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B2FFEA20F174340082E15E /* WavesView.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		37A9DC3020E878F400E5C43E /* MusicAwareTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAwareTabBarController.swift; sourceTree = "<group>"; };
 		37A9DC3220E87A5B00E5C43E /* MiniMusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMusicPlayerView.swift; sourceTree = "<group>"; };
 		37A9DC3420E87A6C00E5C43E /* MiniMusicPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MiniMusicPlayerView.xib; sourceTree = "<group>"; };
+		37B2FFEA20F174340082E15E /* WavesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WavesView.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,6 +200,7 @@
 		37414D3520D74CB30076596E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				37B2FFEA20F174340082E15E /* WavesView.swift */,
 				37A9DC3220E87A5B00E5C43E /* MiniMusicPlayerView.swift */,
 				37A9DC3420E87A6C00E5C43E /* MiniMusicPlayerView.xib */,
 				3789925320E0084A00A304B8 /* SongTableViewCell.swift */,
@@ -424,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3789924C20DFF0C400A304B8 /* Section.swift in Sources */,
+				37B2FFEB20F174340082E15E /* WavesView.swift in Sources */,
 				37414D3720D74CCC0076596E /* ImageContainerView.swift in Sources */,
 				373B1DD820D3220C0090D6FA /* AlbumCollectionViewCell.swift in Sources */,
 				371CC57A20EE6BEA0096FBC7 /* PlayerViewController.swift in Sources */,
