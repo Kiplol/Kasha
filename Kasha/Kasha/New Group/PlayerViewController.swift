@@ -68,10 +68,9 @@ class PlayerViewController: KashaViewController {
         self.progressSlider.maximumTrackTintColor = theme.playerPrimaryColor
         self.progressSlider.minimumTrackTintColor = theme.playerPrimaryColor
         
-        let (labelsColor, labelsShadowColor) = theme.playerBackgroundColor.isDark ? (UIColor.white, UIColor.black.alpha(0.3)) :
-            (UIColor.black, UIColor.white.alpha(0.3))
+        let labelsShadowColor = theme.playerBackgroundColor.isDark ? UIColor.black.alpha(0.3) : UIColor.white.alpha(0.3)
         [self.labelTimeRemaining, self.labelTimeElapsed].forEach {
-            $0?.textColor = labelsColor
+            $0?.textColor = theme.playerPrimaryColor
             $0?.shadowColor = labelsShadowColor
         }
     }
