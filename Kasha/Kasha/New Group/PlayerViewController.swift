@@ -8,15 +8,8 @@
 
 import MediaPlayer
 import UIKit
-import YXWaveView
 
 class PlayerViewController: KashaViewController {
-    
-    private static let stoppedWaveHeight: CGFloat = 5.0
-    private static let stoppedWaveSpeed: CGFloat = 0.6
-    private static let playingWaveHeightMax: CGFloat = 15.0
-    private static let playingWaveHeightMin: CGFloat = 10.0
-    private static let playingWaveSpeed: CGFloat = 1.0
 
     // MARK: - IBOutlets
     @IBOutlet weak var scrollView: UIScrollView!
@@ -35,10 +28,10 @@ class PlayerViewController: KashaViewController {
     @IBOutlet weak var labelTimeRemaining: UILabel!
     @IBOutlet weak var labelTimeElapsed: UILabel!
     @IBOutlet weak var volumeView: MPVolumeView!
+    @IBOutlet weak var wavesView: WavesView!
     
     // MARK: - ivars
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
-    private let waveView: YXWaveView = YXWaveView(frame: .zero, color: UIColor.kashaPrimary)
     private var progress: Double = 0.0 {
         didSet {
             guard self.isViewLoaded else {
@@ -61,8 +54,7 @@ class PlayerViewController: KashaViewController {
             $0.tintColor = theme.playerDetailColor
             $0.layer.shadowColor = shadowColor.cgColor
         }
-        self.waveView.realWaveColor = theme.playerBackgroundColor
-        self.waveView.maskWaveColor = theme.playerBackgroundColor.alpha(0.4)
+        self.wavesView.waveColor = theme.playerBackgroundColor
         self.scrollView.backgroundColor = theme.playerBackgroundColor
         
 //        self.progressSlider.thumbTintColor = theme.playerDetailColor
@@ -88,11 +80,6 @@ class PlayerViewController: KashaViewController {
         self.artworkContainer.applyAlbumsStyle()
         self.artworkContainer.layer.cornerRadius = 20.0
         self.artworkContainer.layer.shadowRadius = 15.0
-        
-        self.waveView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        self.waveContainer.addSubview(self.waveView)
-        self.waveView.frame = self.waveContainer.bounds
-        self.waveView.start()
         
         self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .normal)
         self.progressSlider.setThumbImage(#imageLiteral(resourceName: "Slider-Thumb"), for: .highlighted)
@@ -219,17 +206,11 @@ class PlayerViewController: KashaViewController {
     
     // MARK: - Wave View
     private func stopWaveView() {
-        self.waveView.waveHeight = PlayerViewController.stoppedWaveHeight
-        self.waveView.waveSpeed = PlayerViewController.stoppedWaveSpeed
-        self.waveView.start()
+        self.wavesView.stop()
     }
     
     private func startWaveView() {
-        let waveHeight = CGFloat.random(min: PlayerViewController.playingWaveHeightMin,
-                                        max: PlayerViewController.playingWaveHeightMax)
-        self.waveView.waveHeight = waveHeight
-        self.waveView.waveSpeed = PlayerViewController.playingWaveSpeed
-        self.waveView.start()
+        self.wavesView.start()
 //        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: { [weak self] in
 //            if MediaLibraryHelper.shared.musicPlayer.playbackState == .playing {
 //                self?.startWaveView()
@@ -264,7 +245,6 @@ class PlayerViewController: KashaViewController {
             }
         })
     }
-
     
     // MARK: - Media Notifications
     @objc func playbackStateDidChange(_ notif: Notification) {

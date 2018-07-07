@@ -13,7 +13,8 @@ class WavesView: UIView {
     // MARK: - ivars
     @IBInspectable var playingWaveHeight: CGFloat = 20.0
     @IBInspectable var stoppedWaveHeight: CGFloat = 5.0
-    var numberOfWaves: CGFloat = 2.0
+    @IBInspectable var speed: CGFloat = 1.0
+    @IBInspectable var numberOfWaves: CGFloat = 2.0
     private var displayLink: CADisplayLink?
     @IBInspectable var waveColor: UIColor = .kashaPrimary
     private var isRunning: Bool = false
@@ -66,6 +67,7 @@ class WavesView: UIView {
         let firstPath = UIBezierPath()
         firstPath.move(to: CGPoint(x: 0.0, y: rect.height))
         let waveHeight = self.isRunning ? self.playingWaveHeight : self.stoppedWaveHeight
+        let maxWaveHeight = max(self.playingWaveHeight, self.stoppedWaveHeight)
         
         var secondPathPoints: [CGPoint] = []
         
@@ -74,12 +76,12 @@ class WavesView: UIView {
             //First wave
             let progress = x / width
             let angle = progress * (2.0 * CGFloat.pi * self.numberOfWaves)
-            let y = (sin(angle + t) * waveHeight) + waveHeight
+            let y = (sin(angle + (t * self.speed)) * waveHeight) + maxWaveHeight
             firstPath.addLine(to: CGPoint(x: x, y: y))
             
             //Second wave
             let secondWaveAngle = progress * (2.0 * CGFloat.pi * self.numberOfWaves)
-            let secondY = (cos(secondWaveAngle + (t * 1.75)) * waveHeight) + waveHeight
+            let secondY = (cos(secondWaveAngle + (t * 1.75 * self.speed)) * waveHeight) + maxWaveHeight
             secondPathPoints.append(CGPoint(x: x, y: secondY))
         }
         firstPath.addLine(to: CGPoint(x: rect.width, y: rect.height))
