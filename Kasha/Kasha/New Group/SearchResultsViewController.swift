@@ -37,10 +37,12 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
         super.viewDidLoad()
         self.tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.tableView.frame = self.view.bounds
+        self.tableView.separatorStyle = .none
         self.view.addSubview(self.tableView)
         
         let songCellNib = UINib(nibName: "SongTableViewCell", bundle: Bundle.main)
         self.tableView.register(songCellNib, forCellReuseIdentifier: SearchResultsViewController.songCellID)
+        self.tableView.register(songCellNib, forCellReuseIdentifier: SearchResultsViewController.albumCellID)
         
         let artistCellNib = UINib(nibName: "ArtistTableViewCell", bundle: Bundle.main)
         self.tableView.register(artistCellNib, forCellReuseIdentifier: SearchResultsViewController.artistCellID)
@@ -58,6 +60,13 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
                 Row(data: $0, cellReuseIdentifier: SearchResultsViewController.artistCellID)
             })
             self.sections.append(artistsSection)
+        }
+        
+        if !self.albums.isEmpty {
+            let albumsSection = Section(title: "Albums", rows: self.albums.map {
+                Row(data: $0, cellReuseIdentifier: SearchResultsViewController.albumCellID)
+            })
+            self.sections.append(albumsSection)
         }
         
         if !self.songs.isEmpty {
@@ -109,8 +118,10 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
             songCell.update(withSong: song)
         } else if let artistCell = cell as? ArtistTableViewCell, let artist = row.data as? MediaLibraryHelper.Artist {
             artistCell.update(withArtist: artist)
+        } else if let albumCell = cell as? SongTableViewCell, let album = row.data as? MediaLibraryHelper.Album {
+            albumCell.update(withAlbum: album)
         }
-        
+ 
         return cell
     }
     

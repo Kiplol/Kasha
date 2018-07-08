@@ -180,6 +180,12 @@ class MediaLibraryHelper: NSObject {
                                                                     forProperty: MPMediaItemPropertyArtist,
                                                                     comparisonType: .contains))
             
+            let playlistQuery = MPMediaQuery.playlists()
+            playlistQuery.addFilterPredicate(MPMediaPropertyPredicate(value: query,
+                                                                      forProperty: MPMediaPlaylistPropertyName,
+                                                                      comparisonType: .contains))
+            let playlists = (playlistQuery.collections ?? []).filter { $0.count > 0 }
+            
             DispatchQueue.main.async {
                 completion(songsQuery.items ?? [], albumsQuery.collections ?? [], artistQuery.collections ?? [])
             }

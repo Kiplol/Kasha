@@ -73,7 +73,7 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
     // MARK: - Search
     func allowsSearch() -> Bool {
         //Override
-        return false
+        return true
     }
     
     // MARK: - MusicAwareTabBarControllerListener
@@ -104,7 +104,14 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
     
     // MARK: - SearchResultsViewControllerDelegate
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectAlbum album: MediaLibraryHelper.Album) {
-        
+        guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
+            preconditionFailure("Couldn't instantiant an ArtistViewController from its storyboard.")
+        }
+        albumVC.album = album
+        if let navigationController = self.navigationController {
+            navigationController.popToRootViewController(animated: true)
+        }
+        self.show(albumVC, sender: album)
     }
     
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectArtist artist: MediaLibraryHelper.Artist) {
@@ -112,6 +119,9 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
             preconditionFailure("Couldn't instantiant an ArtistViewController from its storyboard.")
         }
         artistVC.artist = artist
+        if let navigationController = self.navigationController {
+            navigationController.popToRootViewController(animated: true)
+        }
         self.show(artistVC, sender: artist)
     }
     

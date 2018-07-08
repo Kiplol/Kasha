@@ -58,6 +58,21 @@ class SongTableViewCell: UITableViewCell, SelfSizing {
         self.labelDetails.text = details
     }
     
+    func update(withAlbum album: MediaLibraryHelper.Album) {
+        self.labelSongName.text = album.representativeItem?.albumTitle ?? "Unknown Album"
+        self.updateDetailLabel(withAlbum: album)
+        DispatchQueue.global(qos: .default).async {
+            let image = album.representativeItem?.artwork?.image(at: CGSize(width: 80.0, height: 80.0))
+            DispatchQueue.main.async {
+                self.imageAlbum.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
+            }
+        }
+    }
+    
+    private func updateDetailLabel(withAlbum album: MediaLibraryHelper.Album) {
+        self.labelDetails.text = "\(album.count) songs"
+    }
+    
     // MARK: - SelfSizing
     static func sizeConstrained(toWidth width: CGFloat, withData: Any?) -> CGSize {
         return CGSize(width: width, height: 70.0)

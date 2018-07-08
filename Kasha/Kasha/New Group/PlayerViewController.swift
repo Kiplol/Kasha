@@ -70,6 +70,10 @@ class PlayerViewController: KashaViewController {
         self.volumeView.tintColor = theme.playerDetailColor
     }
     
+    override func allowsSearch() -> Bool {
+        return false
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
