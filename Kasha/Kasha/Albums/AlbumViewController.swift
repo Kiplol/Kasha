@@ -32,6 +32,25 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     }
     private var sections: [Section] = []
     
+    class func with(album: MediaLibraryHelper.Album) -> AlbumViewController {
+        guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main)
+            .instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
+                preconditionFailure("Couldn't instantiate a AlbumViewController from storyboard")
+        }
+        albumVC.album = album
+        return albumVC
+    }
+    
+    class func with(playlist: MediaLibraryHelper.Playlist) -> AlbumViewController {
+        guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main)
+            .instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
+                preconditionFailure("Couldn't instantiate a AlbumViewController from storyboard")
+        }
+        albumVC.songs = playlist.items
+        albumVC.title = playlist.name
+        return albumVC
+    }
+    
     // MARK: - KashaViewController
     override func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
         return self.tableView

@@ -9,7 +9,7 @@
 import UIKit
 import ViewAnimator
 
-class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITableViewDelegate {
+class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerPreviewingDelegate {
     
     private static let playlistCellID = "playlistCellID"
     
@@ -55,6 +55,11 @@ class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITab
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        if self.traitCollection.forceTouchCapability == .available {
+            self.registerForPreviewing(with: self, sourceView: self.view)
+        }
         
         // Table View
         let playlistCellNib = UINib(nibName: "PlaylistTableViewCell", bundle: Bundle.main)
@@ -135,9 +140,29 @@ class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITab
             self.performSegue(withIdentifier: "playlistsToAlbum", sender: playlist)
         } else if let playlistFolder = row.data as? MediaLibraryHelper.PlaylistFolder {
             let playlistsVC = PlaylistsViewController.with(parentPlaylistFolder: playlistFolder)
-            playlistsVC.parentPlaylistFolder = playlistFolder
             self.show(playlistsVC, sender: self)
         }
+    }
+    
+    // MARK: - UIViewControllerPreviewingDelegate
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.tableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        if let playlist = row.data as? MediaLibraryHelper.Playlist, !playlist.isFolder {
+            let albumVC = AlbumViewController.with(playlist: playlist)
+            return albumVC
+        } else if let playlistFolder = row.data as? MediaLibraryHelper.PlaylistFolder {
+            let playlistsVC = PlaylistsViewController.with(parentPlaylistFolder: playlistFolder)
+            return playlistsVC
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.show(viewControllerToCommit, sender: self)
     }
     
 }
