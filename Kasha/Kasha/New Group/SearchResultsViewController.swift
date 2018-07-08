@@ -40,7 +40,7 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
         self.tableView.separatorStyle = .none
         self.view.addSubview(self.tableView)
         
-        let songCellNib = UINib(nibName: "SongTableViewCell", bundle: Bundle.main)
+        let songCellNib = UINib(nibName: "KashaTableViewCell", bundle: Bundle.main)
         self.tableView.register(songCellNib, forCellReuseIdentifier: SearchResultsViewController.songCellID)
         self.tableView.register(songCellNib, forCellReuseIdentifier: SearchResultsViewController.albumCellID)
         
@@ -114,12 +114,14 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
         let row = self.sections[indexPath.section].rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: row.cellReuseIdentifier, for: indexPath)
         
-        if let songCell = cell as? SongTableViewCell, let song = row.data as? MediaLibraryHelper.Song {
+        if let songCell = cell as? KashaTableViewCell, let song = row.data as? MediaLibraryHelper.Song {
             songCell.update(withSong: song)
+            songCell.selectionDisplayStyle = .nowPlaying
         } else if let artistCell = cell as? ArtistTableViewCell, let artist = row.data as? MediaLibraryHelper.Artist {
             artistCell.update(withArtist: artist)
-        } else if let albumCell = cell as? SongTableViewCell, let album = row.data as? MediaLibraryHelper.Album {
+        } else if let albumCell = cell as? KashaTableViewCell, let album = row.data as? MediaLibraryHelper.Album {
             albumCell.update(withAlbum: album)
+            albumCell.selectionDisplayStyle = .default
         }
  
         return cell
@@ -135,7 +137,7 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
         let row = self.sections[indexPath.section].rows[indexPath.row]
         switch row.data {
         case is MediaLibraryHelper.Song:
-            return SongTableViewCell.sizeConstrained(toWidth: tableView.bounds.size.width, withData: row.data).height
+            return KashaTableViewCell.sizeConstrained(toWidth: tableView.bounds.size.width, withData: row.data).height
         default:
             return 70.0
         }

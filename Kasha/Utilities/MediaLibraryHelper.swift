@@ -73,6 +73,12 @@ class MediaLibraryHelper: NSObject {
         return albumsQuery.collections ?? []
     }
     
+    func recentlyAddedAlbums() -> [Album] {
+        let thirtyDaysAgo = Date().timeIntervalSince1970 - 60.0 * 60.0 * 24.0 * 30.0
+        let albums = self.allAlbums().filter { !$0.items.isEmpty && $0.items[0].dateAdded.timeIntervalSince1970 > thirtyDaysAgo }
+        return albums
+    }
+    
     // MARK: - Songs
     func allSongs(forArtist artist: MPMediaItemCollection) -> [Song] {
         let artistID = artist.persistentID

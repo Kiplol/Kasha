@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.setupAppearance()
         self.initializeThirdPartyLibraries()
         MediaLibraryHelper.shared.musicPlayer.beginGeneratingPlaybackNotifications()
-        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

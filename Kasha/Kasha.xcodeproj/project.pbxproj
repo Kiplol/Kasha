@@ -32,12 +32,12 @@
 		37414D3C20D820580076596E /* SelfSizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3B20D820580076596E /* SelfSizing.swift */; };
 		37414D4020D840720076596E /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3F20D840720076596E /* ArtistViewController.swift */; };
 		3765C6C720F24C41004E7203 /* VolumeHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3765C6C620F24C41004E7203 /* VolumeHUDView.swift */; };
+		3765C6C920F28D80004E7203 /* KashaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3765C6C820F28D7F004E7203 /* KashaTableViewCell.xib */; };
 		3789924C20DFF0C400A304B8 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924B20DFF0C400A304B8 /* Section.swift */; };
 		3789924F20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */; };
 		3789925020DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */; };
 		3789925220E001C500A304B8 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789925120E001C500A304B8 /* AlbumViewController.swift */; };
-		3789925520E0084A00A304B8 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789925320E0084A00A304B8 /* SongTableViewCell.swift */; };
-		3789925620E0084A00A304B8 /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3789925420E0084A00A304B8 /* SongTableViewCell.xib */; };
+		3789925520E0084A00A304B8 /* KashaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789925320E0084A00A304B8 /* KashaTableViewCell.swift */; };
 		3789925820E04BF900A304B8 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789925720E04BF900A304B8 /* SearchResultsViewController.swift */; };
 		3789925B20E7274C00A304B8 /* PlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789925A20E7274C00A304B8 /* PlaylistsViewController.swift */; };
 		3789925E20E72B5A00A304B8 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789925C20E72B5A00A304B8 /* PlaylistTableViewCell.swift */; };
@@ -78,12 +78,12 @@
 		37414D3B20D820580076596E /* SelfSizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizing.swift; sourceTree = "<group>"; };
 		37414D3F20D840720076596E /* ArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
 		3765C6C620F24C41004E7203 /* VolumeHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeHUDView.swift; sourceTree = "<group>"; };
+		3765C6C820F28D7F004E7203 /* KashaTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KashaTableViewCell.xib; sourceTree = "<group>"; };
 		3789924B20DFF0C400A304B8 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		3789925120E001C500A304B8 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
-		3789925320E0084A00A304B8 /* SongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
-		3789925420E0084A00A304B8 /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
+		3789925320E0084A00A304B8 /* KashaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashaTableViewCell.swift; sourceTree = "<group>"; };
 		3789925720E04BF900A304B8 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		3789925A20E7274C00A304B8 /* PlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsViewController.swift; sourceTree = "<group>"; };
 		3789925C20E72B5A00A304B8 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 				37B2FFEA20F174340082E15E /* WavesView.swift */,
 				37A9DC3220E87A5B00E5C43E /* MiniMusicPlayerView.swift */,
 				37A9DC3420E87A6C00E5C43E /* MiniMusicPlayerView.xib */,
-				3789925320E0084A00A304B8 /* SongTableViewCell.swift */,
-				3789925420E0084A00A304B8 /* SongTableViewCell.xib */,
+				3789925320E0084A00A304B8 /* KashaTableViewCell.swift */,
+				3765C6C820F28D7F004E7203 /* KashaTableViewCell.xib */,
 				3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */,
 				3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */,
 				37414D3B20D820580076596E /* SelfSizing.swift */,
@@ -344,7 +344,7 @@
 				3789925020DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib in Resources */,
 				373B1DD320D318570090D6FA /* ArtistTableViewCell.xib in Resources */,
 				373B1DBE20C8D8FE0090D6FA /* .swiftlint.yml in Resources */,
-				3789925620E0084A00A304B8 /* SongTableViewCell.xib in Resources */,
+				3765C6C920F28D80004E7203 /* KashaTableViewCell.xib in Resources */,
 				373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */,
 				37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */,
 				373B1DD920D3220C0090D6FA /* AlbumCollectionViewCell.xib in Resources */,
@@ -448,7 +448,7 @@
 				373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */,
 				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
 				3789925B20E7274C00A304B8 /* PlaylistsViewController.swift in Sources */,
-				3789925520E0084A00A304B8 /* SongTableViewCell.swift in Sources */,
+				3789925520E0084A00A304B8 /* KashaTableViewCell.swift in Sources */,
 				3789925E20E72B5A00A304B8 /* PlaylistTableViewCell.swift in Sources */,
 				373B1DB220C8B91E0090D6FA /* Constants.swift in Sources */,
 				3789924F20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift in Sources */,

@@ -42,7 +42,7 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
 
         // Table View
-        let songCellNib = UINib(nibName: "SongTableViewCell", bundle: Bundle.main)
+        let songCellNib = UINib(nibName: "KashaTableViewCell", bundle: Bundle.main)
         self.tableView.register(songCellNib, forCellReuseIdentifier: AlbumViewController.songCellID)
     }
     
@@ -96,8 +96,9 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: AlbumViewController.songCellID, for: indexPath)
         let row = self.sections[indexPath.section].rows[indexPath.row]
         
-        if let songCell = cell as? SongTableViewCell,
+        if let songCell = cell as? KashaTableViewCell,
             let song = row.data as? MediaLibraryHelper.Song {
+            songCell.selectionDisplayStyle = .nowPlaying
             songCell.update(withSong: song)
         }
         
@@ -106,7 +107,7 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let row = self.sections[indexPath.section].rows[indexPath.row]
-        if let songCell = cell as? SongTableViewCell,
+        if let songCell = cell as? KashaTableViewCell,
             let song = row.data as? MediaLibraryHelper.Song {
             songCell.setSelected(MediaLibraryHelper.shared.musicPlayer.nowPlayingItem?.persistentID == song.persistentID, animated: true)
         }
@@ -116,7 +117,7 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = self.sections[indexPath.section].rows[indexPath.row]
         if let song = row.data as? MediaLibraryHelper.Song {
-            return SongTableViewCell.sizeConstrained(toWidth: tableView.bounds.size.width, withData: song).height
+            return KashaTableViewCell.sizeConstrained(toWidth: tableView.bounds.size.width, withData: song).height
         }
         return 50.0
     }
