@@ -33,6 +33,11 @@
 		37414D4020D840720076596E /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37414D3F20D840720076596E /* ArtistViewController.swift */; };
 		3765C6C720F24C41004E7203 /* VolumeHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3765C6C620F24C41004E7203 /* VolumeHUDView.swift */; };
 		3765C6C920F28D80004E7203 /* KashaTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3765C6C820F28D7F004E7203 /* KashaTableViewCell.xib */; };
+		3765C6CB20F29993004E7203 /* HorizontalItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3765C6CA20F29993004E7203 /* HorizontalItemsView.swift */; };
+		3765C6CF20F29CA2004E7203 /* HorizontalItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3765C6CE20F29CA2004E7203 /* HorizontalItemsTableViewCell.swift */; };
+		3765C6D120F29CE7004E7203 /* HorizontalItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3765C6D020F29CE7004E7203 /* HorizontalItemsTableViewCell.xib */; };
+		3765C6D320F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3765C6D220F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift */; };
+		3765C6D520F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3765C6D420F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib */; };
 		3789924C20DFF0C400A304B8 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924B20DFF0C400A304B8 /* Section.swift */; };
 		3789924F20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */; };
 		3789925020DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */; };
@@ -79,6 +84,11 @@
 		37414D3F20D840720076596E /* ArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
 		3765C6C620F24C41004E7203 /* VolumeHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeHUDView.swift; sourceTree = "<group>"; };
 		3765C6C820F28D7F004E7203 /* KashaTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KashaTableViewCell.xib; sourceTree = "<group>"; };
+		3765C6CA20F29993004E7203 /* HorizontalItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalItemsView.swift; sourceTree = "<group>"; };
+		3765C6CE20F29CA2004E7203 /* HorizontalItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalItemsTableViewCell.swift; sourceTree = "<group>"; };
+		3765C6D020F29CE7004E7203 /* HorizontalItemsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalItemsTableViewCell.xib; sourceTree = "<group>"; };
+		3765C6D220F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalItemsCollectionViewCell.swift; sourceTree = "<group>"; };
+		3765C6D420F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalItemsCollectionViewCell.xib; sourceTree = "<group>"; };
 		3789924B20DFF0C400A304B8 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -202,6 +212,11 @@
 		37414D3520D74CB30076596E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3765C6CE20F29CA2004E7203 /* HorizontalItemsTableViewCell.swift */,
+				3765C6D020F29CE7004E7203 /* HorizontalItemsTableViewCell.xib */,
+				3765C6D220F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift */,
+				3765C6D420F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib */,
+				3765C6CA20F29993004E7203 /* HorizontalItemsView.swift */,
 				3765C6C620F24C41004E7203 /* VolumeHUDView.swift */,
 				37B2FFEA20F174340082E15E /* WavesView.swift */,
 				37A9DC3220E87A5B00E5C43E /* MiniMusicPlayerView.swift */,
@@ -347,7 +362,9 @@
 				3765C6C920F28D80004E7203 /* KashaTableViewCell.xib in Resources */,
 				373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */,
 				37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */,
+				3765C6D120F29CE7004E7203 /* HorizontalItemsTableViewCell.xib in Resources */,
 				373B1DD920D3220C0090D6FA /* AlbumCollectionViewCell.xib in Resources */,
+				3765C6D520F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib in Resources */,
 				37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */,
 				37066A5C20C6270C0021D0A5 /* Main.storyboard in Resources */,
 				3789925F20E72B5A00A304B8 /* PlaylistTableViewCell.xib in Resources */,
@@ -444,9 +461,12 @@
 				37A9DC3320E87A5B00E5C43E /* MiniMusicPlayerView.swift in Sources */,
 				37414D3C20D820580076596E /* SelfSizing.swift in Sources */,
 				373B1DBB20C8D7110090D6FA /* SplashViewController.swift in Sources */,
+				3765C6CB20F29993004E7203 /* HorizontalItemsView.swift in Sources */,
 				373B1DC520CD8F970090D6FA /* MediaLibraryHelper.swift in Sources */,
+				3765C6D320F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift in Sources */,
 				373B1DCF20D315FC0090D6FA /* ArtistsViewController.swift in Sources */,
 				373B1DB920C8D6FD0090D6FA /* KashaViewController.swift in Sources */,
+				3765C6CF20F29CA2004E7203 /* HorizontalItemsTableViewCell.swift in Sources */,
 				3789925B20E7274C00A304B8 /* PlaylistsViewController.swift in Sources */,
 				3789925520E0084A00A304B8 /* KashaTableViewCell.swift in Sources */,
 				3789925E20E72B5A00A304B8 /* PlaylistTableViewCell.swift in Sources */,

@@ -12,16 +12,16 @@ import SwiftIcons
 import UIKit
 import ViewAnimator
 
-class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     private static let albumCellID = "albumCellID"
+    private static let horizontalItemsCellID = "horizontalItemsCellID"
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var indexView: BDKCollectionIndexView!
     
     // MARK: - ivars
-    private let albumSections = MediaLibraryHelper.shared.allAlbumSections()
     private var sections: [Section] = []
 
     // MARK: - KashaViewController
@@ -58,21 +58,23 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: AlbumsViewController.albumCellID)
         
+        let horizontalItemsCellNib = UINib(nibName: "HorizontalItemsCollectionViewCell", bundle: Bundle.main)
+        self.collectionView.register(horizontalItemsCellNib, forCellWithReuseIdentifier: AlbumsViewController.horizontalItemsCellID)
+        
         //Section Index
         self.indexView.addTarget(self, action: #selector(AlbumsViewController.indexViewValueChanged(sender:)),
                                  for: .valueChanged)
-        self.indexView.indexTitles = self.albumSections.map { $0.title }
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        if let flowLayout = self.collectionView.flowLayout {
-            let numberOfColumns = max(floor((self.collectionView.usableWidth() / AlbumCollectionViewCell.idealWidth)), 2.0)
-            let interItemSpace = self.collectionView.flowLayout?.minimumInteritemSpacing ?? 0.0
-            let width = floor(self.collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
-            flowLayout.itemSize = AlbumCollectionViewCell.sizeConstrained(toWidth: width, withData: nil)
-        }
-    }
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        if let flowLayout = self.collectionView.flowLayout {
+//            let numberOfColumns = max(floor((self.collectionView.usableWidth() / AlbumCollectionViewCell.idealWidth)), 2.0)
+//            let interItemSpace = self.collectionView.flowLayout?.minimumInteritemSpacing ?? 0.0
+//            let width = floor(self.collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
+//            flowLayout.itemSize = AlbumCollectionViewCell.sizeConstrained(toWidth: width, withData: nil)
+//        }
+//    }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,6 +89,14 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     // MARK: - Helpers
     private func populateSections() {
         self.sections.removeAll()
+        var titles: [String] = []
+        
+        let recentlyAddedAlbums = MediaLibraryHelper.shared.recentlyAddedAlbums()
+        if !recentlyAddedAlbums.isEmpty {
+            let recentSection = Section(title: "Recently Added", rows: [Row(data: recentlyAddedAlbums, cellReuseIdentifier: AlbumsViewController.horizontalItemsCellID)])
+            self.sections.append(recentSection)
+            titles.append("-")
+        }
         
         let albumSections = MediaLibraryHelper.shared.allAlbumSections().map {
             Section(title: $0.title, rows: MediaLibraryHelper.shared.allAlbums(inSection: $0).map {
@@ -95,37 +105,55 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         }
         if !albumSections.isEmpty {
             self.sections.append(contentsOf: albumSections)
+            albumSections.map { $0.title ?? "" }.forEach { titles.append($0) }
         }
-    }
-    
-    private func album(forIndexPath indexPath: IndexPath) -> MPMediaItemCollection {
-        let section = self.albumSections[indexPath.section]
-        return MediaLibraryHelper.shared.album(forSection: section, atIndex: indexPath.row)
+        
+        self.indexView.indexTitles = titles
     }
     
     // MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return self.albumSections.count
+        return self.sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.albumSections[section].range.length
+        return self.sections[section].rows.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumsViewController.albumCellID,
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: row.cellReuseIdentifier,
                                                       for: indexPath)
-        if let albumCell = cell as? AlbumCollectionViewCell {
-            albumCell.update(withAlbum: self.album(forIndexPath: indexPath))
+        
+        if let albumCell = cell as? AlbumCollectionViewCell,
+            let album = row.data as? MediaLibraryHelper.Album {
+            albumCell.update(withAlbum: album)
         }
         return cell
     }
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let album = self.album(forIndexPath: indexPath)
-        self.performSegue(withIdentifier: "albumsToAlbum", sender: album)
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        if let album = row.data as? MediaLibraryHelper.Album {
+            self.performSegue(withIdentifier: "albumsToAlbum", sender: album)
+        }
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        if row.data is [MediaLibraryHelper.Album] {
+            return HorizontalItemsCollectionViewCell.sizeConstrained(toWidth: collectionView.usableWidth(), withData: row.data)
+        } else if row.data is MediaLibraryHelper.Album {
+            let numberOfColumns = max(floor((self.collectionView.usableWidth() / AlbumCollectionViewCell.idealWidth)), 2.0)
+            let interItemSpace = self.collectionView.flowLayout?.minimumInteritemSpacing ?? 0.0
+            let width = floor(collectionView.usableWidth() * (1.0 / numberOfColumns)) - (interItemSpace / numberOfColumns)
+            return AlbumCollectionViewCell.sizeConstrained(toWidth: width, withData: nil)
+        } else {
+            return .zero
+        }
     }
 }
 
