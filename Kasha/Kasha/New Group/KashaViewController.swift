@@ -48,13 +48,7 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
             self.definesPresentationContext = true
         }
         
-        if let musicAwareTabBarController = self.musicAwareTabBarController {
-            if musicAwareTabBarController.miniPlayerIsHidden {
-                self.musicAwareTabBarController(musicAwareTabBarController, didHideMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
-            } else {
-                self.musicAwareTabBarController(musicAwareTabBarController, didShowMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
-            }
-        }
+        self.adjustForMusicAwareTabBarController()
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,6 +59,12 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         self.isFirstLayout = false
     }
     
+    override func didMove(toParentViewController parent: UIViewController?) {
+        super.didMove(toParentViewController: parent)
+        if self.musicAwareTabBarController != nil {
+            self.adjustForMusicAwareTabBarController()
+        }
+    }
     // MARK: - Intro Animation
     func doFirstLayoutAnimation() {
         //Override
@@ -74,6 +74,17 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
     func allowsSearch() -> Bool {
         //Override
         return true
+    }
+    
+    // MARK: - MusicAwareTabBarController
+    func adjustForMusicAwareTabBarController() {
+        if let musicAwareTabBarController = self.musicAwareTabBarController {
+            if musicAwareTabBarController.miniPlayerIsHidden {
+                self.musicAwareTabBarController(musicAwareTabBarController, didHideMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
+            } else {
+                self.musicAwareTabBarController(musicAwareTabBarController, didShowMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
+            }
+        }
     }
     
     // MARK: - MusicAwareTabBarControllerListener
