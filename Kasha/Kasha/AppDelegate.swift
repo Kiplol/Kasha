@@ -69,6 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return
             }
             self.window?.rootViewController = rootTabBarController
+            if let window = self.window {
+                VolumeHUDView.addAsVolumeView(toWindow: window)
+            }
         }
     }
     

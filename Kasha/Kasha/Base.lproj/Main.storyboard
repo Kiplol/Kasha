@@ -392,8 +392,6 @@
                                                     <constraint firstItem="sya-fc-dXe" firstAttribute="leading" secondItem="gCr-Rk-vVu" secondAttribute="leading" constant="30" id="0Cp-nx-5ny"/>
                                                     <constraint firstAttribute="trailing" secondItem="sya-fc-dXe" secondAttribute="trailing" constant="30" id="R3u-7i-ul4"/>
                                                     <constraint firstItem="XFL-3c-7KY" firstAttribute="leading" secondItem="gCr-Rk-vVu" secondAttribute="leading" id="S5g-w7-h15"/>
-                                                    <constraint firstItem="qRF-Q8-SdN" firstAttribute="leading" secondItem="gCr-Rk-vVu" secondAttribute="leading" id="Wfw-ee-t4H"/>
-                                                    <constraint firstAttribute="trailing" secondItem="qRF-Q8-SdN" secondAttribute="trailing" id="iZ9-Ya-mV5"/>
                                                     <constraint firstAttribute="trailing" secondItem="XFL-3c-7KY" secondAttribute="trailing" id="nDM-Mk-KoO"/>
                                                 </constraints>
                                             </stackView>
