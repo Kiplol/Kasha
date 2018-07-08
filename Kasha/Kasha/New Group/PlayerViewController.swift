@@ -67,7 +67,7 @@ class PlayerViewController: KashaViewController {
             $0?.shadowColor = labelsShadowColor
         }
         
-        self.volumeView.tintColor = theme.playerPrimaryColor
+        self.volumeView.tintColor = theme.playerDetailColor
     }
     
     // MARK: - View Lifecycle

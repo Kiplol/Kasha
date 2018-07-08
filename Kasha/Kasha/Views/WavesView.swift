@@ -15,19 +15,21 @@ class WavesView: UIView {
     @IBInspectable var stoppedWaveHeight: CGFloat = 5.0
     @IBInspectable var speed: CGFloat = 1.0
     @IBInspectable var numberOfWaves: CGFloat = 2.0
-    private var displayLink: CADisplayLink?
+    private var wavesDisplayLink: CADisplayLink?
+    private var valueChangeDisplayLink: CADisplayLink?
     @IBInspectable var waveColor: UIColor = .kashaPrimary
     private var isRunning: Bool = false
+    private var waveHeightToUse: CGFloat = 5.0
     
     override func didMoveToWindow() {
         super.didMoveToWindow()
-        self.startDiplayLink()
+        self.startWavesDiplayLink()
     }
     
     override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
         if newWindow == nil {
-            self.stopDisplayLink()
+            self.stopWavesDisplayLink()
         }
     }
     
@@ -36,6 +38,7 @@ class WavesView: UIView {
             return
         }
         self.isRunning = true
+        self.waveHeightToUse = self.playingWaveHeight
     }
     
     func stop() {
@@ -43,20 +46,35 @@ class WavesView: UIView {
             return
         }
         self.isRunning = false
+        self.waveHeightToUse = self.stoppedWaveHeight
     }
     
-    private func startDiplayLink() {
-        self.displayLink = CADisplayLink(target: self, selector: #selector(WavesView.displayLinkTick))
-        self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+    private func startWavesDiplayLink() {
+        self.wavesDisplayLink = CADisplayLink(target: self, selector: #selector(WavesView.wavesDisplayLinkTick))
+        self.wavesDisplayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
     
-    private func stopDisplayLink() {
-        self.displayLink?.invalidate()
-        self.displayLink = nil
+    private func stopWavesDisplayLink() {
+        self.wavesDisplayLink?.invalidate()
+        self.wavesDisplayLink = nil
     }
     
-    @objc func displayLinkTick() {
+    private func startValueChangeDisplayLink() {
+        self.valueChangeDisplayLink = CADisplayLink(target: self, selector: #selector(WavesView.valueChangeDisplayLinkTick))
+        self.valueChangeDisplayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+    }
+    
+    private func stopValueChangeDisplayLink() {
+        self.valueChangeDisplayLink?.invalidate()
+        self.valueChangeDisplayLink = nil
+    }
+    
+    @objc func wavesDisplayLinkTick() {
         self.setNeedsDisplay()
+    }
+    
+    @objc func valueChangeDisplayLinkTick() {
+        
     }
     
     override func draw(_ rect: CGRect) {
@@ -66,7 +84,7 @@ class WavesView: UIView {
         
         let firstPath = UIBezierPath()
         firstPath.move(to: CGPoint(x: 0.0, y: rect.height))
-        let waveHeight = self.isRunning ? self.playingWaveHeight : self.stoppedWaveHeight
+        let waveHeight = self.waveHeightToUse
         let maxWaveHeight = max(self.playingWaveHeight, self.stoppedWaveHeight)
         
         var secondPathPoints: [CGPoint] = []
