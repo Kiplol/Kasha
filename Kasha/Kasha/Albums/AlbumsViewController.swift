@@ -22,6 +22,7 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     
     // MARK: - ivars
     private let albumSections = MediaLibraryHelper.shared.allAlbumSections()
+    private var sections: [Section] = []
 
     // MARK: - KashaViewController
     override func commonInit() {
@@ -51,6 +52,7 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.populateSections()
         
         //Collection View
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
@@ -83,6 +85,19 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     }
     
     // MARK: - Helpers
+    private func populateSections() {
+        self.sections.removeAll()
+        
+        let albumSections = MediaLibraryHelper.shared.allAlbumSections().map {
+            Section(title: $0.title, rows: MediaLibraryHelper.shared.allAlbums(inSection: $0).map {
+                Row(data: $0, cellReuseIdentifier: AlbumsViewController.albumCellID)
+            })
+        }
+        if !albumSections.isEmpty {
+            self.sections.append(contentsOf: albumSections)
+        }
+    }
+    
     private func album(forIndexPath indexPath: IndexPath) -> MPMediaItemCollection {
         let section = self.albumSections[indexPath.section]
         return MediaLibraryHelper.shared.album(forSection: section, atIndex: indexPath.row)
