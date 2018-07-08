@@ -52,6 +52,11 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.traitCollection.forceTouchCapability == .available {
+            self.registerForPreviewing(with: self, sourceView: self.collectionView)
+        }
+        
         self.populateSections()
         
         //Collection View
@@ -135,4 +140,24 @@ extension AlbumsViewController {
         let path = IndexPath(item: 0, section: Int(sender.currentIndex))
         self.collectionView.scrollToItem(at: path, at: .top, animated: false)
     }
+}
+
+extension AlbumsViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.collectionView.indexPathForItem(at: location) else {
+            return nil
+        }
+        
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        if let album = row.data as? MediaLibraryHelper.Album {
+            let albumVC = AlbumViewController.with(album: album)
+            return albumVC
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.show(viewControllerToCommit, sender: self)
+    }
+    
 }

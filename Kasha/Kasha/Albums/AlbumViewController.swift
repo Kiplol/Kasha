@@ -31,23 +31,43 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         }
     }
     private var sections: [Section] = []
+    override var previewActionItems: [UIPreviewActionItem] {
+        return [
+            UIPreviewAction(title: "Play", style: .default, handler: { _, _ in
+                if let firstSong = self.songs.first {
+                    MediaLibraryHelper.shared.play(firstSong, inQueue: self.songs)
+                }
+            }),
+            UIPreviewAction(title: "Shuffle", style: .default, handler: { _, _ in
+                //@TODO
+            })
+        ]
+    }
     
-    class func with(album: MediaLibraryHelper.Album) -> AlbumViewController {
+    // MARK: -
+    class func fromStoryboard() -> AlbumViewController {
         guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main)
             .instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
                 preconditionFailure("Couldn't instantiate a AlbumViewController from storyboard")
         }
+        return albumVC
+    }
+    class func with(album: MediaLibraryHelper.Album) -> AlbumViewController {
+        let albumVC = AlbumViewController.fromStoryboard()
         albumVC.album = album
         return albumVC
     }
     
     class func with(playlist: MediaLibraryHelper.Playlist) -> AlbumViewController {
-        guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main)
-            .instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
-                preconditionFailure("Couldn't instantiate a AlbumViewController from storyboard")
-        }
+        let albumVC = AlbumViewController.fromStoryboard()
         albumVC.songs = playlist.items
         albumVC.title = playlist.name
+        return albumVC
+    }
+    
+    class func with(songs: [MediaLibraryHelper.Song]) -> AlbumViewController {
+        let albumVC = AlbumViewController.fromStoryboard()
+        albumVC.songs = songs
         return albumVC
     }
     
@@ -152,10 +172,6 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         if let song = row.data as? MediaLibraryHelper.Song {
             MediaLibraryHelper.shared.play(song, inQueue: self.songs)
         }
-    }
-    
-    private func bar() {
-        
     }
 
 }

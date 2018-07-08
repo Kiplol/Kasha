@@ -58,7 +58,7 @@ class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITab
         
         
         if self.traitCollection.forceTouchCapability == .available {
-            self.registerForPreviewing(with: self, sourceView: self.view)
+            self.registerForPreviewing(with: self, sourceView: self.tableView)
         }
         
         // Table View

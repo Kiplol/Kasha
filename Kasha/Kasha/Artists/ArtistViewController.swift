@@ -28,6 +28,24 @@ UICollectionViewDelegateFlowLayout {
         }
     }
     private var sections: [Section] = []
+    override var previewActionItems: [UIPreviewActionItem] {
+        let playAllPreviewAction = UIPreviewAction(title: "Play All", style: .default) { _, _ in
+            let allSongs = MediaLibraryHelper.shared.allSongs(forArtist: self.artist)
+            if let firstSong = allSongs.first {
+                MediaLibraryHelper.shared.play(firstSong, inQueue: allSongs)
+            }
+        }
+        return [playAllPreviewAction]
+    }
+    
+    class func with(artist: MediaLibraryHelper.Artist) -> ArtistViewController {
+        guard let artistVC = UIStoryboard(name: "Main", bundle: Bundle.main)
+            .instantiateViewController(withIdentifier: "artist") as? ArtistViewController else {
+                preconditionFailure("Couldn't instantiate a ArtistViewController from storyboard")
+        }
+        artistVC.artist = artist
+        return artistVC
+    }
     
     // MARK: - KashaViewController
     override func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
@@ -37,6 +55,10 @@ UICollectionViewDelegateFlowLayout {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.traitCollection.forceTouchCapability == .available {
+            self.registerForPreviewing(with: self, sourceView: self.collectionView)
+        }
 
         //Collection View
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
@@ -166,4 +188,27 @@ UICollectionViewDelegateFlowLayout {
                                                                    withData: title)
     }
 
+}
+
+extension ArtistViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.collectionView.indexPathForItem(at: location) else {
+            return nil
+        }
+        
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        if let album = row.data as? MediaLibraryHelper.Album {
+            return AlbumViewController.with(album: album)
+        } else if let songs = row.data as? [MediaLibraryHelper.Song] {
+            let albumVC = AlbumViewController.with(songs: songs)
+            albumVC.title = self.title
+            return albumVC
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.show(viewControllerToCommit, sender: self)
+    }
+    
 }
