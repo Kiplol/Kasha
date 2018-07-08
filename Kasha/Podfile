@@ -8,6 +8,7 @@ def shared_pods
 	pod 'MarqueeLabel/Swift'
 	pod 'SwiftIcons', '~> 2.0.1'
 	pod 'SwiftLint'
+	pod 'ValueAnimator'
 end
 
 # Pods for Kasha
@@ -17,5 +18,4 @@ target 'Kasha' do
 	pod 'BDKCollectionIndexView'
     pod 'DeckTransition', '~> 2.0'
 	pod 'ViewAnimator'
-	pod 'YXWaveView'
 end
