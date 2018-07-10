@@ -37,7 +37,17 @@ UICollectionViewDelegateFlowLayout {
                 MediaLibraryHelper.shared.play(firstSong, inQueue: allSongs)
             }
         }
-        return [playAllPreviewAction]
+        let shuffleAllPreviewAction = UIPreviewAction(title: "Shuffle All", style: .default) { _, _ in
+            let allSongs = MediaLibraryHelper.shared.allSongs(forArtist: self.artist)
+            guard !allSongs.isEmpty else {
+                return
+            }
+            let randomIndex = Int(arc4random_uniform(UInt32(allSongs.count)))
+            let song = allSongs[randomIndex]
+            MediaLibraryHelper.shared.play(song, inQueue: allSongs)
+            MediaLibraryHelper.shared.turnOnShuffle()
+        }
+        return [playAllPreviewAction, shuffleAllPreviewAction]
     }
     
     class func with(artist: MediaLibraryHelper.Artist) -> ArtistViewController {

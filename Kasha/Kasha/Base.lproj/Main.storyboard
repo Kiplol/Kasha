@@ -28,7 +28,7 @@
         <!--Artists-->
         <scene sceneID="kue-sr-Dod">
             <objects>
-                <navigationController storyboardIdentifier="artistsNav" id="h1U-vz-QD9" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="artistsNav" id="h1U-vz-QD9" customClass="KashaNavigationController" customModule="Kasha" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Artists" id="kF8-UK-CR2"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pLb-rl-nbB">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -519,7 +519,7 @@
         <!--Albums-->
         <scene sceneID="erI-fa-UdE">
             <objects>
-                <navigationController storyboardIdentifier="albumsNav" id="tgO-lb-ar1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="albumsNav" id="tgO-lb-ar1" customClass="KashaNavigationController" customModule="Kasha" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Albums" id="euV-F3-5Hb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cmQ-9a-CZU">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

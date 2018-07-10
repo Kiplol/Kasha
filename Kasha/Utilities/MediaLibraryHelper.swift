@@ -258,7 +258,8 @@ class MediaLibraryHelper: NSObject {
                 return
             }
             let (background, primary, secondary, detail) = image.colors()
-            let newTheme = Theme(playerBackgroundColor: background, playerPrimaryColor: primary,
+            let newTheme = Theme(backgroundColor: .white,
+                                 playerBackgroundColor: background, playerPrimaryColor: primary,
                                  playerSecondaryColor: secondary, playerDetailColor: detail)
             ThemeManager.default.theme = newTheme
         }

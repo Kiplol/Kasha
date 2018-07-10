@@ -85,6 +85,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.isTranslucent = false
         navigationBarAppearance.barTintColor = UIColor.white
         navigationBarAppearance.prefersLargeTitles = true
+        navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
+        navigationBarAppearance.shadowImage = UIImage()
+        navigationBarAppearance.backgroundColor = .white
+        
         UINavigationBar.appearance().largeTitleTextAttributes =
             [NSAttributedStringKey.foregroundColor: UIColor.kashaPrimary]
         

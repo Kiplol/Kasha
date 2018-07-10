@@ -10,12 +10,14 @@ import Gestalt
 
 struct Theme: ThemeProtocol {
 
+    let backgroundColor: UIColor
     let playerBackgroundColor: UIColor
     let playerPrimaryColor: UIColor
     let playerSecondaryColor: UIColor
     let playerDetailColor: UIColor
     
-    static let light = Theme(playerBackgroundColor: .white,
+    static let light = Theme(backgroundColor: .white,
+                             playerBackgroundColor: .white,
                              playerPrimaryColor: .kashaPrimary,
                              playerSecondaryColor: .kashaSecondary,
                              playerDetailColor: .black)
