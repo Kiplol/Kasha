@@ -79,7 +79,7 @@ class MediaLibraryHelper: NSObject {
         let albumsQuery = MPMediaQuery.albums()
         albumsQuery.addFilterPredicate(MPMediaPropertyPredicate(value: artistID,
                                                                 forProperty: MPMediaItemPropertyArtistPersistentID))
-        return albumsQuery.collections ?? []
+        return albumsQuery.collections?.filter { $0.albumNameIfNotEmpty != nil } ?? []
     }
     
     func recentlyAddedAlbums() -> [Album] {
@@ -102,6 +102,16 @@ class MediaLibraryHelper: NSObject {
         let songQuery = MPMediaQuery.songs()
         songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: albumID,
                                                               forProperty: MPMediaItemPropertyAlbumPersistentID))
+        return songQuery.items ?? []
+    }
+    
+    func allSongsForUnknownAlbum(forArtist artist: MPMediaItemCollection) -> [Song] {
+        let artistID = artist.persistentID
+        let albumName = ""
+        let songQuery = MPMediaQuery.songs()
+        songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: artistID, forProperty: MPMediaItemPropertyArtistPersistentID))
+        songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: albumName,
+                                                              forProperty: MPMediaItemPropertyAlbumTitle))
         return songQuery.items ?? []
     }
     
@@ -252,4 +262,13 @@ extension MediaLibraryHelper.PlaylistFolder {
         return (self.value(forProperty: MPMediaPlaylistPropertyName) as? String) ?? "Unknown Playlist"
     }
     
+}
+
+extension MediaLibraryHelper.Album {
+    var albumNameIfNotEmpty: String? {
+        guard let albumName = self.representativeItem?.albumTitle, !albumName.isEmpty else {
+            return nil
+        }
+        return albumName
+    }
 }

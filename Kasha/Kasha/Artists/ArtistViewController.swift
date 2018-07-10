@@ -15,6 +15,7 @@ UICollectionViewDelegateFlowLayout {
     
     private static let albumCellID = "albumCellID"
     private static let allSongsCellID = "allSongsCellID"
+    private static let unknownAlbumCellID = "unknownAlbumCellID"
     private static let sectionHeaderID = "sectionHeader"
     
     // MARK: - IBOutlets
@@ -64,6 +65,7 @@ UICollectionViewDelegateFlowLayout {
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: ArtistViewController.albumCellID)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: ArtistViewController.allSongsCellID)
+        self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: ArtistViewController.unknownAlbumCellID)
         
         let sectionHeaderNib = UINib(nibName: "SectionHeaderCollectionReusableView", bundle: Bundle.main)
         self.collectionView.register(sectionHeaderNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
@@ -113,6 +115,14 @@ UICollectionViewDelegateFlowLayout {
             })
             self.sections.append(albumsSection)
         }
+        
+        // Unknown Album
+        let songsFromUnknownAlbums = MediaLibraryHelper.shared.allSongsForUnknownAlbum(forArtist: self.artist)
+        if !songsFromUnknownAlbums.isEmpty {
+            let unknownAlbumSection = Section(title: "Unknown Album", rows: [Row(data: songsFromUnknownAlbums,
+                                                                                cellReuseIdentifier: ArtistViewController.unknownAlbumCellID)])
+            self.sections.append(unknownAlbumSection)
+        }
     }
     
     // MARK: - UICollectionViewDataSource
@@ -139,6 +149,8 @@ UICollectionViewDelegateFlowLayout {
                 if let album = row.data as? MediaLibraryHelper.Album {
                     albumCell.update(withAlbum: album)
                 }
+            case ArtistViewController.unknownAlbumCellID:
+                albumCell.updateAsUnknownAlbum(forArtist: self.artist, withSongs: row.data as? [MediaLibraryHelper.Song])
             default:
                 break
             }
