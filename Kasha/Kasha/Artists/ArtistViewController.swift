@@ -33,6 +33,7 @@ UICollectionViewDelegateFlowLayout {
         let playAllPreviewAction = UIPreviewAction(title: "Play All", style: .default) { _, _ in
             let allSongs = MediaLibraryHelper.shared.allSongs(forArtist: self.artist)
             if let firstSong = allSongs.first {
+                MediaLibraryHelper.shared.turnOnShuffle()
                 MediaLibraryHelper.shared.play(firstSong, inQueue: allSongs)
             }
         }

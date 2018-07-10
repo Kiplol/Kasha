@@ -35,11 +35,18 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         return [
             UIPreviewAction(title: "Play", style: .default, handler: { _, _ in
                 if let firstSong = self.songs.first {
+                    MediaLibraryHelper.shared.tunOffShuffle()
                     MediaLibraryHelper.shared.play(firstSong, inQueue: self.songs)
                 }
             }),
             UIPreviewAction(title: "Shuffle", style: .default, handler: { _, _ in
-                //@TODO
+                guard !self.songs.isEmpty else {
+                    return
+                }
+                let randomIndex = Int(arc4random_uniform(UInt32(self.songs.count)))
+                let song = self.songs[randomIndex]
+                MediaLibraryHelper.shared.play(song, inQueue: self.songs)
+                MediaLibraryHelper.shared.turnOnShuffle()
             })
         ]
     }

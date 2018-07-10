@@ -67,7 +67,7 @@ class KashaTableViewCell: UITableViewCell, SelfSizing {
         if let artistName = song.artist {
             details += " \(artistName)"
         }
-        if let albumName = song.albumTitle {
+        if let albumName = song.albumTitle, !albumName.isEmpty {
             details += " - \(albumName)"
         }
         self.labelDetails.text = details

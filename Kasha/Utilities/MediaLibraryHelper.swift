@@ -27,6 +27,9 @@ class MediaLibraryHelper: NSObject {
             self.musicPlayer.setQueue(with: self.queue)
         }
     }
+    var isShuffleOn: Bool {
+        return self.musicPlayer.shuffleMode != .off
+    }
     
     // MARK: - Initializers
     override init() {
@@ -185,6 +188,25 @@ class MediaLibraryHelper: NSObject {
     
     func previous() {
         self.musicPlayer.skipToPreviousItem()
+    }
+    
+    func toggleShuffle() -> Bool {
+        switch self.musicPlayer.shuffleMode {
+        case .off:
+            self.turnOnShuffle()
+            return true
+        default:
+            self.tunOffShuffle()
+            return false
+        }
+    }
+    
+    func turnOnShuffle() {
+        self.musicPlayer.shuffleMode = .songs
+    }
+    
+    func tunOffShuffle() {
+        self.musicPlayer.shuffleMode = .off
     }
     
     // MARK: - Search

@@ -19,6 +19,9 @@ class PlayerViewController: KashaViewController {
     @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var buttonPause: UIButton!
     @IBOutlet weak var buttonNext: UIButton!
+    @IBOutlet weak var buttonShuffleIsOff: UIButton!
+    @IBOutlet weak var buttonShuffleIsOn: UIButton!
+    @IBOutlet weak var buttonMore: UIButton!
     @IBOutlet var allButtons: [UIButton]!
     @IBOutlet weak var labelSongTitle: UILabel!
     @IBOutlet weak var labelSongInfo: UILabel!
@@ -102,6 +105,7 @@ class PlayerViewController: KashaViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
+        self.updateWithShuffle(isOn: MediaLibraryHelper.shared.isShuffleOn)
     }
     
     // MARK: - User Interaction
@@ -123,6 +127,14 @@ class PlayerViewController: KashaViewController {
     
     @IBAction func nextTapped(_ sender: Any) {
         MediaLibraryHelper.shared.next()
+    }
+    
+    @IBAction func shuffleIsOnTapped(_ sender: Any) {
+        self.updateWithShuffle(isOn: MediaLibraryHelper.shared.toggleShuffle())
+    }
+    
+    @IBAction func shuffeIsOffTapped(_ sender: Any) {
+        self.updateWithShuffle(isOn: MediaLibraryHelper.shared.toggleShuffle())
     }
     
     // MARK: - Helpers
@@ -163,16 +175,16 @@ class PlayerViewController: KashaViewController {
         }
     }
     
+    private func updateWithShuffle(isOn: Bool) {
+        self.buttonShuffleIsOn.isHidden = !isOn
+        self.buttonShuffleIsOff.isHidden = !self.buttonShuffleIsOn.isHidden
+    }
+    
     private func startPlaybackTracking() {
         self.buttonPlay.isHidden = true
         self.buttonPause.isHidden = false
         self.startWaveView()
         self.startDisplayLink()
-    }
-    
-    private func startDisplayLink() {
-        self.displayLink = CADisplayLink(target: self, selector: #selector(PlayerViewController.displayLinkTick))
-        self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
     
     private func stopPlaybackTracking() {
@@ -182,12 +194,17 @@ class PlayerViewController: KashaViewController {
         self.stopDisplayLink()
     }
     
+    // MARK: - DisplayLink
+    private func startDisplayLink() {
+        self.displayLink = CADisplayLink(target: self, selector: #selector(PlayerViewController.displayLinkTick))
+        self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+    }
+    
     private func stopDisplayLink() {
         self.displayLink?.invalidate()
         self.displayLink = nil
     }
     
-    // MARK: - DisplayLink
     @objc func displayLinkTick() {
         guard let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem,
             let songDuration = nowPlayingItem.value(forProperty: MPMediaItemPropertyPlaybackDuration) as? TimeInterval else {
