@@ -140,6 +140,4 @@ extension ArtistsViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         self.show(viewControllerToCommit, sender: self)
     }
-    
-    
 }
