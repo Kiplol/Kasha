@@ -175,7 +175,8 @@ UICollectionViewDelegateFlowLayout {
         switch kind {
         case UICollectionElementKindSectionHeader:
             guard let title = self.sections[indexPath.section].title else {
-                assert(false, "No title for ArtistViewController section")
+                preconditionFailure("No title for ArtistViewController section")
+                
             }
             let headerView = collectionView
                 .dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader,
@@ -186,7 +187,7 @@ UICollectionViewDelegateFlowLayout {
             }
             return headerView
         default:
-            assert(false, "Unexpected element kind")
+            preconditionFailure("Unexpected element kind")
         }
     }
     
