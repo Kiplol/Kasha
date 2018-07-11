@@ -121,8 +121,12 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         albumVC.album = album
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                self.show(albumVC, sender: album)
+            })
+        } else {
+            self.show(albumVC, sender: album)
         }
-        self.show(albumVC, sender: album)
     }
     
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectArtist artist: MediaLibraryHelper.Artist) {
@@ -132,8 +136,12 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         artistVC.artist = artist
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                self.show(artistVC, sender: artist)
+            })
+        } else {
+            self.show(artistVC, sender: artist)
         }
-        self.show(artistVC, sender: artist)
     }
     
     // MARK: - Gestalt

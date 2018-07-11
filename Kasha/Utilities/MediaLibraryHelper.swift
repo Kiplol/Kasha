@@ -87,7 +87,18 @@ class MediaLibraryHelper: NSObject {
     
     func recentlyAddedAlbums() -> [Album] {
         let thirtyDaysAgo = Date().timeIntervalSince1970 - 60.0 * 60.0 * 24.0 * 30.0
-        let albums = self.allAlbums().filter { !$0.items.isEmpty && $0.items[0].dateAdded.timeIntervalSince1970 > thirtyDaysAgo }
+        var recentAlbums: [Album] = []
+        let albums = self.allAlbums()//.filter { !$0.items.isEmpty && $0.items[0].dateAdded.timeIntervalSince1970 > thirtyDaysAgo }
+        DispatchQueue.concurrentPerform(iterations: albums.count) { index in
+            let album = albums[index]
+            guard !album.items.isEmpty else {
+                return
+            }
+            let firstItem = album.items[0]
+            if firstItem.dateAdded.timeIntervalSince1970 > thirtyDaysAgo {
+                recentAlbums.append(album)
+            }
+        }
         return albums
     }
     

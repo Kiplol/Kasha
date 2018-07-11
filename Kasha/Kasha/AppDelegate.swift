@@ -83,9 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Navigation Bar
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.isTranslucent = false
-        navigationBarAppearance.barTintColor = UIColor.white
+        navigationBarAppearance.barTintColor = .white
         navigationBarAppearance.prefersLargeTitles = true
-        navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
+        navigationBarAppearance.setBackgroundImage(UIImage.from(color: .white), for: .default)
         navigationBarAppearance.shadowImage = UIImage()
         navigationBarAppearance.backgroundColor = .white
         
