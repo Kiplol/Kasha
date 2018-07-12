@@ -23,6 +23,7 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     
     // MARK: - ivars
     private var sections: [Section] = []
+    private var recentlyAddedSection: Section?
 
     // MARK: - KashaViewController
     override func commonInit() {
@@ -57,8 +58,6 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
             self.registerForPreviewing(with: self, sourceView: self.collectionView)
         }
         
-        self.populateSections()
-        
         //Collection View
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: AlbumsViewController.albumCellID)
@@ -69,6 +68,16 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         //Section Index
         self.indexView.addTarget(self, action: #selector(AlbumsViewController.indexViewValueChanged(sender:)),
                                  for: .valueChanged)
+        
+        self.populateSections()
+        DispatchQueue.global(qos: .userInitiated).async {
+            let recentlyAddedAlbums = MediaLibraryHelper.shared.recentlyAddedAlbums()
+            if !recentlyAddedAlbums.isEmpty {
+                DispatchQueue.main.async {
+                    self.populateSections(recentlyAdded: recentlyAddedAlbums)
+                }
+            }
+        }
     }
     
 //    override func viewWillLayoutSubviews() {
@@ -92,16 +101,20 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     }
     
     // MARK: - Helpers
-    private func populateSections() {
+    private func populateSections(recentlyAdded: [MediaLibraryHelper.Album]? = nil) {
         self.sections.removeAll()
         var titles: [String] = []
         
-        let recentlyAddedAlbums = MediaLibraryHelper.shared.recentlyAddedAlbums()
-        if !recentlyAddedAlbums.isEmpty {
-            let recentSection = Section(title: "Recently Added", rows: [Row(data: recentlyAddedAlbums, cellReuseIdentifier: AlbumsViewController.horizontalItemsCellID)])
+        let previouslyContainedRecentlyAddedSection = self.recentlyAddedSection != nil
+        if let recentlyAdded = recentlyAdded, !recentlyAdded.isEmpty {
+            let recentSection = Section(title: "Recently Added", rows: [Row(data: recentlyAdded, cellReuseIdentifier: AlbumsViewController.horizontalItemsCellID)])
             self.sections.append(recentSection)
+            self.recentlyAddedSection = recentSection
             titles.append("-")
+        } else {
+            self.recentlyAddedSection = nil
         }
+        let containsRecentlyAddedSection = self.recentlyAddedSection != nil
         
         let albumSections = MediaLibraryHelper.shared.allAlbumSections().map {
             Section(title: $0.title, rows: MediaLibraryHelper.shared.allAlbums(inSection: $0).map {
@@ -114,6 +127,17 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         }
         
         self.indexView.indexTitles = titles
+        self.collectionView.performBatchUpdates({
+            if previouslyContainedRecentlyAddedSection != containsRecentlyAddedSection {
+                if containsRecentlyAddedSection {
+                    self.collectionView.insertSections([0])
+                } else {
+                    self.collectionView.deleteSections([0])
+                }
+            } else {
+                
+            }
+        }, completion: nil)
     }
     
     // MARK: - UICollectionViewDataSource
@@ -134,6 +158,9 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         if let albumCell = cell as? AlbumCollectionViewCell,
             let album = row.data as? MediaLibraryHelper.Album {
             albumCell.update(withAlbum: album)
+        } else if let horizontalItemsCell = cell as? HorizontalItemsCollectionViewCell,
+            let recentlyAddedAlbums = row.data as? [MediaLibraryHelper.Album] {
+            horizontalItemsCell.horizontalItemsView.items = recentlyAddedAlbums
         }
         return cell
     }

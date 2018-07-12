@@ -22,6 +22,11 @@ class HorizontalItemsView: UIView, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: - ivars
     private var sections: [Section] = []
+    var items: [Any] = [] {
+        didSet {
+            self.populateSections()
+        }
+    }
     
     // MARK: -
     override func awakeFromNib() {
@@ -38,16 +43,25 @@ class HorizontalItemsView: UIView, UICollectionViewDataSource, UICollectionViewD
         self.collectionView.delegate = self
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let layout = self.collectionView.flowLayout {
+            layout.itemSize = CGSize(width: self.bounds.size.height, height: self.bounds.size.height)
+        }
+    }
+    
     // MARK: - Helpers
     private func populateSections() {
         self.sections.removeAll()
         
-        let albumsSection = Section(title: "Recently Added", rows: MediaLibraryHelper.shared.recentlyAddedAlbums().map {
+        let albumsSection = Section(title: "Recently Added", rows: self.items.map {
             Row(data: $0, cellReuseIdentifier: HorizontalItemsView.albumCellReuseID)
         })
         if !albumsSection.rows.isEmpty {
             self.sections.append(albumsSection)
         }
+        
+        self.collectionView.reloadData()
     }
     
     // MARK: - UICollectionViewDataSource

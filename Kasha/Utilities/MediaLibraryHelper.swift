@@ -99,7 +99,7 @@ class MediaLibraryHelper: NSObject {
                 recentAlbums.append(album)
             }
         }
-        return albums
+        return recentAlbums
     }
     
     // MARK: - Songs
