@@ -48,6 +48,7 @@ class HorizontalItemsView: UIView, UICollectionViewDataSource, UICollectionViewD
         if let layout = self.collectionView.flowLayout {
             layout.itemSize = CGSize(width: self.bounds.size.height, height: self.bounds.size.height)
         }
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: - Helpers

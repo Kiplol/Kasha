@@ -99,6 +99,7 @@ class MediaLibraryHelper: NSObject {
                 recentAlbums.append(album)
             }
         }
+        //@TODO: Sort https://stackoverflow.com/questions/29187409/sort-albums-by-artist-using-mpmediaquery
         return recentAlbums
     }
     

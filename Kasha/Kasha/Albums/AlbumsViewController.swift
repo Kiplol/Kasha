@@ -16,6 +16,7 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
     
     private static let albumCellID = "albumCellID"
     private static let horizontalItemsCellID = "horizontalItemsCellID"
+    private static let sectionHeaderID = "sectionHeaderID"
     
     // MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -64,6 +65,11 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         
         let horizontalItemsCellNib = UINib(nibName: "HorizontalItemsCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(horizontalItemsCellNib, forCellWithReuseIdentifier: AlbumsViewController.horizontalItemsCellID)
+        
+        let sectionHeaderNib = UINib(nibName: "SectionHeaderCollectionReusableView", bundle: Bundle.main)
+        self.collectionView.register(sectionHeaderNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                     withReuseIdentifier: AlbumsViewController.sectionHeaderID)
+        self.collectionView.flowLayout?.sectionHeadersPinToVisibleBounds = true
         
         //Section Index
         self.indexView.addTarget(self, action: #selector(AlbumsViewController.indexViewValueChanged(sender:)),
@@ -165,6 +171,28 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
+    // MARK: Section Headers
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            guard let title = self.sections[indexPath.section].title else {
+                preconditionFailure("No title for ArtistViewController section")
+                
+            }
+            let headerView = collectionView
+                .dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader,
+                                                  withReuseIdentifier: AlbumsViewController.sectionHeaderID,
+                                                  for: indexPath)
+            if let sectionHeaderView = headerView as? SectionHeaderCollectionReusableView {
+                sectionHeaderView.text = title
+            }
+            return headerView
+        default:
+            preconditionFailure("Unexpected element kind")
+        }
+    }
+    
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = self.sections[indexPath.section].rows[indexPath.row]
@@ -186,6 +214,14 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         } else {
             return .zero
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        guard let title = self.sections[section].title else {
+            return .zero
+        }
+        return SectionHeaderCollectionReusableView.sizeConstrained(toWidth: collectionView.usableWidth(),
+                                                                   withData: title)
     }
 }
 
