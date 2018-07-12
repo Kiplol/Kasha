@@ -252,6 +252,11 @@ extension AlbumsViewController: UIViewControllerPreviewingDelegate {
         if let album = row.data as? MediaLibraryHelper.Album {
             let albumVC = AlbumViewController.with(album: album)
             return albumVC
+        } else if let horizontalItemsCell = collectionView.cellForItem(at: indexPath) as? HorizontalItemsCollectionViewCell,
+            let innerIndexPath = horizontalItemsCell.horizontalItemsView.collectionView.indexPathForItem(at: horizontalItemsCell.horizontalItemsView.collectionView.convert(location, from: self.collectionView)),
+            let album = horizontalItemsCell.horizontalItemsView.sections[innerIndexPath.section].rows[innerIndexPath.row].data as? MediaLibraryHelper.Album {
+            let albumVC = AlbumViewController.with(album: album)
+            return albumVC
         }
         return nil
     }

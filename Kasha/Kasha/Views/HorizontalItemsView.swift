@@ -25,7 +25,7 @@ class HorizontalItemsView: UIView, UICollectionViewDataSource, UICollectionViewD
     }
     
     // MARK: - ivars
-    private var sections: [Section] = []
+    private(set) var sections: [Section] = []
     var items: [Any] = [] {
         didSet {
             self.populateSections()
