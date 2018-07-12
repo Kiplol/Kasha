@@ -48,6 +48,10 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.traitCollection.forceTouchCapability == .available {
+            self.registerForPreviewing(with: self, sourceView: self.tableView)
+        }
 
         //Table View
         let artistCellNib = UINib(nibName: "ArtistTableViewCell", bundle: Bundle.main)
@@ -120,5 +124,20 @@ extension ArtistsViewController {
     @objc func indexViewValueChanged(sender: BDKCollectionIndexView) {
         let path = IndexPath(item: 0, section: Int(sender.currentIndex))
         self.tableView.scrollToRow(at: path, at: .top, animated: false)
+    }
+}
+
+extension ArtistsViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.tableView.indexPathForRow(at: location) else {
+            return nil
+        }
+        let artist = self.artist(forIndexPath: indexPath)
+        let artistVC = ArtistViewController.with(artist: artist)
+        return artistVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.show(viewControllerToCommit, sender: self)
     }
 }

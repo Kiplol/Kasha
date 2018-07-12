@@ -10,13 +10,25 @@ import Gestalt
 
 struct Theme: ThemeProtocol {
 
-    let playerBackgroundColor: UIColor
-    let playerPrimaryColor: UIColor
-    let playerSecondaryColor: UIColor
-    let playerDetailColor: UIColor
+    let backgroundColor: UIColor
+    let playerTheme: PlayerTheme
     
-    static let light = Theme(playerBackgroundColor: .white,
-                             playerPrimaryColor: .kashaPrimary,
-                             playerSecondaryColor: .kashaSecondary,
-                             playerDetailColor: .black)
+    struct PlayerTheme {
+        let playerBackgroundColor: UIColor
+        let playerPrimaryColor: UIColor
+        let playerSecondaryColor: UIColor
+        let playerDetailColor: UIColor
+        
+        static let `default` = PlayerTheme(playerBackgroundColor: .white,
+                                           playerPrimaryColor: .kashaPrimary,
+                                           playerSecondaryColor: .kashaSecondary,
+                                           playerDetailColor: .black)
+    }
+    
+    static let light = Theme(backgroundColor: .white,
+                             playerTheme: .default)
+    
+    func copy(withPlayerTheme playerTheme: PlayerTheme) -> Theme {
+        return Theme(backgroundColor: self.backgroundColor, playerTheme: playerTheme)
+    }
 }

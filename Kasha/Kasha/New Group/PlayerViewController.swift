@@ -19,6 +19,9 @@ class PlayerViewController: KashaViewController {
     @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var buttonPause: UIButton!
     @IBOutlet weak var buttonNext: UIButton!
+    @IBOutlet weak var buttonShuffleIsOff: UIButton!
+    @IBOutlet weak var buttonShuffleIsOn: UIButton!
+    @IBOutlet weak var buttonMore: UIButton!
     @IBOutlet var allButtons: [UIButton]!
     @IBOutlet weak var labelSongTitle: UILabel!
     @IBOutlet weak var labelSongInfo: UILabel!
@@ -46,28 +49,28 @@ class PlayerViewController: KashaViewController {
     override func apply(theme: Theme) {
         super.apply(theme: theme)
         let shadowColor = self.view.backgroundColor!.isDark ? UIColor.white : UIColor.black
-        let playPauseBackgoundColor = theme.playerDetailColor.isDark ? UIColor.white : UIColor.black
+        let playPauseBackgoundColor = theme.playerTheme.playerDetailColor.isDark ? UIColor.white : UIColor.black
         [self.buttonPause, self.buttonPlay].forEach {
             $0?.backgroundColor = playPauseBackgoundColor.alpha(0.7)
         }
         self.allButtons.forEach {
-            $0.tintColor = theme.playerDetailColor
+            $0.tintColor = theme.playerTheme.playerDetailColor
             $0.layer.shadowColor = shadowColor.cgColor
         }
-        self.wavesView.waveColor = theme.playerBackgroundColor
-        self.scrollView.backgroundColor = theme.playerBackgroundColor
+        self.wavesView.waveColor = theme.playerTheme.playerBackgroundColor
+        self.scrollView.backgroundColor = theme.playerTheme.playerBackgroundColor
         
 //        self.progressSlider.thumbTintColor = theme.playerDetailColor
-        self.progressSlider.maximumTrackTintColor = theme.playerPrimaryColor
-        self.progressSlider.minimumTrackTintColor = theme.playerPrimaryColor
+        self.progressSlider.maximumTrackTintColor = theme.playerTheme.playerPrimaryColor
+        self.progressSlider.minimumTrackTintColor = theme.playerTheme.playerPrimaryColor
         
-        let labelsShadowColor = theme.playerBackgroundColor.isDark ? UIColor.black.alpha(0.3) : UIColor.white.alpha(0.3)
+        let labelsShadowColor = theme.playerTheme.playerBackgroundColor.isDark ? UIColor.black.alpha(0.3) : UIColor.white.alpha(0.3)
         [self.labelTimeRemaining, self.labelTimeElapsed].forEach {
-            $0?.textColor = theme.playerPrimaryColor
+            $0?.textColor = theme.playerTheme.playerPrimaryColor
             $0?.shadowColor = labelsShadowColor
         }
         
-        self.volumeView.tintColor = theme.playerDetailColor
+        self.volumeView.tintColor = theme.playerTheme.playerDetailColor
     }
     
     override func allowsSearch() -> Bool {
@@ -102,6 +105,7 @@ class PlayerViewController: KashaViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
+        self.updateWithShuffle(isOn: MediaLibraryHelper.shared.isShuffleOn)
     }
     
     // MARK: - User Interaction
@@ -125,6 +129,14 @@ class PlayerViewController: KashaViewController {
         MediaLibraryHelper.shared.next()
     }
     
+    @IBAction func shuffleIsOnTapped(_ sender: Any) {
+        self.updateWithShuffle(isOn: MediaLibraryHelper.shared.toggleShuffle())
+    }
+    
+    @IBAction func shuffeIsOffTapped(_ sender: Any) {
+        self.updateWithShuffle(isOn: MediaLibraryHelper.shared.toggleShuffle())
+    }
+    
     // MARK: - Helpers
     private func update(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
         guard let nowPlayingItem = nowPlayingItem else {
@@ -140,7 +152,7 @@ class PlayerViewController: KashaViewController {
             if let artist = nowPlayingItem.artist {
                 components.append(artist)
             }
-            if let album = nowPlayingItem.albumTitle {
+            if let album = nowPlayingItem.albumTitle, !album.isEmpty {
                 components.append(album)
             }
             return components.joined(separator: " - ")
@@ -163,16 +175,16 @@ class PlayerViewController: KashaViewController {
         }
     }
     
+    private func updateWithShuffle(isOn: Bool) {
+        self.buttonShuffleIsOn.isHidden = !isOn
+        self.buttonShuffleIsOff.isHidden = !self.buttonShuffleIsOn.isHidden
+    }
+    
     private func startPlaybackTracking() {
         self.buttonPlay.isHidden = true
         self.buttonPause.isHidden = false
         self.startWaveView()
         self.startDisplayLink()
-    }
-    
-    private func startDisplayLink() {
-        self.displayLink = CADisplayLink(target: self, selector: #selector(PlayerViewController.displayLinkTick))
-        self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
     }
     
     private func stopPlaybackTracking() {
@@ -182,12 +194,17 @@ class PlayerViewController: KashaViewController {
         self.stopDisplayLink()
     }
     
+    // MARK: - DisplayLink
+    private func startDisplayLink() {
+        self.displayLink = CADisplayLink(target: self, selector: #selector(PlayerViewController.displayLinkTick))
+        self.displayLink?.add(to: RunLoop.main, forMode: RunLoopMode.defaultRunLoopMode)
+    }
+    
     private func stopDisplayLink() {
         self.displayLink?.invalidate()
         self.displayLink = nil
     }
     
-    // MARK: - DisplayLink
     @objc func displayLinkTick() {
         guard let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem,
             let songDuration = nowPlayingItem.value(forProperty: MPMediaItemPropertyPlaybackDuration) as? TimeInterval else {

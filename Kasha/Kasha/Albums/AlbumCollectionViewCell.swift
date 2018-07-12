@@ -38,7 +38,7 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
     }
     
     func update(withAlbum album: MPMediaItemCollection) {
-        self.labelAlbumName.text = album.representativeItem?.albumTitle ?? "Unknown Album"
+        self.labelAlbumName.text = album.albumNameIfNotEmpty ?? "Unknown Album"
         self.labelArtistName.text = album.representativeItem?.artist ?? "Unknown Artist"
         DispatchQueue.global(qos: .default).async {
             let image = album.representativeItem?.artwork?.image(at: CGSize(width: 200.0, height: 200.0))
@@ -51,6 +51,17 @@ class AlbumCollectionViewCell: UICollectionViewCell, SelfSizing {
     func updateAsAllSongs(forArtist artist: MPMediaItemCollection) {
         self.update(withAlbum: artist)
         self.labelAlbumName.text = "All Songs"
+    }
+    
+    func updateAsUnknownAlbum(forArtist artist: MediaLibraryHelper.Artist, withSongs songs: [MediaLibraryHelper.Song]? = nil) {
+        self.labelAlbumName.text = "Unknown Album"
+        self.labelArtistName.text = artist.representativeItem?.artist ?? "Unknown Artist"
+        DispatchQueue.global(qos: .default).async {
+            let image = (songs?.first?.artwork ?? artist.representativeItem?.artwork)?.image(at: CGSize(width: 200.0, height: 200.0))
+            DispatchQueue.main.async {
+                self.imageAlbum.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
+            }
+        }
     }
     
     override func layoutSubviews() {

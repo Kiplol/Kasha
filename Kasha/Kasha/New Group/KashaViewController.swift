@@ -48,13 +48,11 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
             self.definesPresentationContext = true
         }
         
-        if let musicAwareTabBarController = self.musicAwareTabBarController {
-            if musicAwareTabBarController.miniPlayerIsHidden {
-                self.musicAwareTabBarController(musicAwareTabBarController, didHideMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
-            } else {
-                self.musicAwareTabBarController(musicAwareTabBarController, didShowMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
-            }
-        }
+        self.adjustForMusicAwareTabBarController()
+        
+//        let shadowView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.bounds.size.width, height: 5.0))
+//        shadowView.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+//        self.view.addSubview(shadowView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,6 +63,12 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         self.isFirstLayout = false
     }
     
+    override func didMove(toParentViewController parent: UIViewController?) {
+        super.didMove(toParentViewController: parent)
+        if self.musicAwareTabBarController != nil {
+            self.adjustForMusicAwareTabBarController()
+        }
+    }
     // MARK: - Intro Animation
     func doFirstLayoutAnimation() {
         //Override
@@ -74,6 +78,17 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
     func allowsSearch() -> Bool {
         //Override
         return true
+    }
+    
+    // MARK: - MusicAwareTabBarController
+    func adjustForMusicAwareTabBarController() {
+        if let musicAwareTabBarController = self.musicAwareTabBarController {
+            if musicAwareTabBarController.miniPlayerIsHidden {
+                self.musicAwareTabBarController(musicAwareTabBarController, didHideMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
+            } else {
+                self.musicAwareTabBarController(musicAwareTabBarController, didShowMiniMusicPlayerView: musicAwareTabBarController.miniPlayer)
+            }
+        }
     }
     
     // MARK: - MusicAwareTabBarControllerListener
@@ -110,8 +125,12 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         albumVC.album = album
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                navigationController.show(albumVC, sender: album)
+            })
+        } else {
+            self.show(albumVC, sender: album)
         }
-        self.show(albumVC, sender: album)
     }
     
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectArtist artist: MediaLibraryHelper.Artist) {
@@ -121,8 +140,12 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         artistVC.artist = artist
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                navigationController.show(artistVC, sender: artist)
+            })
+        } else {
+            self.show(artistVC, sender: artist)
         }
-        self.show(artistVC, sender: artist)
     }
     
     // MARK: - Gestalt

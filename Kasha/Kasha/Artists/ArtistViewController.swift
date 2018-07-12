@@ -15,6 +15,7 @@ UICollectionViewDelegateFlowLayout {
     
     private static let albumCellID = "albumCellID"
     private static let allSongsCellID = "allSongsCellID"
+    private static let unknownAlbumCellID = "unknownAlbumCellID"
     private static let sectionHeaderID = "sectionHeader"
     
     // MARK: - IBOutlets
@@ -28,6 +29,35 @@ UICollectionViewDelegateFlowLayout {
         }
     }
     private var sections: [Section] = []
+    override var previewActionItems: [UIPreviewActionItem] {
+        let playAllPreviewAction = UIPreviewAction(title: "Play All", style: .default) { _, _ in
+            let allSongs = MediaLibraryHelper.shared.allSongs(forArtist: self.artist)
+            if let firstSong = allSongs.first {
+                MediaLibraryHelper.shared.turnOnShuffle()
+                MediaLibraryHelper.shared.play(firstSong, inQueue: allSongs)
+            }
+        }
+        let shuffleAllPreviewAction = UIPreviewAction(title: "Shuffle All", style: .default) { _, _ in
+            let allSongs = MediaLibraryHelper.shared.allSongs(forArtist: self.artist)
+            guard !allSongs.isEmpty else {
+                return
+            }
+            let randomIndex = Int(arc4random_uniform(UInt32(allSongs.count)))
+            let song = allSongs[randomIndex]
+            MediaLibraryHelper.shared.play(song, inQueue: allSongs)
+            MediaLibraryHelper.shared.turnOnShuffle()
+        }
+        return [playAllPreviewAction, shuffleAllPreviewAction]
+    }
+    
+    class func with(artist: MediaLibraryHelper.Artist) -> ArtistViewController {
+        guard let artistVC = UIStoryboard(name: "Main", bundle: Bundle.main)
+            .instantiateViewController(withIdentifier: "artist") as? ArtistViewController else {
+                preconditionFailure("Couldn't instantiate a ArtistViewController from storyboard")
+        }
+        artistVC.artist = artist
+        return artistVC
+    }
     
     // MARK: - KashaViewController
     override func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
@@ -37,11 +67,16 @@ UICollectionViewDelegateFlowLayout {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.traitCollection.forceTouchCapability == .available {
+            self.registerForPreviewing(with: self, sourceView: self.collectionView)
+        }
 
         //Collection View
         let albumCellNib = UINib(nibName: "AlbumCollectionViewCell", bundle: Bundle.main)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: ArtistViewController.albumCellID)
         self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: ArtistViewController.allSongsCellID)
+        self.collectionView.register(albumCellNib, forCellWithReuseIdentifier: ArtistViewController.unknownAlbumCellID)
         
         let sectionHeaderNib = UINib(nibName: "SectionHeaderCollectionReusableView", bundle: Bundle.main)
         self.collectionView.register(sectionHeaderNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
@@ -91,6 +126,14 @@ UICollectionViewDelegateFlowLayout {
             })
             self.sections.append(albumsSection)
         }
+        
+        // Unknown Album
+        let songsFromUnknownAlbums = MediaLibraryHelper.shared.allSongsForUnknownAlbum(forArtist: self.artist)
+        if !songsFromUnknownAlbums.isEmpty {
+            let unknownAlbumSection = Section(title: "Unknown Album", rows: [Row(data: songsFromUnknownAlbums,
+                                                                                cellReuseIdentifier: ArtistViewController.unknownAlbumCellID)])
+            self.sections.append(unknownAlbumSection)
+        }
     }
     
     // MARK: - UICollectionViewDataSource
@@ -117,6 +160,8 @@ UICollectionViewDelegateFlowLayout {
                 if let album = row.data as? MediaLibraryHelper.Album {
                     albumCell.update(withAlbum: album)
                 }
+            case ArtistViewController.unknownAlbumCellID:
+                albumCell.updateAsUnknownAlbum(forArtist: self.artist, withSongs: row.data as? [MediaLibraryHelper.Song])
             default:
                 break
             }
@@ -130,7 +175,8 @@ UICollectionViewDelegateFlowLayout {
         switch kind {
         case UICollectionElementKindSectionHeader:
             guard let title = self.sections[indexPath.section].title else {
-                assert(false, "No title for ArtistViewController section")
+                preconditionFailure("No title for ArtistViewController section")
+                
             }
             let headerView = collectionView
                 .dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader,
@@ -141,7 +187,7 @@ UICollectionViewDelegateFlowLayout {
             }
             return headerView
         default:
-            assert(false, "Unexpected element kind")
+            preconditionFailure("Unexpected element kind")
         }
     }
     
@@ -166,4 +212,27 @@ UICollectionViewDelegateFlowLayout {
                                                                    withData: title)
     }
 
+}
+
+extension ArtistViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = self.collectionView.indexPathForItem(at: location) else {
+            return nil
+        }
+        
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        if let album = row.data as? MediaLibraryHelper.Album {
+            return AlbumViewController.with(album: album)
+        } else if let songs = row.data as? [MediaLibraryHelper.Song] {
+            let albumVC = AlbumViewController.with(songs: songs)
+            albumVC.title = self.title
+            return albumVC
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.show(viewControllerToCommit, sender: self)
+    }
+    
 }

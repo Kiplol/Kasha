@@ -27,6 +27,9 @@ class MediaLibraryHelper: NSObject {
             self.musicPlayer.setQueue(with: self.queue)
         }
     }
+    var isShuffleOn: Bool {
+        return self.musicPlayer.shuffleMode != .off
+    }
     
     // MARK: - Initializers
     override init() {
@@ -79,12 +82,23 @@ class MediaLibraryHelper: NSObject {
         let albumsQuery = MPMediaQuery.albums()
         albumsQuery.addFilterPredicate(MPMediaPropertyPredicate(value: artistID,
                                                                 forProperty: MPMediaItemPropertyArtistPersistentID))
-        return albumsQuery.collections ?? []
+        return albumsQuery.collections?.filter { $0.albumNameIfNotEmpty != nil } ?? []
     }
     
     func recentlyAddedAlbums() -> [Album] {
         let thirtyDaysAgo = Date().timeIntervalSince1970 - 60.0 * 60.0 * 24.0 * 30.0
-        let albums = self.allAlbums().filter { !$0.items.isEmpty && $0.items[0].dateAdded.timeIntervalSince1970 > thirtyDaysAgo }
+        var recentAlbums: [Album] = []
+        let albums = self.allAlbums()//.filter { !$0.items.isEmpty && $0.items[0].dateAdded.timeIntervalSince1970 > thirtyDaysAgo }
+        DispatchQueue.concurrentPerform(iterations: albums.count) { index in
+            let album = albums[index]
+            guard !album.items.isEmpty else {
+                return
+            }
+            let firstItem = album.items[0]
+            if firstItem.dateAdded.timeIntervalSince1970 > thirtyDaysAgo {
+                recentAlbums.append(album)
+            }
+        }
         return albums
     }
     
@@ -102,6 +116,16 @@ class MediaLibraryHelper: NSObject {
         let songQuery = MPMediaQuery.songs()
         songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: albumID,
                                                               forProperty: MPMediaItemPropertyAlbumPersistentID))
+        return songQuery.items ?? []
+    }
+    
+    func allSongsForUnknownAlbum(forArtist artist: MPMediaItemCollection) -> [Song] {
+        let artistID = artist.persistentID
+        let albumName = ""
+        let songQuery = MPMediaQuery.songs()
+        songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: artistID, forProperty: MPMediaItemPropertyArtistPersistentID))
+        songQuery.addFilterPredicate(MPMediaPropertyPredicate(value: albumName,
+                                                              forProperty: MPMediaItemPropertyAlbumTitle))
         return songQuery.items ?? []
     }
     
@@ -177,6 +201,25 @@ class MediaLibraryHelper: NSObject {
         self.musicPlayer.skipToPreviousItem()
     }
     
+    func toggleShuffle() -> Bool {
+        switch self.musicPlayer.shuffleMode {
+        case .off:
+            self.turnOnShuffle()
+            return true
+        default:
+            self.tunOffShuffle()
+            return false
+        }
+    }
+    
+    func turnOnShuffle() {
+        self.musicPlayer.shuffleMode = .songs
+    }
+    
+    func tunOffShuffle() {
+        self.musicPlayer.shuffleMode = .off
+    }
+    
     // MARK: - Search
     func searh(for query: String, completion: @escaping ([Song], [Album], [Artist]) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
@@ -226,8 +269,9 @@ class MediaLibraryHelper: NSObject {
                 return
             }
             let (background, primary, secondary, detail) = image.colors()
-            let newTheme = Theme(playerBackgroundColor: background, playerPrimaryColor: primary,
+            let newPlayerTheme = Theme.PlayerTheme(playerBackgroundColor: background, playerPrimaryColor: primary,
                                  playerSecondaryColor: secondary, playerDetailColor: detail)
+            let newTheme = (ThemeManager.default.theme as? Theme ?? Theme.light).copy(withPlayerTheme: newPlayerTheme)
             ThemeManager.default.theme = newTheme
         }
     }
@@ -252,4 +296,13 @@ extension MediaLibraryHelper.PlaylistFolder {
         return (self.value(forProperty: MPMediaPlaylistPropertyName) as? String) ?? "Unknown Playlist"
     }
     
+}
+
+extension MediaLibraryHelper.Album {
+    var albumNameIfNotEmpty: String? {
+        guard let albumName = self.representativeItem?.albumTitle, !albumName.isEmpty else {
+            return nil
+        }
+        return albumName
+    }
 }
