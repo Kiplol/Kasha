@@ -86,21 +86,29 @@ class MediaLibraryHelper: NSObject {
     }
     
     func recentlyAddedAlbums() -> [Album] {
-        let thirtyDaysAgo = Date().timeIntervalSince1970 - 60.0 * 60.0 * 24.0 * 30.0
+        let thirtyDaysAgo = Date().timeIntervalSince1970 - 60.0 * 60.0 * 24.0 * 300.0
         var recentAlbums: [Album] = []
         let albums = self.allAlbums()//.filter { !$0.items.isEmpty && $0.items[0].dateAdded.timeIntervalSince1970 > thirtyDaysAgo }
         DispatchQueue.concurrentPerform(iterations: albums.count) { index in
             let album = albums[index]
-            guard !album.items.isEmpty else {
+            guard let representativeItem = album.representativeItem else {
                 return
             }
-            let firstItem = album.items[0]
-            if firstItem.dateAdded.timeIntervalSince1970 > thirtyDaysAgo {
+            if representativeItem.dateAdded.timeIntervalSince1970 > thirtyDaysAgo {
                 recentAlbums.append(album)
             }
         }
-        //@TODO: Sort https://stackoverflow.com/questions/29187409/sort-albums-by-artist-using-mpmediaquery
-        return recentAlbums
+        return recentAlbums.sorted(by: { album1, album2 -> Bool in
+            guard let representativeItem1 = album1.representativeItem,
+                let representativeItem2 = album2.representativeItem else {
+                    if album1.representativeItem != nil {
+                        return true
+                    } else {
+                        return false
+                    }
+            }
+            return representativeItem1.dateAdded.timeIntervalSince1970 > representativeItem2.dateAdded.timeIntervalSince1970
+        })
     }
     
     // MARK: - Songs
