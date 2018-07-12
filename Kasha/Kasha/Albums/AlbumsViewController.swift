@@ -12,7 +12,8 @@ import SwiftIcons
 import UIKit
 import ViewAnimator
 
-class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UICollectionViewDelegate,
+UICollectionViewDelegateFlowLayout, HorizontalItemsViewDelegate {
     
     private static let albumCellID = "albumCellID"
     private static let horizontalItemsCellID = "horizontalItemsCellID"
@@ -167,6 +168,7 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         } else if let horizontalItemsCell = cell as? HorizontalItemsCollectionViewCell,
             let recentlyAddedAlbums = row.data as? [MediaLibraryHelper.Album] {
             horizontalItemsCell.horizontalItemsView.items = recentlyAddedAlbums
+            horizontalItemsCell.horizontalItemsView.delegate = self
         }
         return cell
     }
@@ -222,6 +224,13 @@ class AlbumsViewController: KashaViewController, UICollectionViewDataSource, UIC
         }
         return SectionHeaderCollectionReusableView.sizeConstrained(toWidth: collectionView.usableWidth(),
                                                                    withData: title)
+    }
+    
+    // MARK: - HorizontalItemsViewDelegate
+    func horizontalItemsView(_ horizontalItemsView: HorizontalItemsView, didSelectItem item: Any) {
+        if let album = item as? MediaLibraryHelper.Album {
+            self.performSegue(withIdentifier: "albumsToAlbum", sender: album)
+        }
     }
 }
 

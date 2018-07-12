@@ -14,6 +14,6 @@ class HorizontalItemsCollectionViewCell: UICollectionViewCell, SelfSizing {
     
     // MARK: - SelfSizing
     static func sizeConstrained(toWidth width: CGFloat, withData: Any?) -> CGSize {
-        return CGSize(width: width, height: 120.0)
+        return CGSize(width: width, height: 150.0)
     }
 }

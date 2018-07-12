@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol HorizontalItemsViewDelegate: class {
+    func horizontalItemsView(_ horizontalItemsView: HorizontalItemsView, didSelectItem item: Any)
+}
+
 class HorizontalItemsView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
 
     private static let albumCellReuseID = "albumCellID"
@@ -27,12 +31,14 @@ class HorizontalItemsView: UIView, UICollectionViewDataSource, UICollectionViewD
             self.populateSections()
         }
     }
+    weak var delegate: HorizontalItemsViewDelegate?
     
     // MARK: -
     override func awakeFromNib() {
         super.awakeFromNib()
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        layout.sectionInset.bottom = 10.0
         self.collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
         self.collectionView.backgroundColor = .clear
         self.collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -46,7 +52,11 @@ class HorizontalItemsView: UIView, UICollectionViewDataSource, UICollectionViewD
     override func layoutSubviews() {
         super.layoutSubviews()
         if let layout = self.collectionView.flowLayout {
-            layout.itemSize = CGSize(width: self.bounds.size.height, height: self.bounds.size.height)
+            var usableHeight = self.collectionView.bounds.size.height
+            if let layout = self.collectionView.flowLayout {
+                usableHeight -= (layout.sectionInset.bottom + layout.sectionInset.top)
+            }
+            layout.itemSize = CGSize(width: usableHeight, height: usableHeight)
         }
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
@@ -84,5 +94,11 @@ class HorizontalItemsView: UIView, UICollectionViewDataSource, UICollectionViewD
     }
     
     // MARK: - UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = self.sections[indexPath.section].rows[indexPath.row].data else {
+            return
+        }
+        self.delegate?.horizontalItemsView(self, didSelectItem: item)
+    }
     
 }
