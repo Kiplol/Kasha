@@ -239,6 +239,8 @@ extension AlbumsViewController {
     @objc func indexViewValueChanged(sender: BDKCollectionIndexView) {
         let path = IndexPath(item: 0, section: Int(sender.currentIndex))
         self.collectionView.scrollToItem(at: path, at: .top, animated: false)
+        let newYOffset = self.collectionView.contentOffset.y - SectionHeaderCollectionReusableView.sizeConstrained(toWidth: self.collectionView.bounds.size.width, withData: nil).height
+        self.collectionView.setContentOffset(CGPoint(x: 0.0, y: newYOffset), animated: false)
     }
 }
 
