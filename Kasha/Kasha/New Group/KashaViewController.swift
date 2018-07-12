@@ -49,6 +49,10 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         }
         
         self.adjustForMusicAwareTabBarController()
+        
+//        let shadowView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.bounds.size.width, height: 5.0))
+//        shadowView.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+//        self.view.addSubview(shadowView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -122,7 +126,7 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                self.show(albumVC, sender: album)
+                navigationController.show(albumVC, sender: album)
             })
         } else {
             self.show(albumVC, sender: album)
@@ -137,7 +141,7 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                self.show(artistVC, sender: artist)
+                navigationController.show(artistVC, sender: artist)
             })
         } else {
             self.show(artistVC, sender: artist)

@@ -85,12 +85,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.isTranslucent = false
         navigationBarAppearance.barTintColor = .white
         navigationBarAppearance.prefersLargeTitles = true
-        navigationBarAppearance.setBackgroundImage(UIImage.from(color: .white), for: .default)
-        navigationBarAppearance.shadowImage = UIImage()
+        navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
         navigationBarAppearance.backgroundColor = .white
-        
         UINavigationBar.appearance().largeTitleTextAttributes =
             [NSAttributedStringKey.foregroundColor: UIColor.kashaPrimary]
+        
+        UISearchBar.appearance().backgroundColor = .white
         
         // Tab Bar
         let tabBarAppearance = UITabBar.appearance()
