@@ -90,6 +90,22 @@ class KashaTableViewCell: UITableViewCell, SelfSizing {
         self.labelDetails.isHidden = false
     }
     
+    func update(withPlaylist playlist: MediaLibraryHelper.Playlist) {
+        self.labelTitle.text = playlist.name
+        self.updateDetailLabel(withPlaylist: playlist)
+        DispatchQueue.global(qos: .default).async {
+            let image = playlist.representativeItem?.artwork?.image(at: CGSize(width: 80.0, height: 80.0))
+            DispatchQueue.main.async {
+                self.imageAlbum.image = image ?? #imageLiteral(resourceName: "placeholder-artwork")
+            }
+        }
+    }
+    
+    private func updateDetailLabel(withPlaylist playlist: MediaLibraryHelper.Playlist) {
+        self.labelDetails.text = "\(playlist.items.count) songs"
+        self.labelDetails.isHidden = false
+    }
+    
     // MARK: - SelfSizing
     static func sizeConstrained(toWidth width: CGFloat, withData: Any?) -> CGSize {
         return CGSize(width: width, height: 70.0)

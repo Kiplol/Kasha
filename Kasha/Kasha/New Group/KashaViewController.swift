@@ -148,6 +148,22 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         }
     }
     
+    func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectPlaylist playlist: MediaLibraryHelper.Playlist) {
+        guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
+            preconditionFailure("Couldn't instantiant an ArtistViewController from its storyboard.")
+        }
+        albumVC.songs = playlist.items
+        albumVC.title = playlist.name
+        if let navigationController = self.navigationController {
+            navigationController.popToRootViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
+                navigationController.show(albumVC, sender: playlist)
+            })
+        } else {
+            self.show(albumVC, sender: playlist)
+        }
+    }
+    
     // MARK: - Gestalt
     func apply(theme: Theme) {
         //Override

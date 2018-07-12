@@ -11,6 +11,7 @@ import UIKit
 protocol SearchResultsViewControllerDelegate: class {
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectAlbum album: MediaLibraryHelper.Album)
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectArtist artist: MediaLibraryHelper.Artist)
+    func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectPlaylist playlist: MediaLibraryHelper.Playlist)
 }
 
 class SearchResultsViewController: KashaViewController, UISearchResultsUpdating {
@@ -18,6 +19,7 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
     private static let songCellID = "songCellID"
     private static let artistCellID = "artistCellID"
     private static let albumCellID = "albumCellID"
+    private static let playlistCellID = "playlistCellID"
     private static let maxResultPerSection = 6
     
     // MARK: - ivars
@@ -25,6 +27,7 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
     var songs: [MediaLibraryHelper.Song] = []
     var albums: [MediaLibraryHelper.Album] = []
     var artists: [MediaLibraryHelper.Artist] = []
+    var playlists: [MediaLibraryHelper.Playlist] = []
     private var sections: [Section] = []
     weak var delegate: SearchResultsViewControllerDelegate?
     
@@ -43,6 +46,7 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
         let songCellNib = UINib(nibName: "KashaTableViewCell", bundle: Bundle.main)
         self.tableView.register(songCellNib, forCellReuseIdentifier: SearchResultsViewController.songCellID)
         self.tableView.register(songCellNib, forCellReuseIdentifier: SearchResultsViewController.albumCellID)
+        self.tableView.register(songCellNib, forCellReuseIdentifier: SearchResultsViewController.playlistCellID)
         
         let artistCellNib = UINib(nibName: "ArtistTableViewCell", bundle: Bundle.main)
         self.tableView.register(artistCellNib, forCellReuseIdentifier: SearchResultsViewController.artistCellID)
@@ -76,6 +80,12 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
             self.sections.append(songsSection)
         }
         
+        if !self.playlists.isEmpty {
+            let playlistsSection = Section(title: "Playlists", rows: self.playlists.map {
+                Row(data: $0, cellReuseIdentifier: SearchResultsViewController.playlistCellID)
+            })
+            self.sections.append(playlistsSection)
+        }
         if self.isViewLoaded {
             self.tableView.reloadData()
         }
@@ -87,10 +97,11 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
             self.viewIfLoaded?.isHidden = true
             return
         }
-        MediaLibraryHelper.shared.searh(for: query) { songs, albums, artists in
+        MediaLibraryHelper.shared.searh(for: query) { songs, albums, artists, playlists in
             self.songs = songs
             self.albums = albums
             self.artists = artists
+            self.playlists = playlists
             self.populateSections()
             self.viewIfLoaded?.isHidden = self.sections.isEmpty
         }
@@ -114,16 +125,30 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
         let row = self.sections[indexPath.section].rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: row.cellReuseIdentifier, for: indexPath)
         
-        if let songCell = cell as? KashaTableViewCell, let song = row.data as? MediaLibraryHelper.Song {
-            songCell.update(withSong: song)
-            songCell.selectionDisplayStyle = .nowPlaying
-        } else if let artistCell = cell as? ArtistTableViewCell, let artist = row.data as? MediaLibraryHelper.Artist {
-            artistCell.update(withArtist: artist)
-        } else if let albumCell = cell as? KashaTableViewCell, let album = row.data as? MediaLibraryHelper.Album {
-            albumCell.update(withAlbum: album)
-            albumCell.selectionDisplayStyle = .default
+        switch row.cellReuseIdentifier {
+        case SearchResultsViewController.songCellID:
+            if let songCell = cell as? KashaTableViewCell, let song = row.data as? MediaLibraryHelper.Song {
+                songCell.update(withSong: song)
+                songCell.selectionDisplayStyle = .nowPlaying
+            }
+        case SearchResultsViewController.artistCellID:
+            if let artistCell = cell as? ArtistTableViewCell, let artist = row.data as? MediaLibraryHelper.Artist {
+                artistCell.update(withArtist: artist)
+            }
+        case SearchResultsViewController.albumCellID:
+            if let albumCell = cell as? KashaTableViewCell, let album = row.data as? MediaLibraryHelper.Album {
+                albumCell.update(withAlbum: album)
+                albumCell.selectionDisplayStyle = .default
+            }
+        case SearchResultsViewController.playlistCellID:
+            if let playlistCell = cell as? KashaTableViewCell, let playlist = row.data as? MediaLibraryHelper.Playlist {
+                playlistCell.update(withPlaylist: playlist)
+                playlistCell.selectionDisplayStyle = .default
+            }
+        default:
+            break
         }
- 
+        
         return cell
     }
     
@@ -145,14 +170,26 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = self.sections[indexPath.section].rows[indexPath.row]
-        if let song = row.data as? MediaLibraryHelper.Song {
-            MediaLibraryHelper.shared.play(song)
-        } else if let artist = row.data as? MediaLibraryHelper.Artist,
-            row.cellReuseIdentifier == SearchResultsViewController.artistCellID {
-            self.delegate?.searchResultsViewController(self, didSelectArtist: artist)
-        } else if let album = row.data as? MediaLibraryHelper.Album,
-            row.cellReuseIdentifier == SearchResultsViewController.albumCellID {
-            self.delegate?.searchResultsViewController(self, didSelectAlbum: album)
+        
+        switch row.cellReuseIdentifier {
+        case SearchResultsViewController.songCellID:
+            if let song = row.data as? MediaLibraryHelper.Song {
+                MediaLibraryHelper.shared.play(song)
+            }
+        case SearchResultsViewController.artistCellID:
+            if let artist = row.data as? MediaLibraryHelper.Artist {
+                self.delegate?.searchResultsViewController(self, didSelectArtist: artist)
+            }
+        case SearchResultsViewController.albumCellID:
+            if let album = row.data as? MediaLibraryHelper.Album {
+               self.delegate?.searchResultsViewController(self, didSelectAlbum: album)
+            }
+        case SearchResultsViewController.playlistCellID:
+            if let playlist = row.data as? MediaLibraryHelper.Playlist {
+                self.delegate?.searchResultsViewController(self, didSelectPlaylist: playlist)
+            }
+        default:
+            break
         }
     }
 }

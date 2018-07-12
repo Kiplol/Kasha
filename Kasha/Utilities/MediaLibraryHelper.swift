@@ -230,7 +230,7 @@ class MediaLibraryHelper: NSObject {
     }
     
     // MARK: - Search
-    func searh(for query: String, completion: @escaping ([Song], [Album], [Artist]) -> Void) {
+    func searh(for query: String, completion: @escaping ([Song], [Album], [Artist], [Playlist]) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
             let songsQuery = MPMediaQuery.songs()
             songsQuery.addFilterPredicate(MPMediaPropertyPredicate(value: query,
@@ -251,10 +251,10 @@ class MediaLibraryHelper: NSObject {
             playlistQuery.addFilterPredicate(MPMediaPropertyPredicate(value: query,
                                                                       forProperty: MPMediaPlaylistPropertyName,
                                                                       comparisonType: .contains))
-            let playlists = (playlistQuery.collections ?? []).filter { $0.count > 0 }
+            let playlists = (playlistQuery.collections ?? []).filter { $0.count > 0 } as? [Playlist] ?? []
             
             DispatchQueue.main.async {
-                completion(songsQuery.items ?? [], albumsQuery.collections ?? [], artistQuery.collections ?? [])
+                completion(songsQuery.items ?? [], albumsQuery.collections ?? [], artistQuery.collections ?? [], playlists)
             }
         }
     }
