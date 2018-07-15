@@ -238,19 +238,35 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bgl-Pi-T8E" userLabel="Labels">
-                                                        <rect key="frame" x="154.5" y="295" width="26" height="48"/>
+                                                        <rect key="frame" x="0.0" y="295" width="335" height="48"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8z-yQ-e18" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="26" height="25.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="25.5"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWh-1j-dbl" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                                <rect key="frame" x="0.0" y="27.5" width="26" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="27.5" width="335" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </label>
                                                         </subviews>
                                                         <constraints>
@@ -417,6 +433,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHA-pc-v3L">
                                                                 <rect key="frame" x="291" y="0.0" width="44" height="44"/>
                                                                 <state key="normal" image="more"/>
+                                                                <connections>
+                                                                    <action selector="moreTapped:" destination="adD-Z6-8SG" eventType="touchUpInside" id="N0i-du-Mbf"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>

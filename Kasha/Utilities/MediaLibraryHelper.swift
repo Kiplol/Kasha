@@ -85,6 +85,13 @@ class MediaLibraryHelper: NSObject {
         return albumsQuery.collections?.filter { $0.albumNameIfNotEmpty != nil } ?? []
     }
     
+    func album(with persistentAlbumID: MPMediaEntityPersistentID) -> Album? {
+        let query = MPMediaQuery.albums()
+        query.addFilterPredicate(MPMediaPropertyPredicate(value: persistentAlbumID,
+                                                          forProperty: MPMediaItemPropertyAlbumPersistentID))
+        return (query.collections?.filter { $0.albumNameIfNotEmpty != nil } ?? []).first
+    }
+    
     func recentlyAddedAlbums() -> [Album] {
         let ninetyDaysAgo = Date().timeIntervalSince1970 - 60.0 * 60.0 * 24.0 * 90.0
         var recentAlbums: [Album] = []

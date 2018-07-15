@@ -137,6 +137,26 @@ class PlayerViewController: KashaViewController {
         self.updateWithShuffle(isOn: MediaLibraryHelper.shared.toggleShuffle())
     }
     
+    @IBAction func moreTapped(_ sender: Any) {
+        let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem
+        let alert = UIAlertController(title: nowPlayingItem?.title ?? "", message: nil, preferredStyle: .actionSheet)
+        if let albumPersistedID = nowPlayingItem?.albumPersistentID,
+            let album = MediaLibraryHelper.shared.album(with: albumPersistedID) {
+            let goToAlbumAction = UIAlertAction(title: "Go to Album", style: .default) { _ in
+                AppDelegate.instance.show(album: album)
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(goToAlbumAction)
+        }
+        let goToArtistAction = UIAlertAction(title: "Go to Artist", style: .default) { _ in
+            //@TODO
+        }
+        
+        alert.addAction(goToArtistAction)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - Helpers
     private func update(withNowPlayingItem nowPlayingItem: MediaLibraryHelper.Song?) {
         guard let nowPlayingItem = nowPlayingItem else {

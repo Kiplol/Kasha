@@ -75,6 +75,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // MARK: - Navigation
+    func show(album: MediaLibraryHelper.Album) -> AlbumViewController? {
+        guard let tabBarController = self.window?.rootViewController as? MusicAwareTabBarController,
+        let viewControllers = tabBarController.viewControllers else {
+            return nil
+        }
+
+        let albumsVCOptional = viewControllers.map { ($0 as? UINavigationController)?.viewControllers.first ?? $0 }
+            .filter { $0 is AlbumsViewController }
+            .first as? AlbumsViewController
+        
+        guard let albumsVC = albumsVCOptional else {
+            return nil
+        }
+        let indexOfAlbumsVC: Int? = {
+            if let indexOfVC = viewControllers.index(of: albumsVC) {
+                return indexOfVC
+            } else if let navigationController = albumsVC.navigationController {
+                return viewControllers.index(of: navigationController)
+            } else {
+                return nil
+            }
+        }()
+        if let indexOfAlbumsVC = indexOfAlbumsVC {
+            tabBarController.selectedIndex = indexOfAlbumsVC
+        }
+        
+        albumsVC.navigationController?.popToRootViewController(animated: false)
+        let albumVC = AlbumViewController.fromStoryboard()
+        albumVC.album = album
+        albumsVC.show(albumVC, sender: album)
+        return albumVC
+    }
+    
     // MARK: - Private
     func setupAppearance() {
         // Window
