@@ -76,6 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - Navigation
+    @discardableResult
     func show(album: MediaLibraryHelper.Album) -> AlbumViewController? {
         guard let tabBarController = self.window?.rootViewController as? MusicAwareTabBarController,
         let viewControllers = tabBarController.viewControllers else {
@@ -105,7 +106,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         albumsVC.navigationController?.popToRootViewController(animated: false)
         let albumVC = AlbumViewController.fromStoryboard()
         albumVC.album = album
-        albumsVC.show(albumVC, sender: album)
+        if let navigationController = albumsVC.navigationController {
+            navigationController.pushViewController(albumVC, animated: false)
+        } else {
+            albumsVC.show(albumVC, sender: album)
+        }
         return albumVC
     }
     

@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import DeckTransition
 import MediaPlayer
 import UIKit
 
@@ -144,6 +145,7 @@ class PlayerViewController: KashaViewController {
             let album = MediaLibraryHelper.shared.album(with: albumPersistedID) {
             let goToAlbumAction = UIAlertAction(title: "Go to Album", style: .default) { _ in
                 AppDelegate.instance.show(album: album)
+                (self.presentationController as? DeckSnapshotUpdater)?.requestPresentedViewSnapshotUpdate()
                 self.presentingViewController?.dismiss(animated: true, completion: nil)
             }
             alert.addAction(goToAlbumAction)
