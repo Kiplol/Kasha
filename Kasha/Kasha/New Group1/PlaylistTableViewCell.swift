@@ -21,7 +21,8 @@ class PlaylistTableViewCell: UITableViewCell, SelfSizing {
         super.awakeFromNib()
         ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
             themeable.backgroundColor = theme.backgroundColor
-            
+            themeable.labelTitle.textColor = theme.textColor
+            themeable.labelDetails.textColor = theme.detailTextColor
         }
     }
     

@@ -20,6 +20,7 @@ class ArtistTableViewCell: UITableViewCell, SelfSizing {
         super.awakeFromNib()
         ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
             themeable.backgroundColor = theme.backgroundColor
+            themeable.labelArtistName.textColor = theme.textColor
         }
     }
     

@@ -51,6 +51,9 @@ class PlayerViewController: KashaViewController {
         super.apply(theme: theme)
         self.topBackgroundView.backgroundColor = theme.backgroundColor
         self.artworkContainer.backgroundColor = theme.backgroundColor
+        self.labelSongTitle.textColor = theme.textColor
+        self.labelSongInfo.textColor = theme.detailTextColor
+        
         let shadowColor = self.view.backgroundColor!.isDark ? UIColor.white : UIColor.black
         let playPauseBackgoundColor = theme.playerTheme.playerDetailColor.isDark ? UIColor.white : UIColor.black
         [self.buttonPause, self.buttonPlay].forEach {
