@@ -162,3 +162,14 @@ extension Array where Element: UIViewController {
     }
     
 }
+
+extension UIWindow {
+    
+    func removeAndReaddAllSubviews() {
+        self.subviews.forEach {
+            $0.removeFromSuperview()
+            self.addSubview($0)
+        }
+    }
+    
+}

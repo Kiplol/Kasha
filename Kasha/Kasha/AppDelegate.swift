@@ -127,14 +127,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Navigation Bar
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.isTranslucent = false
-        navigationBarAppearance.barTintColor = .white
         navigationBarAppearance.prefersLargeTitles = true
         navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
-        navigationBarAppearance.backgroundColor = .white
         UINavigationBar.appearance().largeTitleTextAttributes =
             [NSAttributedStringKey.foregroundColor: UIColor.kashaPrimary]
-        
-        UISearchBar.appearance().backgroundColor = .white
         
         // Tab Bar
         let tabBarAppearance = UITabBar.appearance()
@@ -152,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         volumeSliderAppearance.maximumValueImage = #imageLiteral(resourceName: "volume_up")
         volumeSliderAppearance.minimumValueImage = #imageLiteral(resourceName: "volume_down")
         
-        ThemeManager.default.apply(theme: Theme.self, to: self) { _, theme in
+        ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
             let navigationBarAppearance = UINavigationBar.appearance()
             navigationBarAppearance.barTintColor = theme.backgroundColor
             navigationBarAppearance.backgroundColor = theme.backgroundColor
@@ -160,6 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UISearchBar.appearance().backgroundColor = theme.backgroundColor
             UITabBar.appearance().barTintColor = theme.backgroundColor
             UIApplication.shared.statusBarStyle = theme.statusBarStyle
+            themeable.window?.removeAndReaddAllSubviews()
         }
     }
     
@@ -171,7 +168,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ])
         
         // Gestalt
-        ThemeManager.default.theme = Theme.light
+        let defaultTheme = SettingsBundleHelper.shared.isDarkModeOn ? Theme.dark : Theme.light
+        ThemeManager.default.theme = defaultTheme
     }
 
 }

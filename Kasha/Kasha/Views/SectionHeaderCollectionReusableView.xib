@@ -35,7 +35,7 @@
                             <constraint firstItem="HdB-2I-lbs" firstAttribute="leading" secondItem="UiC-gQ-Tsy" secondAttribute="leading" constant="12" id="rwg-zL-WhC"/>
                         </constraints>
                     </view>
-                    <blurEffect style="light"/>
+                    <blurEffect style="regular"/>
                 </visualEffectView>
             </subviews>
             <constraints>

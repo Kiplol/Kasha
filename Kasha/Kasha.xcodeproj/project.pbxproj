@@ -51,6 +51,8 @@
 		37A9DC3320E87A5B00E5C43E /* MiniMusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A9DC3220E87A5B00E5C43E /* MiniMusicPlayerView.swift */; };
 		37A9DC3520E87A6C00E5C43E /* MiniMusicPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37A9DC3420E87A6C00E5C43E /* MiniMusicPlayerView.xib */; };
 		37B2FFEB20F174340082E15E /* WavesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37B2FFEA20F174340082E15E /* WavesView.swift */; };
+		37E351DC21012FB70008F3D6 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37E351DB21012FB70008F3D6 /* Settings.bundle */; };
+		37E351DE21012FF20008F3D6 /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E351DD21012FF20008F3D6 /* SettingsBundleHelper.swift */; };
 		D048B88C7F74CC64987477FC /* Pods_Kasha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +104,8 @@
 		37A9DC3220E87A5B00E5C43E /* MiniMusicPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniMusicPlayerView.swift; sourceTree = "<group>"; };
 		37A9DC3420E87A6C00E5C43E /* MiniMusicPlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MiniMusicPlayerView.xib; sourceTree = "<group>"; };
 		37B2FFEA20F174340082E15E /* WavesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WavesView.swift; sourceTree = "<group>"; };
+		37E351DB21012FB70008F3D6 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		37E351DD21012FF20008F3D6 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		75F671CB85BAE2BF6E077436 /* Pods_Kasha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kasha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8BEC05F0D04AC44F3C787F /* Pods-Kasha.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kasha.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kasha/Pods-Kasha.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +145,7 @@
 		37066A5320C6270C0021D0A5 /* Kasha */ = {
 			isa = PBXGroup;
 			children = (
+				37E351DB21012FB70008F3D6 /* Settings.bundle */,
 				373B1DCB20CDE1E70090D6FA /* Albums */,
 				373B1DC120CA38AA0090D6FA /* Artists */,
 				373B1DB720C8D6E10090D6FA /* Onboarding */,
@@ -192,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				373B1DDA20D326A90090D6FA /* ViewUtilities.swift */,
+				37E351DD21012FF20008F3D6 /* SettingsBundleHelper.swift */,
 				373B1DC420CD8F970090D6FA /* MediaLibraryHelper.swift */,
 			);
 			name = Utilities;
@@ -362,6 +368,7 @@
 				3765C6C920F28D80004E7203 /* KashaTableViewCell.xib in Resources */,
 				373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */,
 				37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */,
+				37E351DC21012FB70008F3D6 /* Settings.bundle in Resources */,
 				3765C6D120F29CE7004E7203 /* HorizontalItemsTableViewCell.xib in Resources */,
 				373B1DD920D3220C0090D6FA /* AlbumCollectionViewCell.xib in Resources */,
 				3765C6D520F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib in Resources */,
@@ -474,6 +481,7 @@
 				3789924F20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift in Sources */,
 				373B1DD220D318570090D6FA /* ArtistTableViewCell.swift in Sources */,
 				37414D4020D840720076596E /* ArtistViewController.swift in Sources */,
+				37E351DE21012FF20008F3D6 /* SettingsBundleHelper.swift in Sources */,
 				371CC58120EFFEE90096FBC7 /* KashaNavigationController.swift in Sources */,
 				3765C6C720F24C41004E7203 /* VolumeHUDView.swift in Sources */,
 			);
