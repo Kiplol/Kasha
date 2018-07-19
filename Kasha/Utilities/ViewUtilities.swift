@@ -146,3 +146,19 @@ extension UIImage {
         return img!
     }
 }
+
+extension Array where Element: UIViewController {
+    
+    func indexOfNavigationControllerWithRootViewController<T: UIViewController>(ofClass vcClass: T.Type) -> Array.Index? {
+        return self.index {
+            if $0 is T {
+                return true
+            } else if let navController = $0 as? UINavigationController {
+                return navController.viewControllers.first is T
+            } else {
+                return false
+            }
+        }
+    }
+    
+}

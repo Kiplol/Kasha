@@ -77,41 +77,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Navigation
     @discardableResult
-    func show(album: MediaLibraryHelper.Album) -> AlbumViewController? {
+    func show(album: MediaLibraryHelper.Album, animated: Bool = false) -> AlbumViewController? {
         guard let tabBarController = self.window?.rootViewController as? MusicAwareTabBarController,
-        let viewControllers = tabBarController.viewControllers else {
+        let viewControllers = tabBarController.viewControllers,
+        let indexOfAlbumsVC = viewControllers.indexOfNavigationControllerWithRootViewController(ofClass: AlbumsViewController.self),
+        let albumsVC = (viewControllers[indexOfAlbumsVC] as? AlbumsViewController) ??
+            (viewControllers[indexOfAlbumsVC] as? UINavigationController)?.viewControllers.first as? AlbumsViewController else {
             return nil
         }
 
-        let albumsVCOptional = viewControllers.map { ($0 as? UINavigationController)?.viewControllers.first ?? $0 }
-            .filter { $0 is AlbumsViewController }
-            .first as? AlbumsViewController
-        
-        guard let albumsVC = albumsVCOptional else {
-            return nil
-        }
-        let indexOfAlbumsVC: Int? = {
-            if let indexOfVC = viewControllers.index(of: albumsVC) {
-                return indexOfVC
-            } else if let navigationController = albumsVC.navigationController {
-                return viewControllers.index(of: navigationController)
-            } else {
-                return nil
-            }
-        }()
-        if let indexOfAlbumsVC = indexOfAlbumsVC {
-            tabBarController.selectedIndex = indexOfAlbumsVC
-        }
-        
+        tabBarController.selectedIndex = indexOfAlbumsVC
         albumsVC.navigationController?.popToRootViewController(animated: false)
         let albumVC = AlbumViewController.fromStoryboard()
         albumVC.album = album
         if let navigationController = albumsVC.navigationController {
-            navigationController.pushViewController(albumVC, animated: false)
+            navigationController.pushViewController(albumVC, animated: animated)
         } else {
             albumsVC.show(albumVC, sender: album)
         }
         return albumVC
+    }
+    
+    @discardableResult
+    func show(artist: MediaLibraryHelper.Artist, animated: Bool = false) -> ArtistViewController? {
+        guard let tabBarController = self.window?.rootViewController as? MusicAwareTabBarController,
+            let viewControllers = tabBarController.viewControllers,
+            let indexOfArtistsVC = viewControllers.indexOfNavigationControllerWithRootViewController(ofClass: ArtistsViewController.self),
+            let artistsVC = (viewControllers[indexOfArtistsVC] as? ArtistsViewController) ??
+                (viewControllers[indexOfArtistsVC] as? UINavigationController)?.viewControllers.first as? ArtistsViewController else {
+                    return nil
+        }
+        
+        tabBarController.selectedIndex = indexOfArtistsVC
+        artistsVC.navigationController?.popToRootViewController(animated: false)
+        let artistVC = ArtistViewController.with(artist: artist)
+        if let navigationController = artistsVC.navigationController {
+            navigationController.pushViewController(artistVC, animated: animated)
+        } else {
+            artistsVC.show(artistVC, sender: artist)
+        }
+        return artistVC
     }
     
     // MARK: - Private

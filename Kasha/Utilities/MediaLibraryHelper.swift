@@ -54,6 +54,13 @@ class MediaLibraryHelper: NSObject {
         return MediaLibraryHelper.shared.allArists()[currentLocation]
     }
     
+    func artist(with persistentArtistID: MPMediaEntityPersistentID) -> Artist? {
+        let query = MPMediaQuery.artists()
+        query.addFilterPredicate(MPMediaPropertyPredicate(value: persistentArtistID,
+                                                          forProperty: MPMediaItemPropertyArtistPersistentID))
+        return query.collections?.first
+    }
+    
     // MARK: - Albums
     func allAlbums() -> [Album] {
         return MPMediaQuery.albums().collections ?? []

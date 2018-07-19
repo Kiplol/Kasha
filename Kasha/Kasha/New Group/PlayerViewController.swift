@@ -150,11 +150,17 @@ class PlayerViewController: KashaViewController {
             }
             alert.addAction(goToAlbumAction)
         }
-        let goToArtistAction = UIAlertAction(title: "Go to Artist", style: .default) { _ in
-            //@TODO
+        
+        if let artistPersistentID = nowPlayingItem?.artistPersistentID,
+            let artist = MediaLibraryHelper.shared.artist(with: artistPersistentID) {
+            let goToArtistAction = UIAlertAction(title: "Go to Artist", style: .default) { _ in
+                AppDelegate.instance.show(artist: artist)
+                (self.presentationController as? DeckSnapshotUpdater)?.requestPresentedViewSnapshotUpdate()
+                self.presentingViewController?.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(goToArtistAction)
         }
         
-        alert.addAction(goToArtistAction)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
