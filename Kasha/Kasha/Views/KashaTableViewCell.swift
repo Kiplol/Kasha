@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import Gestalt
 import UIKit
 
 class KashaTableViewCell: UITableViewCell, SelfSizing {
@@ -32,6 +33,11 @@ class KashaTableViewCell: UITableViewCell, SelfSizing {
         self.nowPlayingView.layer.cornerRadius = 2.0
         self.labelTitle.text = nil
         self.labelDetails.text = nil
+        
+        ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
+            themeable.backgroundColor = theme.backgroundColor
+            themeable.containerView.backgroundColor = theme.backgroundColor
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

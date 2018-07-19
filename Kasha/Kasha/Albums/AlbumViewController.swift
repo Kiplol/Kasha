@@ -82,6 +82,11 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     override func scrollViewToInsetForMiniPlayer() -> UIScrollView? {
         return self.tableView
     }
+    
+    override func apply(theme: Theme) {
+        super.apply(theme: theme)
+        self.tableView.backgroundColor = theme.backgroundColor
+    }
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {

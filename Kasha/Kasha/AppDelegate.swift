@@ -147,9 +147,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        UISlider.appearance().thumbTintColor = UIColor.kashaPrimary
 //        UISlider.appearance().minimumTrackTintColor = UIColor.kashaSecondary
 //        UISlider.appearance().maximumTrackTintColor = UIColor.kashaSecondary
+        
         let volumeSliderAppearance = UISlider.appearance(whenContainedInInstancesOf: [MPVolumeView.self])
         volumeSliderAppearance.maximumValueImage = #imageLiteral(resourceName: "volume_up")
         volumeSliderAppearance.minimumValueImage = #imageLiteral(resourceName: "volume_down")
+        
+        ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
+            let navigationBarAppearance = UINavigationBar.appearance()
+            navigationBarAppearance.barTintColor = theme.backgroundColor
+            navigationBarAppearance.backgroundColor = theme.backgroundColor
+            UISearchBar.appearance().backgroundColor = theme.backgroundColor
+            UITabBar.appearance().barTintColor = theme.backgroundColor
+        }
     }
     
     private func initializeThirdPartyLibraries() {

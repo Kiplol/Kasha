@@ -45,6 +45,11 @@ class ArtistsViewController: KashaViewController, UITableViewDataSource, UITable
         return self.tableView
     }
     
+    override func apply(theme: Theme) {
+        super.apply(theme: theme)
+        self.tableView.backgroundColor = theme.backgroundColor
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -52,6 +52,11 @@ UICollectionViewDelegateFlowLayout, HorizontalItemsViewDelegate {
         return self.collectionView
     }
     
+    override func apply(theme: Theme) {
+        super.apply(theme: theme)
+        self.collectionView.backgroundColor = theme.backgroundColor
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

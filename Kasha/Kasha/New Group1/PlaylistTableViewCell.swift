@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import Gestalt
 import MediaPlayer
 import UIKit
 
@@ -15,6 +16,14 @@ class PlaylistTableViewCell: UITableViewCell, SelfSizing {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDetails: UILabel!
     @IBOutlet weak var imageCover: ImageContainerView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
+            themeable.backgroundColor = theme.backgroundColor
+            
+        }
+    }
     
     func update(withPlaylist playlist: MediaLibraryHelper.Playlist) {
         self.labelTitle.text = playlist.name

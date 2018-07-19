@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import Gestalt
 import MediaPlayer
 import UIKit
 
@@ -15,10 +16,12 @@ class ArtistTableViewCell: UITableViewCell, SelfSizing {
     @IBOutlet weak var imageArtist: ImageContainerView!
     @IBOutlet weak var labelArtistName: UILabel!
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        self.imageArtist.applyAlbumsStyle()
-//    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
+            themeable.backgroundColor = theme.backgroundColor
+        }
+    }
     
     func update(withArtist artist: MPMediaItemCollection) {
         self.labelArtistName.text = artist.representativeItem?.artist ?? "Unknown Artist"

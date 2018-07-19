@@ -52,6 +52,11 @@ class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITab
         return self.tableView
     }
     
+    override func apply(theme: Theme) {
+        super.apply(theme: theme)
+        self.tableView.backgroundColor = theme.backgroundColor
+    }
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

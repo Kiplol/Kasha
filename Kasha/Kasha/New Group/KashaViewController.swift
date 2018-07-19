@@ -167,5 +167,6 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
     // MARK: - Gestalt
     func apply(theme: Theme) {
         //Override
+        self.viewIfLoaded?.backgroundColor = theme.backgroundColor
     }
 }

@@ -36,6 +36,12 @@ class SearchResultsViewController: KashaViewController, UISearchResultsUpdating 
         return false
     }
 
+    override func apply(theme: Theme) {
+        super.apply(theme: theme)
+        self.tableView.backgroundColor = theme.backgroundColor
+    }
+    
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
