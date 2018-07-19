@@ -19,5 +19,6 @@ extension UIColor {
     
     class var kashaPrimary: UIColor { return UIColor(hex: "#ff5252") }
     class var kashaSecondary: UIColor { return UIColor(hex: "#00d2ff")}
+    class var kashaDarkBackground: UIColor { return UIColor(hex: "#303033") }
     
 }

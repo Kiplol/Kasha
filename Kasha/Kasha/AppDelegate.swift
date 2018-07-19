@@ -152,12 +152,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         volumeSliderAppearance.maximumValueImage = #imageLiteral(resourceName: "volume_up")
         volumeSliderAppearance.minimumValueImage = #imageLiteral(resourceName: "volume_down")
         
-        ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
+        ThemeManager.default.apply(theme: Theme.self, to: self) { _, theme in
             let navigationBarAppearance = UINavigationBar.appearance()
             navigationBarAppearance.barTintColor = theme.backgroundColor
             navigationBarAppearance.backgroundColor = theme.backgroundColor
+            navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor: theme.textColor]
             UISearchBar.appearance().backgroundColor = theme.backgroundColor
             UITabBar.appearance().barTintColor = theme.backgroundColor
+            UIApplication.shared.statusBarStyle = theme.statusBarStyle
         }
     }
     

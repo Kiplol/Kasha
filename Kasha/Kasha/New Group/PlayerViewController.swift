@@ -7,6 +7,7 @@
 //
 
 import DeckTransition
+import Gestalt
 import MediaPlayer
 import UIKit
 
@@ -112,6 +113,14 @@ class PlayerViewController: KashaViewController {
         super.viewWillAppear(animated)
         self.update(withNowPlayingItem: MediaLibraryHelper.shared.musicPlayer.nowPlayingItem)
         self.updateWithShuffle(isOn: MediaLibraryHelper.shared.isShuffleOn)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let statusBarStyle = (ThemeManager.default.theme as? Theme)?.statusBarStyle {
+            UIApplication.shared.statusBarStyle = statusBarStyle
+        }
     }
     
     // MARK: - User Interaction
