@@ -11,6 +11,8 @@ import Gestalt
 struct Theme: ThemeProtocol {
 
     let backgroundColor: UIColor
+    let textColor: UIColor
+    let detailTextColor: UIColor
     let playerTheme: PlayerTheme
     
     struct PlayerTheme {
@@ -25,10 +27,11 @@ struct Theme: ThemeProtocol {
                                            playerDetailColor: .black)
     }
     
-    static let light = Theme(backgroundColor: .white,
+    static let light = Theme(backgroundColor: .white, textColor: .black, detailTextColor: .lightGray,
                              playerTheme: .default)
     
     func copy(withPlayerTheme playerTheme: PlayerTheme) -> Theme {
-        return Theme(backgroundColor: self.backgroundColor, playerTheme: playerTheme)
+        return Theme(backgroundColor: self.backgroundColor, textColor: self.textColor,
+                     detailTextColor: self.detailTextColor, playerTheme: playerTheme)
     }
 }
