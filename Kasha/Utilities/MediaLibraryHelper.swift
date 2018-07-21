@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import DeckTransition
 import Gestalt
 import Hue
 import MediaPlayer
@@ -152,6 +153,44 @@ class MediaLibraryHelper: NSObject {
         return songQuery.items ?? []
     }
     
+    func actions(forSong song: Song, withViewController viewController: UIViewController?) -> [UIAlertAction] {
+        var actions: [UIAlertAction] = []
+        actions.append(UIAlertAction(title: "Play Now", style: .default, handler: { _ in
+            self.play(song)
+        }))
+        actions.append(UIAlertAction(title: "Play Next", style: .default, handler: { _ in
+            self.enqueue(song)
+        }))
+        if let viewController = viewController {
+            if let album = MediaLibraryHelper.shared.album(with: song.albumPersistentID) {
+                let goToAlbumAction = UIAlertAction(title: "Go to Album", style: .default) { _ in
+                    AppDelegate.instance.show(album: album)
+                    (viewController.presentationController as? DeckSnapshotUpdater)?.requestPresentedViewSnapshotUpdate()
+                    viewController.presentingViewController?.dismiss(animated: true, completion: nil)
+                }
+                actions.append(goToAlbumAction)
+            }
+            
+            if let artist = MediaLibraryHelper.shared.artist(with: song.artistPersistentID) {
+                let goToArtistAction = UIAlertAction(title: "Go to Artist", style: .default) { _ in
+                    AppDelegate.instance.show(artist: artist)
+                    (viewController.presentationController as? DeckSnapshotUpdater)?.requestPresentedViewSnapshotUpdate()
+                    viewController.presentingViewController?.dismiss(animated: true, completion: nil)
+                }
+                actions.append(goToArtistAction)
+            }
+        }
+        
+        return actions
+    }
+    
+    func actionsAlert(forSong song: Song, withViewController viewController: UIViewController) -> UIAlertController {
+        let alert = UIAlertController(title: song.title ?? "", message: nil, preferredStyle: .actionSheet)
+        self.actions(forSong: song, withViewController: viewController).forEach { alert.addAction($0) }
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        return alert
+    }
+    
     // MARK: - Playlists
     func allPlaylists() -> [Playlist] {
         let playlistQuery = MPMediaQuery.playlists()
@@ -176,71 +215,6 @@ class MediaLibraryHelper: NSObject {
             $0.parentPersistentID! == playlistPersistentID
         }
         return matches.isEmpty ? nil : matches
-    }
-    
-    // MARK: - Playback
-    func play(_ song: Song, inQueue queue: [Song]? = nil) {
-        if let queue = queue {
-            self.queue = MPMediaItemCollection(items: queue)
-            self.musicPlayer.nowPlayingItem = song
-        } else {
-            self.queue = MPMediaItemCollection(items: [song])
-        }
-        self.musicPlayer.prepareToPlay { [unowned self] error in
-            guard error == nil else {
-                debugPrint(error ?? "")
-                return
-            }
-            self.play()
-        }
-    }
-    
-    func play() {
-        if self.musicPlayer.isPreparedToPlay {
-            self.musicPlayer.play()
-        } else {
-            if let nowPlayItem = self.musicPlayer.nowPlayingItem {
-                self.queue = MPMediaItemCollection(items: [nowPlayItem])
-            }
-            self.musicPlayer.prepareToPlay { error in
-                guard error == nil else {
-                    debugPrint(error ?? "")
-                    return
-                }
-                self.play()
-            }
-        }
-    }
-    
-    func pause() {
-        self.musicPlayer.pause()
-    }
-    
-    func next() {
-        self.musicPlayer.skipToNextItem()
-    }
-    
-    func previous() {
-        self.musicPlayer.skipToPreviousItem()
-    }
-    
-    func toggleShuffle() -> Bool {
-        switch self.musicPlayer.shuffleMode {
-        case .off:
-            self.turnOnShuffle()
-            return true
-        default:
-            self.tunOffShuffle()
-            return false
-        }
-    }
-    
-    func turnOnShuffle() {
-        self.musicPlayer.shuffleMode = .songs
-    }
-    
-    func tunOffShuffle() {
-        self.musicPlayer.shuffleMode = .off
     }
     
     // MARK: - Search
@@ -298,7 +272,92 @@ class MediaLibraryHelper: NSObject {
             ThemeManager.default.theme = newTheme
         }
     }
+}
 
+extension MediaLibraryHelper {
+    // MARK: - Playback
+    func play(_ song: Song, inQueue queue: [Song]? = nil) {
+        if let queue = queue {
+            self.queue = MPMediaItemCollection(items: queue)
+            self.musicPlayer.nowPlayingItem = song
+        } else {
+            self.queue = MPMediaItemCollection(items: [song])
+        }
+        self.musicPlayer.prepareToPlay { [unowned self] error in
+            guard error == nil else {
+                debugPrint(error ?? "")
+                return
+            }
+            self.play()
+        }
+    }
+    
+    func enqueue(_ song: Song) {
+        self.enqueue([song])
+    }
+    
+    func enqueue(_ songs: [Song]) {
+        guard self.queue.items.count > 1 else {
+            if let firstSong = songs.first {
+                self.play(firstSong, inQueue: songs)
+            }
+            return
+        }
+        var newItems = self.queue.items
+        newItems.insert(contentsOf: songs, at: 1)
+        let newQueue = MPMediaItemCollection(items: newItems)
+        self.queue = newQueue
+        let queueDescriptor = MPMusicPlayerMediaItemQueueDescriptor(itemCollection: MPMediaItemCollection(items: songs))
+        self.musicPlayer.prepend(queueDescriptor)
+    }
+    
+    func play() {
+        if self.musicPlayer.isPreparedToPlay {
+            self.musicPlayer.play()
+        } else {
+            if let nowPlayItem = self.musicPlayer.nowPlayingItem {
+                self.queue = MPMediaItemCollection(items: [nowPlayItem])
+            }
+            self.musicPlayer.prepareToPlay { error in
+                guard error == nil else {
+                    debugPrint(error ?? "")
+                    return
+                }
+                self.play()
+            }
+        }
+    }
+    
+    func pause() {
+        self.musicPlayer.pause()
+    }
+    
+    func next() {
+        self.musicPlayer.skipToNextItem()
+    }
+    
+    func previous() {
+        self.musicPlayer.skipToPreviousItem()
+    }
+    
+    func toggleShuffle() -> Bool {
+        switch self.musicPlayer.shuffleMode {
+        case .off:
+            self.turnOnShuffle()
+            return true
+        default:
+            self.tunOffShuffle()
+            return false
+        }
+    }
+    
+    func turnOnShuffle() {
+        self.musicPlayer.shuffleMode = .songs
+    }
+    
+    func tunOffShuffle() {
+        self.musicPlayer.shuffleMode = .off
+    }
 }
 
 extension MediaLibraryHelper.Playlist {

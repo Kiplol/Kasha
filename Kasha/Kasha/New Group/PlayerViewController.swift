@@ -153,29 +153,10 @@ class PlayerViewController: KashaViewController {
     }
     
     @IBAction func moreTapped(_ sender: Any) {
-        let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem
-        let alert = UIAlertController(title: nowPlayingItem?.title ?? "", message: nil, preferredStyle: .actionSheet)
-        if let albumPersistedID = nowPlayingItem?.albumPersistentID,
-            let album = MediaLibraryHelper.shared.album(with: albumPersistedID) {
-            let goToAlbumAction = UIAlertAction(title: "Go to Album", style: .default) { _ in
-                AppDelegate.instance.show(album: album)
-                (self.presentationController as? DeckSnapshotUpdater)?.requestPresentedViewSnapshotUpdate()
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
-            }
-            alert.addAction(goToAlbumAction)
+        guard let nowPlayingItem = MediaLibraryHelper.shared.musicPlayer.nowPlayingItem else {
+            return
         }
-        
-        if let artistPersistentID = nowPlayingItem?.artistPersistentID,
-            let artist = MediaLibraryHelper.shared.artist(with: artistPersistentID) {
-            let goToArtistAction = UIAlertAction(title: "Go to Artist", style: .default) { _ in
-                AppDelegate.instance.show(artist: artist)
-                (self.presentationController as? DeckSnapshotUpdater)?.requestPresentedViewSnapshotUpdate()
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
-            }
-            alert.addAction(goToArtistAction)
-        }
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        let alert = MediaLibraryHelper.shared.actionsAlert(forSong: nowPlayingItem, withViewController: self)
         self.present(alert, animated: true, completion: nil)
     }
     

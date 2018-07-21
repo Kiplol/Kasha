@@ -118,6 +118,22 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    // MARK: - User Interaction
+    @objc func accessoryTapped(_ sender: AnyObject?, event: UIEvent?) {
+        guard let touch = event?.allTouches?.first,
+        let indexPath = self.tableView.indexPathForRow(at: touch.location(in: self.tableView)) else {
+            return
+        }
+        
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        if let song = row.data as? MediaLibraryHelper.Song {
+            self.present(MediaLibraryHelper.shared.actionsAlert(forSong: song,
+                                                                withViewController: self),
+                         animated: true,
+                         completion: nil)
+        }
+    }
+    
     // MARK: - MediaNotifications
     @objc func nowPlayingItemDidChange(_ notif: Notification) {
         guard let player = notif.object as? MPMusicPlayerController else {
@@ -151,6 +167,11 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
             let song = row.data as? MediaLibraryHelper.Song {
             songCell.selectionDisplayStyle = .nowPlaying
             songCell.update(withSong: song)
+            let accessoryButton = UIButton(type: .system)
+            accessoryButton.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            accessoryButton.addTarget(self, action: #selector(AlbumViewController.accessoryTapped(_:event:)), for: .touchUpInside)
+            accessoryButton.sizeToFit()
+            songCell.accessoryView = accessoryButton
         }
         
         return cell
@@ -185,5 +206,27 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
             MediaLibraryHelper.shared.play(song, inQueue: self.songs)
         }
     }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        print("yay?")
+//    }
+//
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        return [UITableViewRowAction(style: .normal, title: "Test", handler: { (action, indexPath) in
+//            print("fart")
+//        }), UITableViewRowAction(style: .normal, title: "Poo", handler: { (action, indexPath) in
+//            print("fart2")
+//        })]
+//    }
+//
+//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+//        let row = self.sections[indexPath.section].rows[indexPath.row]
+//        if let song = row.data as? MediaLibraryHelper.Song {
+//            self.present(MediaLibraryHelper.shared.actionsAlert(forSong: song,
+//                                                                withViewController: self),
+//                         animated: true,
+//                         completion: nil)
+//        }
+//    }
 
 }
