@@ -28,7 +28,7 @@ class SettingsBundleHelper: NSObject {
     
     @objc func defaultsChanged() {
         let theme = SettingsBundleHelper.shared.isDarkModeOn ? Theme.dark : Theme.light
-        ThemeManager.default.theme = theme
+        ThemeManager.default.theme = (ThemeManager.default.theme as? Theme).map { theme.copy(withPlayerTheme: $0.playerTheme) } ?? theme
     }
 
 }

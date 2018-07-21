@@ -155,8 +155,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor: theme.textColor]
             UISearchBar.appearance().backgroundColor = theme.backgroundColor
             UITabBar.appearance().barTintColor = theme.backgroundColor
-            UIApplication.shared.statusBarStyle = theme.statusBarStyle
-            themeable.window?.removeAndReaddAllSubviews()
+            //@TODO: Figure out how to not fuck up the view behind the deck when these 2 lines happen.
+//            themeable.window?.removeAndReaddAllSubviews()
+//            UIApplication.shared.statusBarStyle = theme.statusBarStyle
         }
     }
     
