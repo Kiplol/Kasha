@@ -21,6 +21,7 @@ protocol MusicAwareTabBarControllerListener {
 
 class MusicAwareTabBarController: UITabBarController {
     
+    private static let selectedIndexKey = "selectedIndex"
     private(set) var miniPlayer: MiniMusicPlayerView!
     private(set) var miniPlayerIsHidden: Bool = true
     private var swipeUpGestureRecognizer: UISwipeGestureRecognizer!
@@ -55,6 +56,10 @@ class MusicAwareTabBarController: UITabBarController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(MusicAwareTabBarController.playbackStateDidChange(_:)), name: NSNotification.Name.MPMusicPlayerControllerPlaybackStateDidChange, object: nil)
+        if let selectedIndex = UserDefaults.standard.object(forKey: MusicAwareTabBarController.selectedIndexKey) as? Int,
+            selectedIndex < self.viewControllers?.count ?? 0 {
+            self.selectedIndex = selectedIndex
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,6 +70,13 @@ class MusicAwareTabBarController: UITabBarController {
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
         self.positionMiniPlayer(forPlaybackState: MediaLibraryHelper.shared.musicPlayer.playbackState, animated: false)
+    }
+    
+    // MARK: - UITabBarDelegate
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if let items = tabBar.items, let index = items.index(of: item) {
+            UserDefaults.standard.set(index, forKey: MusicAwareTabBarController.selectedIndexKey)
+        }
     }
     
     // MARK: - Navigation
