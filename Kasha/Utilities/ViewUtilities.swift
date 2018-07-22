@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kip. All rights reserved.
 //
 
+import MediaPlayer
 import UIKit
 
 //typealias ColorSet = (background: UIColor?, primary: UIColor?, secondary: UIColor?, detail: UIColor?)
@@ -28,7 +29,7 @@ extension UIView {
         self.applyAlbumStyleRoundedCorners()
         self.applyAlbumStyleShadow()
     }
-
+    
 }
 
 extension UIView {
@@ -145,6 +146,34 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return img!
     }
+    func tint(_ tintColor: UIColor?) -> UIImage {
+        guard let tintColor = tintColor else { return self }
+        return modifiedImage { context, rect in
+            context.setBlendMode(.multiply)
+            context.clip(to: rect, mask: self.cgImage!)
+            tintColor.setFill()
+            context.fill(rect)
+        }
+    }
+    
+    private func modifiedImage( draw: (CGContext, CGRect) -> Void) -> UIImage {
+        
+        // using scale correctly preserves retina images
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        guard let context = UIGraphicsGetCurrentContext() else { return self }
+        
+        // correctly rotate image
+        context.translateBy(x: 0, y: size.height)
+        context.scaleBy(x: 1.0, y: -1.0)
+        
+        let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
+        
+        draw(context, rect)
+        
+        guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { return self }
+        return newImage
+    }
 }
 
 extension Array where Element: UIViewController {
@@ -169,6 +198,43 @@ extension UIWindow {
         self.subviews.forEach {
             $0.removeFromSuperview()
             self.addSubview($0)
+        }
+    }
+    
+}
+
+extension UIImageView {
+    
+    func setSongImage(_ song: MediaLibraryHelper.Song, beforeSet: ((UIImage) -> (UIImage?))? = nil) {
+        let bounds = self.bounds
+        DispatchQueue.global(qos: .default).async {
+            let image = song.artwork?.image(at: CGSize(width: bounds.size.width, height: bounds.size.height))
+            DispatchQueue.main.async {
+                let imageForClosure = image ?? #imageLiteral(resourceName: "placeholder-artwork")
+                self.image = beforeSet?(imageForClosure) ?? imageForClosure
+            }
+        }
+    }
+    
+    func setAlbumImage(_ album: MediaLibraryHelper.Album, beforeSet: ((UIImage) -> (UIImage?))? = nil) {
+        let bounds = self.bounds
+        DispatchQueue.global(qos: .default).async {
+            let image = album.representativeItem?.artwork?.image(at: CGSize(width: bounds.size.width, height: bounds.size.height))
+            DispatchQueue.main.async {
+                let imageForClosure = image ?? #imageLiteral(resourceName: "placeholder-artwork")
+                self.image = beforeSet?(imageForClosure) ?? imageForClosure
+            }
+        }
+    }
+    
+    func setPlaylistImage(_ playlist: MediaLibraryHelper.Playlist, beforeSet: ((UIImage) -> (UIImage?))? = nil) {
+        let bounds = self.bounds
+        DispatchQueue.global(qos: .default).async {
+            let image = playlist.representativeItem?.artwork?.image(at: CGSize(width: bounds.size.width, height: bounds.size.height))
+            DispatchQueue.main.async {
+                let imageForClosure = image ?? #imageLiteral(resourceName: "placeholder-artwork")
+                self.image = beforeSet?(imageForClosure) ?? imageForClosure
+            }
         }
     }
     

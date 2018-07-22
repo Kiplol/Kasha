@@ -82,8 +82,7 @@ class PlaylistsViewController: KashaViewController, UITableViewDataSource, UITab
         super.prepare(for: segue, sender: sender)
         if let albumVC = segue.destination as? AlbumViewController,
             let playlist = sender as? MediaLibraryHelper.Playlist {
-            albumVC.songs = playlist.items
-            albumVC.title = playlist.name
+            albumVC.playlist = playlist
         }
     }
     

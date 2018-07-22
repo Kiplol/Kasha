@@ -140,9 +140,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5o-sC-Gq4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-artwork" translatesAutoresizingMaskIntoConstraints="NO" id="zRG-aB-qVp">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="zRG-aB-qVp" firstAttribute="top" secondItem="o5o-sC-Gq4" secondAttribute="top" id="PaX-tA-AbA"/>
+                                    <constraint firstAttribute="trailing" secondItem="zRG-aB-qVp" secondAttribute="trailing" id="fkW-DQ-W14"/>
+                                    <constraint firstItem="zRG-aB-qVp" firstAttribute="leading" secondItem="o5o-sC-Gq4" secondAttribute="leading" id="u2y-wQ-UiW"/>
+                                    <constraint firstAttribute="height" constant="200" id="vIo-6U-t9p"/>
+                                    <constraint firstAttribute="bottom" secondItem="zRG-aB-qVp" secondAttribute="bottom" id="xsF-4S-2NK"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GFg-cQ-2Cq">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="a7P-yh-tLs" id="bFq-pq-PDe"/>
                                     <outlet property="delegate" destination="a7P-yh-tLs" id="8SJ-HE-tgb"/>
@@ -151,14 +167,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="o5o-sC-Gq4" firstAttribute="top" secondItem="aVa-TO-WPY" secondAttribute="top" id="4ef-7H-BvJ"/>
                             <constraint firstItem="GFg-cQ-2Cq" firstAttribute="leading" secondItem="TJF-GP-bJB" secondAttribute="leading" id="4iB-Y1-87m"/>
                             <constraint firstItem="TJF-GP-bJB" firstAttribute="trailing" secondItem="GFg-cQ-2Cq" secondAttribute="trailing" id="WBI-Ja-kku"/>
+                            <constraint firstAttribute="trailing" secondItem="o5o-sC-Gq4" secondAttribute="trailing" id="YVN-1P-NJt"/>
                             <constraint firstItem="TJF-GP-bJB" firstAttribute="bottom" secondItem="GFg-cQ-2Cq" secondAttribute="bottom" id="YfP-EQ-CCN"/>
+                            <constraint firstItem="o5o-sC-Gq4" firstAttribute="leading" secondItem="aVa-TO-WPY" secondAttribute="leading" id="lmz-tW-ii2"/>
                             <constraint firstItem="GFg-cQ-2Cq" firstAttribute="top" secondItem="TJF-GP-bJB" secondAttribute="top" id="u81-03-AXq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TJF-GP-bJB"/>
                     </view>
                     <connections>
+                        <outlet property="headerContainer" destination="o5o-sC-Gq4" id="9o1-U1-DiF"/>
+                        <outlet property="imageHeader" destination="zRG-aB-qVp" id="BdY-k5-uar"/>
                         <outlet property="tableView" destination="GFg-cQ-2Cq" id="6O2-oP-DEq"/>
                     </connections>
                 </viewController>

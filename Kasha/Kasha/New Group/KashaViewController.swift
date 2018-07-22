@@ -152,8 +152,7 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
         guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
             preconditionFailure("Couldn't instantiant an ArtistViewController from its storyboard.")
         }
-        albumVC.songs = playlist.items
-        albumVC.title = playlist.name
+        albumVC.playlist = playlist
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {

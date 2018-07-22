@@ -15,6 +15,8 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var headerContainer: UIView!
+    @IBOutlet weak var imageHeader: UIImageView!
     
     // MARK: - ivars
     var songs: [MediaLibraryHelper.Song] = [] {
@@ -25,8 +27,24 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     var album: MediaLibraryHelper.Album? {
         didSet {
             if let album = self.album {
+                self.playlist = nil
                 self.title = album.representativeItem?.albumTitle
                 self.songs = MediaLibraryHelper.shared.allSongs(fromAlbum: album)
+                if self.isViewLoaded {
+                    self.imageHeader.setAlbumImage(album)
+                }
+            }
+        }
+    }
+    var playlist: MediaLibraryHelper.Playlist? {
+        didSet {
+            if let playlist = self.playlist {
+                self.album = nil
+                self.title = playlist.name
+                self.songs = playlist.items
+                if self.isViewLoaded {
+                    self.imageHeader.setPlaylistImage(playlist)
+                }
             }
         }
     }
@@ -50,6 +68,7 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
             })
         ]
     }
+    private var isFirstLayout = true
     
     // MARK: -
     class func fromStoryboard() -> AlbumViewController {
@@ -67,8 +86,7 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     
     class func with(playlist: MediaLibraryHelper.Playlist) -> AlbumViewController {
         let albumVC = AlbumViewController.fromStoryboard()
-        albumVC.songs = playlist.items
-        albumVC.title = playlist.name
+        albumVC.playlist = playlist
         return albumVC
     }
     
@@ -85,7 +103,7 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     
     override func apply(theme: Theme) {
         super.apply(theme: theme)
-        self.tableView.backgroundColor = theme.backgroundColor
+//        self.tableView.backgroundColor = theme.backgroundColor
     }
 
     // MARK: - View Lifecycle
@@ -95,6 +113,27 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         // Table View
         let songCellNib = UINib(nibName: "KashaTableViewCell", bundle: Bundle.main)
         self.tableView.register(songCellNib, forCellReuseIdentifier: AlbumViewController.songCellID)
+        
+        //Header
+        if let album = self.album {
+            self.imageHeader.setAlbumImage(album)
+        } else if let playlist = self.playlist {
+            self.imageHeader.setPlaylistImage(playlist)
+        } else if let firstSong = self.songs.first {
+            self.imageHeader.setSongImage(firstSong)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if self.isFirstLayout {
+            self.tableView.contentInset.top = self.headerContainer.bounds.size.height
+            self.tableView.scrollRectToVisible(CGRect(x: 0.0,
+                                                      y: 0.0,
+                                                      width: 1.0,
+                                                      height: 1.0), animated: false)
+        }
+        self.isFirstLayout = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
