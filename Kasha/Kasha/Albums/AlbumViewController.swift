@@ -12,11 +12,16 @@ import UIKit
 class AlbumViewController: KashaViewController, UITableViewDataSource, UITableViewDelegate {
     
     private static let songCellID = "songCellID"
+    private static let controlsCellID = "controlsCellID"
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerContainer: UIView!
-    @IBOutlet weak var imageHeader: UIImageView!
+    @IBOutlet weak var imageHeader: ImageContainerView! {
+        didSet {
+            self.imageHeader.applyAlbumsStyle()
+        }
+    }
     
     // MARK: - ivars
     var songs: [MediaLibraryHelper.Song] = [] {
@@ -31,7 +36,7 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
                 self.title = album.representativeItem?.albumTitle
                 self.songs = MediaLibraryHelper.shared.allSongs(fromAlbum: album)
                 if self.isViewLoaded {
-                    self.imageHeader.setAlbumImage(album)
+                    self.imageHeader.imageView.setAlbumImage(album)
                 }
             }
         }
@@ -43,7 +48,7 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
                 self.title = playlist.name
                 self.songs = playlist.items
                 if self.isViewLoaded {
-                    self.imageHeader.setPlaylistImage(playlist)
+                    self.imageHeader.imageView.setPlaylistImage(playlist)
                 }
             }
         }
@@ -52,19 +57,10 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     override var previewActionItems: [UIPreviewActionItem] {
         return [
             UIPreviewAction(title: "Play", style: .default, handler: { _, _ in
-                if let firstSong = self.songs.first {
-                    MediaLibraryHelper.shared.tunOffShuffle()
-                    MediaLibraryHelper.shared.play(firstSong, inQueue: self.songs)
-                }
+                self.play()
             }),
             UIPreviewAction(title: "Shuffle", style: .default, handler: { _, _ in
-                guard !self.songs.isEmpty else {
-                    return
-                }
-                let randomIndex = Int(arc4random_uniform(UInt32(self.songs.count)))
-                let song = self.songs[randomIndex]
-                MediaLibraryHelper.shared.play(song, inQueue: self.songs)
-                MediaLibraryHelper.shared.turnOnShuffle()
+                self.shuffle()
             })
         ]
     }
@@ -113,21 +109,23 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         // Table View
         let songCellNib = UINib(nibName: "KashaTableViewCell", bundle: Bundle.main)
         self.tableView.register(songCellNib, forCellReuseIdentifier: AlbumViewController.songCellID)
+        let controlsCellNib = UINib(nibName: "PlaylistControlsTableViewCell", bundle: Bundle.main)
+        self.tableView.register(controlsCellNib, forCellReuseIdentifier: AlbumViewController.controlsCellID)
         
         //Header
         if let album = self.album {
-            self.imageHeader.setAlbumImage(album)
+            self.imageHeader.imageView.setAlbumImage(album)
         } else if let playlist = self.playlist {
-            self.imageHeader.setPlaylistImage(playlist)
+            self.imageHeader.imageView.setPlaylistImage(playlist)
         } else if let firstSong = self.songs.first {
-            self.imageHeader.setSongImage(firstSong)
+            self.imageHeader.imageView.setSongImage(firstSong)
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if self.isFirstLayout {
-            self.tableView.contentInset.top = self.headerContainer.bounds.size.height
+            self.tableView.contentInset.top = self.headerContainer.bounds.size.height - PlaylistControlsTableViewCell.sizeConstrained(toWidth: self.view.bounds.size.width, withData: nil).height
             self.tableView.scrollRectToVisible(CGRect(x: 0.0,
                                                       y: 0.0,
                                                       width: 1.0,
@@ -149,12 +147,33 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     // MARK: - Helpers
     private func populateSections() {
         self.sections.removeAll()
+        
+        self.sections.append(Section(title: nil,
+                                      rows: [Row(data: nil, cellReuseIdentifier: AlbumViewController.controlsCellID)]))
+        
         self.sections.append(Section(title: nil, rows: self.songs.map {
             Row(data: $0, cellReuseIdentifier: AlbumViewController.songCellID)
         }))
         if self.isViewLoaded {
             self.tableView.reloadData()
         }
+    }
+    
+    private func play() {
+        if let firstSong = self.songs.first {
+            MediaLibraryHelper.shared.tunOffShuffle()
+            MediaLibraryHelper.shared.play(firstSong, inQueue: self.songs)
+        }
+    }
+    
+    private func shuffle() {
+        guard !self.songs.isEmpty else {
+            return
+        }
+        let randomIndex = Int(arc4random_uniform(UInt32(self.songs.count)))
+        let song = self.songs[randomIndex]
+        MediaLibraryHelper.shared.play(song, inQueue: self.songs)
+        MediaLibraryHelper.shared.turnOnShuffle()
     }
     
     // MARK: - User Interaction
@@ -199,8 +218,8 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AlbumViewController.songCellID, for: indexPath)
         let row = self.sections[indexPath.section].rows[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: row.cellReuseIdentifier, for: indexPath)
         
         if let songCell = cell as? KashaTableViewCell,
             let song = row.data as? MediaLibraryHelper.Song {
@@ -211,6 +230,13 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
             accessoryButton.addTarget(self, action: #selector(AlbumViewController.accessoryTapped(_:event:)), for: .touchUpInside)
             accessoryButton.sizeToFit()
             songCell.accessoryView = accessoryButton
+        } else if let controlsCell = cell as? PlaylistControlsTableViewCell {
+            controlsCell.buttonPlayAction = { [weak self] _ in
+                self?.play()
+            }
+            controlsCell.buttonShuffleAction = { [weak self] _ in
+                self?.shuffle()
+            }
         }
         
         return cell
@@ -229,6 +255,8 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         let row = self.sections[indexPath.section].rows[indexPath.row]
         if let song = row.data as? MediaLibraryHelper.Song {
             return KashaTableViewCell.sizeConstrained(toWidth: tableView.bounds.size.width, withData: song).height
+        } else if row.cellReuseIdentifier == AlbumViewController.controlsCellID {
+            return PlaylistControlsTableViewCell.sizeConstrained(toWidth: tableView.bounds.size.width, withData: row.data).height
         }
         return 50.0
     }
@@ -244,6 +272,11 @@ class AlbumViewController: KashaViewController, UITableViewDataSource, UITableVi
         if let song = row.data as? MediaLibraryHelper.Song {
             MediaLibraryHelper.shared.play(song, inQueue: self.songs)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        let row = self.sections[indexPath.section].rows[indexPath.row]
+        return row.cellReuseIdentifier != AlbumViewController.controlsCellID
     }
     
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

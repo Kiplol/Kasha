@@ -15,6 +15,7 @@ struct Theme: ThemeProtocol {
     let detailTextColor: UIColor
     let playerTheme: PlayerTheme
     let statusBarStyle: UIStatusBarStyle
+    let primaryAccentColor: UIColor
     
     struct PlayerTheme {
         let playerBackgroundColor: UIColor
@@ -29,13 +30,13 @@ struct Theme: ThemeProtocol {
     }
     
     static let light = Theme(backgroundColor: .white, textColor: .black, detailTextColor: .lightGray,
-                             playerTheme: .default, statusBarStyle: .default)
+                             playerTheme: .default, statusBarStyle: .default, primaryAccentColor: .kashaPrimary)
     static let dark = Theme(backgroundColor: .kashaDarkBackground, textColor: .white, detailTextColor: .lightGray,
-                             playerTheme: .default, statusBarStyle: .lightContent)
+                            playerTheme: .default, statusBarStyle: .lightContent, primaryAccentColor: .kashaPrimary)
     
     func copy(withPlayerTheme playerTheme: PlayerTheme) -> Theme {
         return Theme(backgroundColor: self.backgroundColor, textColor: self.textColor,
                      detailTextColor: self.detailTextColor, playerTheme: playerTheme,
-                     statusBarStyle: self.statusBarStyle)
+                     statusBarStyle: self.statusBarStyle, primaryAccentColor: self.primaryAccentColor)
     }
 }

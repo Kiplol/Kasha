@@ -38,6 +38,8 @@
 		3765C6D120F29CE7004E7203 /* HorizontalItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3765C6D020F29CE7004E7203 /* HorizontalItemsTableViewCell.xib */; };
 		3765C6D320F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3765C6D220F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift */; };
 		3765C6D520F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3765C6D420F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib */; };
+		377320ED2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377320EB2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift */; };
+		377320EE2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377320EC2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib */; };
 		3789924C20DFF0C400A304B8 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924B20DFF0C400A304B8 /* Section.swift */; };
 		3789924F20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */; };
 		3789925020DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */; };
@@ -91,6 +93,8 @@
 		3765C6D020F29CE7004E7203 /* HorizontalItemsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalItemsTableViewCell.xib; sourceTree = "<group>"; };
 		3765C6D220F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalItemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		3765C6D420F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalItemsCollectionViewCell.xib; sourceTree = "<group>"; };
+		377320EB2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistControlsTableViewCell.swift; sourceTree = "<group>"; };
+		377320EC2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistControlsTableViewCell.xib; sourceTree = "<group>"; };
 		3789924B20DFF0C400A304B8 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 		37414D3520D74CB30076596E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				377320EB2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift */,
+				377320EC2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib */,
 				3765C6CE20F29CA2004E7203 /* HorizontalItemsTableViewCell.swift */,
 				3765C6D020F29CE7004E7203 /* HorizontalItemsTableViewCell.xib */,
 				3765C6D220F29DCA004E7203 /* HorizontalItemsCollectionViewCell.swift */,
@@ -367,6 +373,7 @@
 				373B1DBE20C8D8FE0090D6FA /* .swiftlint.yml in Resources */,
 				3765C6C920F28D80004E7203 /* KashaTableViewCell.xib in Resources */,
 				373B1DB620C8BA080090D6FA /* AuthKey_AVTL547TZF.p8 in Resources */,
+				377320EE2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib in Resources */,
 				37066A6120C6270D0021D0A5 /* LaunchScreen.storyboard in Resources */,
 				37E351DC21012FB70008F3D6 /* Settings.bundle in Resources */,
 				3765C6D120F29CE7004E7203 /* HorizontalItemsTableViewCell.xib in Resources */,
@@ -484,6 +491,7 @@
 				37E351DE21012FF20008F3D6 /* SettingsBundleHelper.swift in Sources */,
 				371CC58120EFFEE90096FBC7 /* KashaNavigationController.swift in Sources */,
 				3765C6C720F24C41004E7203 /* VolumeHUDView.swift in Sources */,
+				377320ED2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
