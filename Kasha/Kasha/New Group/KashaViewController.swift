@@ -119,48 +119,15 @@ class KashaViewController: UIViewController, MusicAwareTabBarControllerListener,
     
     // MARK: - SearchResultsViewControllerDelegate
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectAlbum album: MediaLibraryHelper.Album) {
-        guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
-            preconditionFailure("Couldn't instantiant an ArtistViewController from its storyboard.")
-        }
-        albumVC.album = album
-        if let navigationController = self.navigationController {
-            navigationController.popToRootViewController(animated: true)
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                navigationController.show(albumVC, sender: album)
-            })
-        } else {
-            self.show(albumVC, sender: album)
-        }
+        AppDelegate.instance.show(album: album, animated: true)
     }
     
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectArtist artist: MediaLibraryHelper.Artist) {
-        guard let artistVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "artist") as? ArtistViewController else {
-            preconditionFailure("Couldn't instantiant an ArtistViewController from its storyboard.")
-        }
-        artistVC.artist = artist
-        if let navigationController = self.navigationController {
-            navigationController.popToRootViewController(animated: true)
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                navigationController.show(artistVC, sender: artist)
-            })
-        } else {
-            self.show(artistVC, sender: artist)
-        }
+        AppDelegate.instance.show(artist: artist, animated: true)
     }
     
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectPlaylist playlist: MediaLibraryHelper.Playlist) {
-        guard let albumVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "songs") as? AlbumViewController else {
-            preconditionFailure("Couldn't instantiant an ArtistViewController from its storyboard.")
-        }
-        albumVC.playlist = playlist
-        if let navigationController = self.navigationController {
-            navigationController.popToRootViewController(animated: true)
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(0.5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: {
-                navigationController.show(albumVC, sender: playlist)
-            })
-        } else {
-            self.show(albumVC, sender: playlist)
-        }
+        AppDelegate.instance.show(playlist: playlist, animated: true)
     }
     
     // MARK: - Gestalt

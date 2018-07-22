@@ -119,25 +119,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return artistVC
     }
     
+    @discardableResult
+    func show(playlist: MediaLibraryHelper.Playlist, animated: Bool = false) -> AlbumViewController? {
+        guard let tabBarController = self.window?.rootViewController as? MusicAwareTabBarController,
+            let viewControllers = tabBarController.viewControllers,
+            let indexOfPlaylistsVC = viewControllers.indexOfNavigationControllerWithRootViewController(ofClass: PlaylistsViewController.self),
+            let playlistsVC = (viewControllers[indexOfPlaylistsVC] as? PlaylistsViewController) ??
+                (viewControllers[indexOfPlaylistsVC] as? UINavigationController)?.viewControllers.first as? PlaylistsViewController else {
+                    return nil
+        }
+        
+        tabBarController.selectedIndex = indexOfPlaylistsVC
+        playlistsVC.navigationController?.popToRootViewController(animated: false)
+        let playlistVC = AlbumViewController.with(playlist: playlist)
+        if let navigationController = playlistsVC.navigationController {
+            navigationController.pushViewController(playlistVC, animated: animated)
+        } else {
+            playlistsVC.show(playlistVC, sender: playlist)
+        }
+        return playlistVC
+    }
+    
     // MARK: - Private
     func setupAppearance() {
-        // Window
-        self.window?.tintColor = UIColor.kashaPrimary
-
         // Navigation Bar
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.isTranslucent = false
         navigationBarAppearance.prefersLargeTitles = true
         navigationBarAppearance.setBackgroundImage(UIImage(), for: .default)
-        UINavigationBar.appearance().largeTitleTextAttributes =
-            [NSAttributedStringKey.foregroundColor: UIColor.kashaPrimary]
         
         // Tab Bar
         let tabBarAppearance = UITabBar.appearance()
         tabBarAppearance.isTranslucent = false
-        
-        // Collection Index View
-        BDKCollectionIndexView.appearance().tintColor = UIColor.kashaPrimary
         
         // Slider
 //        UISlider.appearance().thumbTintColor = UIColor.kashaPrimary
@@ -149,10 +162,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         volumeSliderAppearance.minimumValueImage = #imageLiteral(resourceName: "volume_down")
         
         ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
+            // Window
+            themeable.window?.tintColor = theme.primaryAccentColor
+            
+            // Collection Index View
+            BDKCollectionIndexView.appearance().tintColor = theme.primaryAccentColor
+            
             let navigationBarAppearance = UINavigationBar.appearance()
             navigationBarAppearance.barTintColor = theme.backgroundColor
             navigationBarAppearance.backgroundColor = theme.backgroundColor
             navigationBarAppearance.titleTextAttributes = [NSAttributedStringKey.foregroundColor: theme.textColor]
+            navigationBarAppearance.largeTitleTextAttributes =
+                [NSAttributedStringKey.foregroundColor: theme.primaryAccentColor]
+            
             UISearchBar.appearance().backgroundColor = theme.backgroundColor
             UITabBar.appearance().barTintColor = theme.backgroundColor
             //@TODO: Figure out how to not fuck up the view behind the deck when these 2 lines happen.
