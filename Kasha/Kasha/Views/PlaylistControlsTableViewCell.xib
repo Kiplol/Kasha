@@ -21,6 +21,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Blh-qA-c4s">
                         <rect key="frame" x="30" y="16" width="110" height="36"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                         <state key="normal" title="PLAY" image="play"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -46,7 +47,8 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iML-lW-AJK">
                         <rect key="frame" x="180" y="16" width="110" height="36"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" title="SHUFFLE" image="shuffle_on"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                        <state key="normal" title="SHUFFLE" image="shuffle_off"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                 <real key="value" value="5"/>
@@ -92,6 +94,6 @@
     </objects>
     <resources>
         <image name="play" width="36" height="36"/>
-        <image name="shuffle_on" width="36" height="36"/>
+        <image name="shuffle_off" width="36" height="36"/>
     </resources>
 </document>
