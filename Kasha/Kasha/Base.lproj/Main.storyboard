@@ -145,10 +145,10 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bfe-uQ-I9Q" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
                                         <rect key="frame" x="20" y="10" width="335" height="255"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Bfe-uQ-I9Q" firstAttribute="leading" secondItem="o5o-sC-Gq4" secondAttribute="leading" constant="20" id="3Fq-yH-hvM"/>
                                     <constraint firstAttribute="bottom" secondItem="Bfe-uQ-I9Q" secondAttribute="bottom" constant="5" id="4js-3D-1fQ"/>
