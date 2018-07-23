@@ -21,13 +21,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8r-J6-dPO">
-                        <rect key="frame" x="68" y="26" width="228" height="20"/>
+                        <rect key="frame" x="79" y="26" width="217" height="20"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dXR-Cp-xVc" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
-                        <rect key="frame" x="10" y="11" width="50" height="50"/>
+                        <rect key="frame" x="21" y="11" width="50" height="50"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="dXR-Cp-xVc" secondAttribute="height" multiplier="1:1" id="I59-jW-Nnj"/>
@@ -38,7 +38,7 @@
                 <constraints>
                     <constraint firstItem="dXR-Cp-xVc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5S8-Ef-zNf"/>
                     <constraint firstAttribute="trailingMargin" secondItem="A8r-J6-dPO" secondAttribute="trailing" constant="8" id="HKE-17-199"/>
-                    <constraint firstItem="dXR-Cp-xVc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="cnU-XA-zZe"/>
+                    <constraint firstItem="dXR-Cp-xVc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="cnU-XA-zZe"/>
                     <constraint firstItem="A8r-J6-dPO" firstAttribute="leading" secondItem="dXR-Cp-xVc" secondAttribute="trailing" constant="8" id="dJ8-i8-JaR"/>
                     <constraint firstItem="A8r-J6-dPO" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="gDR-gs-5BH"/>
                 </constraints>

@@ -12,6 +12,8 @@ import MediaPlayer
 import UIKit
 
 class MiniMusicPlayerView: UIView {
+    
+    private static let shouldThemeFromMusic = false
 
     // MARK: - IBOutlets
     @IBOutlet weak var imageArtwork: ImageContainerView!
@@ -52,10 +54,18 @@ class MiniMusicPlayerView: UIView {
         
         ThemeManager.default.apply(theme: Theme.self, to: self) { themeable, theme in
             DispatchQueue.main.async {
-                themeable.backgroundColor = theme.playerTheme.playerBackgroundColor
-                themeable.fillView.backgroundColor = theme.playerTheme.playerPrimaryColor
-                let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
-                themeable.updateButtons(withColor: theme.playerTheme.playerDetailColor, andShadowColor: buttonShadowColor)
+                if MiniMusicPlayerView.shouldThemeFromMusic {
+                    themeable.backgroundColor = theme.playerTheme.playerBackgroundColor
+                    themeable.fillView.backgroundColor = theme.playerTheme.playerPrimaryColor
+                    let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
+                    themeable.updateButtons(withColor: theme.playerTheme.playerDetailColor, andShadowColor: buttonShadowColor)
+                } else {
+                    themeable.backgroundColor = theme.backgroundColor
+                    themeable.fillView.backgroundColor = theme.primaryAccentColor
+                    let buttonShadowColor = self.fillView.backgroundColor!.isDark ? UIColor.white : UIColor.black
+                    let buttonColor = buttonShadowColor.isDark ? UIColor.white : UIColor.black
+                    themeable.updateButtons(withColor: buttonColor, andShadowColor: buttonShadowColor)
+                }
             }
         }
     }
