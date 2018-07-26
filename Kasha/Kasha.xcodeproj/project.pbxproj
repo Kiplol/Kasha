@@ -40,6 +40,8 @@
 		3765C6D520F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3765C6D420F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib */; };
 		377320ED2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377320EB2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift */; };
 		377320EE2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377320EC2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib */; };
+		377320F1210A47BB001C0574 /* ControlsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377320EF210A47BB001C0574 /* ControlsCollectionViewCell.swift */; };
+		377320F2210A47BB001C0574 /* ControlsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 377320F0210A47BB001C0574 /* ControlsCollectionViewCell.xib */; };
 		3789924C20DFF0C400A304B8 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924B20DFF0C400A304B8 /* Section.swift */; };
 		3789924F20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */; };
 		3789925020DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */; };
@@ -95,6 +97,8 @@
 		3765C6D420F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalItemsCollectionViewCell.xib; sourceTree = "<group>"; };
 		377320EB2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistControlsTableViewCell.swift; sourceTree = "<group>"; };
 		377320EC2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistControlsTableViewCell.xib; sourceTree = "<group>"; };
+		377320EF210A47BB001C0574 /* ControlsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsCollectionViewCell.swift; sourceTree = "<group>"; };
+		377320F0210A47BB001C0574 /* ControlsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlsCollectionViewCell.xib; sourceTree = "<group>"; };
 		3789924B20DFF0C400A304B8 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = ../Models/Section.swift; sourceTree = "<group>"; };
 		3789924D20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		3789924E20DFFD4300A304B8 /* SectionHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 		37414D3520D74CB30076596E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				377320EF210A47BB001C0574 /* ControlsCollectionViewCell.swift */,
+				377320F0210A47BB001C0574 /* ControlsCollectionViewCell.xib */,
 				377320EB2104FB8A001C0574 /* PlaylistControlsTableViewCell.swift */,
 				377320EC2104FB8A001C0574 /* PlaylistControlsTableViewCell.xib */,
 				3765C6CE20F29CA2004E7203 /* HorizontalItemsTableViewCell.swift */,
@@ -378,6 +384,7 @@
 				37E351DC21012FB70008F3D6 /* Settings.bundle in Resources */,
 				3765C6D120F29CE7004E7203 /* HorizontalItemsTableViewCell.xib in Resources */,
 				373B1DD920D3220C0090D6FA /* AlbumCollectionViewCell.xib in Resources */,
+				377320F2210A47BB001C0574 /* ControlsCollectionViewCell.xib in Resources */,
 				3765C6D520F29DD5004E7203 /* HorizontalItemsCollectionViewCell.xib in Resources */,
 				37066A5E20C6270D0021D0A5 /* Assets.xcassets in Resources */,
 				37066A5C20C6270C0021D0A5 /* Main.storyboard in Resources */,
@@ -463,6 +470,7 @@
 				3789924C20DFF0C400A304B8 /* Section.swift in Sources */,
 				37B2FFEB20F174340082E15E /* WavesView.swift in Sources */,
 				37414D3720D74CCC0076596E /* ImageContainerView.swift in Sources */,
+				377320F1210A47BB001C0574 /* ControlsCollectionViewCell.swift in Sources */,
 				373B1DD820D3220C0090D6FA /* AlbumCollectionViewCell.swift in Sources */,
 				371CC57A20EE6BEA0096FBC7 /* PlayerViewController.swift in Sources */,
 				373B1DDB20D326A90090D6FA /* ViewUtilities.swift in Sources */,
