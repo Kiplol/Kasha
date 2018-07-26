@@ -17,9 +17,45 @@
                     <view key="view" contentMode="scaleToFill" id="kSt-ej-iOq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kasha needs access to your music library to work properly." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QC7-lR-QeC">
+                                <rect key="frame" x="27" y="314" width="321" height="40"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6zR-k7-Jbd">
+                                <rect key="frame" x="107" y="374" width="160" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="C00-MD-RIg"/>
+                                    <constraint firstAttribute="width" constant="160" id="XcJ-pb-o75"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="SETTINGS">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingsTapped:" destination="NuI-kI-Kca" eventType="touchUpInside" id="bmG-kA-r7r"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6zR-k7-Jbd" firstAttribute="centerX" secondItem="kSt-ej-iOq" secondAttribute="centerX" id="Dbl-4m-DgX"/>
+                            <constraint firstItem="QC7-lR-QeC" firstAttribute="centerX" secondItem="kSt-ej-iOq" secondAttribute="centerX" id="EH1-Ry-TNF"/>
+                            <constraint firstItem="QC7-lR-QeC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iqt-yh-OrY" secondAttribute="leading" constant="20" id="UCm-xB-EH9"/>
+                            <constraint firstItem="iqt-yh-OrY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QC7-lR-QeC" secondAttribute="trailing" constant="20" id="UxM-Fo-Ao9"/>
+                            <constraint firstItem="QC7-lR-QeC" firstAttribute="centerY" secondItem="kSt-ej-iOq" secondAttribute="centerY" id="hGn-4f-ap2"/>
+                            <constraint firstItem="6zR-k7-Jbd" firstAttribute="top" secondItem="QC7-lR-QeC" secondAttribute="bottom" constant="20" id="yHf-jG-Oyq"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iqt-yh-OrY"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonSettings" destination="6zR-k7-Jbd" id="GhA-Tr-KL0"/>
+                        <outlet property="labelExplanation" destination="QC7-lR-QeC" id="2xh-0G-iDt"/>
+                        <outletCollection property="unauthorizedViews" destination="QC7-lR-QeC" collectionClass="NSMutableArray" id="PAf-e7-jas"/>
+                        <outletCollection property="unauthorizedViews" destination="6zR-k7-Jbd" collectionClass="NSMutableArray" id="P1J-oQ-V5O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALv-Fp-Wf1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

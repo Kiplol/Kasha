@@ -8,13 +8,11 @@
 	<array>
 		<dict>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
+			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
-			<string>Dark Mode</string>
+			<string>Made by Elliott &quot;Kip&quot; Kipper</string>
 			<key>Key</key>
-			<string>DARK_MODE_ON</string>
-			<key>DefaultValue</key>
-			<false/>
+			<string></string>
 		</dict>
 	</array>
 </dict>
