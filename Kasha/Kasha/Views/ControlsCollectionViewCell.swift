@@ -41,7 +41,7 @@ class ControlsCollectionViewCell: UICollectionViewCell, SelfSizing {
     
     // MARK: - SelfSizing
     static func sizeConstrained(toWidth width: CGFloat, withData: Any?) -> CGSize {
-        return CGSize(width: width, height: 70.0)
+        return CGSize(width: width, height: 50.0)
     }
 
 }

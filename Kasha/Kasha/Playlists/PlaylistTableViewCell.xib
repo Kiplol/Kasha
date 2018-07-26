@@ -21,14 +21,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kBc-9Y-nN3" customClass="ImageContainerView" customModule="Kasha" customModuleProvider="target">
-                        <rect key="frame" x="10" y="10" width="79.5" height="79.5"/>
+                        <rect key="frame" x="15" y="10" width="79.5" height="79.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="kBc-9Y-nN3" secondAttribute="height" multiplier="1:1" id="5YR-og-JvL"/>
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="OPj-XR-uRK">
-                        <rect key="frame" x="97.5" y="31.5" width="196.5" height="37"/>
+                        <rect key="frame" x="102.5" y="31.5" width="191.5" height="37"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lin-az-S1F">
                                 <rect key="frame" x="0.0" y="0.0" width="44.5" height="20.5"/>
@@ -51,7 +51,7 @@
                     <constraint firstItem="kBc-9Y-nN3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="P5w-pT-TUf"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OPj-XR-uRK" secondAttribute="trailing" constant="10" id="XSW-uA-2L4"/>
                     <constraint firstItem="OPj-XR-uRK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Yyt-Q0-uv7"/>
-                    <constraint firstItem="kBc-9Y-nN3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="bug-bz-5Ti"/>
+                    <constraint firstItem="kBc-9Y-nN3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="bug-bz-5Ti"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
